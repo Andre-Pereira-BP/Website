@@ -1,0 +1,64 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Ambiente
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Cobertura de testes
+coverage
+
+# Arquivos de build
+/build
+
+# Dependências
+/.pnp
+.pnp.js
+
+# Arquivos temporários
+.tmp
+.temp
+
+# Arquivos específicos de sistema
+Thumbs.db
+desktop.ini
+
+# Arquivos gerados pelo Tailwind
+.tailwind-cache
+
+# Chaves de API e arquivos de configuração sensíveis
+**/config/keys.js
+**/config/secrets.js
+
+# Diretório de debug
+.debug/
+
+# Arquivos de bloqueio de pacotes (opcional, dependendo da sua estratégia de gerenciamento de pacotes)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml

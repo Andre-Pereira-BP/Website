@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=PT+Sans:wght@400;700&display=swap');
+@import '@fortawesome/fontawesome-free/css/all.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-ptsans text-gray-700;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-montserrat font-medium text-gray-900;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-6 py-3 rounded-md transition-colors font-montserrat font-medium;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary-light;
+  }
+
+  .btn-light {
+    @apply bg-white text-dark hover:bg-dark hover:text-white;
+  }
+}
