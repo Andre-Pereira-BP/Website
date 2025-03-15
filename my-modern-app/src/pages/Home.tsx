@@ -195,16 +195,16 @@ const Home = () => {
                 ></div>
                 <div className="container mx-auto px-4 h-full flex items-center relative z-20">
                   <div className="max-w-2xl text-white">
-                    <motion.p 
-                      className="text-lg md:text-xl font-medium opacity-90 mb-2"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: 0.2 }}
-                    >
-                      {slide.subtitle}
-                    </motion.p>
+                  <motion.p 
+                    className="text-lg md:text-xl font-medium opacity-90 mb-2 text-white"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                  >
+                    {slide.subtitle}
+                  </motion.p>
                     <motion.h1 
-                      className="text-4xl md:text-6xl font-bold mb-4"
+                      className="text-4xl md:text-6xl font-bold mb-4 text-white"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: 0.3 }}
@@ -212,7 +212,7 @@ const Home = () => {
                       {slide.title}
                     </motion.h1>
                     <motion.p 
-                      className="text-lg md:text-xl opacity-90 mb-8"
+                      className="text-lg md:text-xl opacity-90 mb-8 text-white"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: 0.4 }}
