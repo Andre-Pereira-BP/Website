@@ -82,7 +82,7 @@ const Footer = () => {
             
             {/* Certifications */}
             <div className="mt-6">
-              <h4 className="text-sm font-bold mb-3 uppercase tracking-wider">Certifications</h4>
+              <h4 className="text-sm font-bold mb-3 uppercase tracking-wider text-white">Certifications</h4>
               <div className="flex space-x-4">
                 {certifications.map((cert, index) => (
                   <div key={index} className="bg-white p-2 rounded-md w-20 h-20 flex items-center justify-center">
@@ -104,7 +104,7 @@ const Footer = () => {
               transition={{ duration: 0.5, delay: 0.1 * colIndex }}
               variants={fadeInUp}
             >
-              <h4 className="text-lg font-bold mb-4 uppercase tracking-wider">{column.title}</h4>
+              <h4 className="text-lg font-bold mb-4 uppercase tracking-wider text-white">{column.title}</h4>
               <ul className="space-y-3">
                 {column.links.map((link, linkIndex) => (
                   <li key={linkIndex}>
@@ -142,7 +142,7 @@ const Footer = () => {
             transition={{ duration: 0.5, delay: 0.3 }}
             variants={fadeInUp}
           >
-            <h4 className="text-lg font-bold mb-4 uppercase tracking-wider">Headquarters</h4>
+            <h4 className="text-lg font-bold mb-4 uppercase tracking-wider text-white">Headquarters</h4>
             <address className="not-italic text-sm text-gray-200 leading-relaxed">
               <p className="mb-1">PACT - Parque do Alentejo de Ciência e Tecnologia</p>
               <p className="mb-1">Rua Luís Adelino Fonseca, Lote 1A</p>
