@@ -536,7 +536,7 @@ const Expertise = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="md:w-2/3 mb-8 md:mb-0">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4 font-montserrat">Ready to Solve Your Testing Challenges?</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-4 font-montserrat text-white">Ready to Solve Your Testing Challenges?</h2>
               <p className="text-white/90 max-w-2xl">
                 Our team of experts is ready to help you develop the optimal testing solution for your specific needs. 
                 Contact us today to discuss how our expertise can benefit your project.

@@ -247,7 +247,7 @@ const Contact = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="mb-6 md:mb-0">
-              <h2 className="text-2xl font-bold mb-2 font-montserrat">Connect With Us</h2>
+              <h2 className="text-2xl font-bold mb-2 font-montserrat text-white">Connect With Us</h2>
               <p className="text-white/80">
                 Follow us on LinkedIn to stay updated with our latest news and projects
               </p>

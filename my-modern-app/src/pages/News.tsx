@@ -356,7 +356,7 @@ const News = () => {
               
               <div className="container mx-auto px-4 relative z-10">
                 <div className="max-w-2xl mx-auto text-center">
-                  <h2 className="text-2xl md:text-3xl font-bold mb-4 font-montserrat">Stay Up to Date</h2>
+                  <h2 className="text-2xl md:text-3xl font-bold mb-4 font-montserrat text-white">Stay Up to Date</h2>
                   <p className="text-white/90 mb-6">
                     Subscribe to our newsletter to receive the latest news and updates from BridgePoint.
                   </p>

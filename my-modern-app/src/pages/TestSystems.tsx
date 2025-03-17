@@ -286,7 +286,7 @@ const TestSystems = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex flex-col md:flex-row items-center justify-between text-white">
             <div className="md:w-2/3 mb-8 md:mb-0">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4 font-montserrat">Need a Custom Test Solution?</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-4 font-montserrat text-white">Need a Custom Test Solution?</h2>
               <p className="text-white/90 max-w-2xl">
                 Our engineering team is ready to design and develop a testing system 
                 tailored to your specific requirements.
