@@ -1,9 +1,15 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import ModernLayout from '../components/layout/Layout';
 import ContactMap from '../components/ui/ContactMap';
 
 const Contact = () => {
+  // Estado para o escritório selecionado
+  const [selectedOffice, setSelectedOffice] = useState<string>("South");
+  
+  // Referência para o componente do mapa
+  // const mapRef = useRef<any>(null);
+  
   // Animation variants
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
@@ -62,6 +68,7 @@ const Contact = () => {
   // Office locations
   const offices = [
     {
+      id: "Headquarters",
       name: "Headquarters",
       address: [
         "PACT – Parque do Alentejo de Ciência e Tecnologia",
@@ -75,6 +82,7 @@ const Contact = () => {
       )
     },
     {
+      id: "South",
       name: "South Office",
       address: [
         "Rua Bartolomeu Dias, Nº72 Fração L",
@@ -88,6 +96,7 @@ const Contact = () => {
       )
     },
     {
+      id: "North",
       name: "North Office",
       address: [
         "Largo da Palmeira, Nº 24",
@@ -102,12 +111,17 @@ const Contact = () => {
     }
   ];
   
-  // For anchor links
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+  // Função para selecionar escritório
+  const handleOfficeSelect = (officeId: string) => {
+    setSelectedOffice(officeId);
+    
+    // Fazer scroll até o mapa
+    setTimeout(() => {
+      const mapElement = document.getElementById('map-section');
+      if (mapElement) {
+        mapElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
   };
   
   return (
@@ -194,12 +208,15 @@ const Contact = () => {
             {offices.map((office, index) => (
               <motion.div
                 key={index}
-                className="bg-white rounded-lg shadow-lg overflow-hidden"
+                className={`bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer transform transition-all duration-300 ${
+                  selectedOffice === office.id ? 'ring-2 ring-primary scale-105' : 'hover:shadow-xl hover:-translate-y-1'
+                }`}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 * index }}
                 variants={fadeInUp}
+                onClick={() => handleOfficeSelect(office.id)}
               >
                 <div className="p-6">
                   <div className="flex items-center mb-4">
@@ -220,13 +237,14 @@ const Contact = () => {
           
           {/* Map Section */}
           <motion.div
+            id="map-section"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
             variants={fadeInUp}
           >
-            <ContactMap />
+           <ContactMap selectedOffice={selectedOffice} />
           </motion.div>
         </div>
       </section>
