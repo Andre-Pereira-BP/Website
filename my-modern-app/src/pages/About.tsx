@@ -326,7 +326,7 @@ const About = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="md:w-2/3 mb-8 md:mb-0">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4 font-montserrat">Join Our Team of Innovators</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-4 font-montserrat text-white">Join Our Team of Innovators</h2>
               <p className="text-white/90 max-w-2xl">
                 We're always looking for talented individuals who share our passion for engineering and testing excellence. Explore our current openings and become part of our success story.
               </p>

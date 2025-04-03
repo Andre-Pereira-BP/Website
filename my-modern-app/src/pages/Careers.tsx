@@ -1080,7 +1080,7 @@ const Careers = () => {
                             <div className="container mx-auto px-4 relative z-10">
                                 <div className="flex flex-col md:flex-row items-center justify-between">
                                     <div className="mb-6 md:mb-0 md:mr-8">
-                                        <h2 className="text-2xl md:text-3xl font-bold mb-2 font-montserrat">Follow Us on LinkedIn</h2>
+                                        <h2 className="text-2xl md:text-3xl font-bold mb-2 font-montserrat text-white">Follow Us on LinkedIn</h2>
                                         <p className="text-white/80 max-w-xl">
                                             Stay updated on our latest job openings, company news, and industry insights
                                             by following BridgePoint on LinkedIn.

@@ -90,9 +90,9 @@ const Contact = () => {
     {
       name: "North Office",
       address: [
-        "Habitat Criativo – Centro de empresas",
-        "Av. Afonso III, S/N",
-        "4950-498 Monção – Viana do Castelo, PORTUGAL"
+        "Largo da Palmeira, Nº 24",
+        "Cabo - Barbeita",
+        "4950-045 Monção – Viana do Castelo, PORTUGAL"
       ],
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
