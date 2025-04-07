@@ -23,6 +23,7 @@ const Header = () => {
     { path: '/about', label: 'Company' },
     { path: '/test-systems', label: 'Test Systems' },
     { path: '/expertise', label: 'Expertise' },
+    { path: '/quality', label: 'Quality' },
     { path: '/news', label: 'News' },
     { path: '/careers', label: 'Join Us' },
     { path: '/contact', label: 'Contact' }

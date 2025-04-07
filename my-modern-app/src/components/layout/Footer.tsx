@@ -22,6 +22,7 @@ const Footer = () => {
         { label: "About Us", path: "/about", isExternal: false },
         { label: "Expertise", path: "/expertise", isExternal: false },
         { label: "Test Systems", path: "/test-systems", isExternal: false },
+        { label: "Quality", path: "/quality", isExternal: false },
         { label: "News", path: "/news", isExternal: false },
         { label: "Careers", path: "/careers", isExternal: false }
       ]

@@ -8,6 +8,7 @@ import Expertise from './pages/Expertise';
 import News from './pages/News';
 import Careers from './pages/Careers';
 import Contact from './pages/Contact';
+import Quality from './pages/Quality';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/test-systems" element={<TestSystems />} />
         <Route path="/expertise" element={<Expertise />} />
+        <Route path="/quality" element={<Quality />} />
         <Route path="/news" element={<News />} />
         <Route path="/careers" element={<Careers />} />
         <Route path="/contact" element={<Contact />} />
