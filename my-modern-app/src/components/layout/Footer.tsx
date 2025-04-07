@@ -17,7 +17,7 @@ const Footer = () => {
   // Navigation columns
   const navColumns = [
     {
-      title: "Company",
+      title: "COMPANY",
       links: [
         { label: "About Us", path: "/about", isExternal: false },
         { label: "Expertise", path: "/expertise", isExternal: false },
@@ -28,7 +28,7 @@ const Footer = () => {
       ]
     },
     {
-      title: "Contact",
+      title: "CONTACT",
       links: [
         { label: "Sales", path: "/contact#sales", isExternal: false },
         { label: "Engineering", path: "/contact#engineering", isExternal: false },
@@ -38,22 +38,10 @@ const Footer = () => {
     }
   ];
   
-  // Certification logos
-  const certifications = [
-    { 
-      name: "ISO 9001", 
-      logo: "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/Home_Certifications_1.png" 
-    },
-    { 
-      name: "PME Líder", 
-      logo: "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/Home_Certifications.png" 
-    }
-  ];
-  
   return (
     <>
-      <footer className="bg-primary/95 text-white relative overflow-hidden">
-        {/* Decorative background elements */}
+      <footer className="bg-blue-800 text-white relative overflow-hidden">
+        {/* Decorative background elements - exatamente como no original */}
         <div className="absolute top-0 left-0 right-0 bottom-0 opacity-10 pointer-events-none">
           <div className="absolute top-0 left-0 w-full h-full">
             <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -70,10 +58,10 @@ const Footer = () => {
         </div>
         
         <div className="container mx-auto px-4 py-12 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-12 gap-4">
             {/* Column 1: Logo and About */}
             <motion.div 
-              className="col-span-1 lg:col-span-1"
+              className="col-span-3"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -83,7 +71,7 @@ const Footer = () => {
               <img 
                 src="https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/02/logotipo_BridgePoint_branco-site-1.png" 
                 alt="BridgePoint" 
-                className="h-10 mb-6"
+                className="h-14 mb-6"
               />
               <p className="text-sm text-gray-200 mb-6 leading-relaxed max-w-xs">
                 BridgePoint is a systems engineering company specializing in the development of custom test and measurement systems, monitoring and data acquisition, digital signal processing, control, and artificial vision.
@@ -91,22 +79,30 @@ const Footer = () => {
               
               {/* Certifications */}
               <div className="mt-6">
-                <h4 className="text-sm font-bold mb-3 uppercase tracking-wider text-white">Certifications</h4>
+                <h4 className="text-sm font-bold mb-3 uppercase tracking-wider text-white">CERTIFICATIONS</h4>
                 <div className="flex space-x-4">
-                  {certifications.map((cert, index) => (
-                    <div key={index} className="bg-white p-2 rounded-md w-20 h-20 flex items-center justify-center">
-                      <img src={cert.logo} alt={cert.name} className="max-w-full max-h-full object-contain" />
-                    </div>
-                  ))}
+                  <img 
+                    src="https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/TR-Testmark_9000030036_EN_CMYK_with-QR-Code.jpg" 
+                    alt="Top Scoring" 
+                    className="h-20 w-auto"
+                  />
+                  <img 
+                    src="https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/Home_Certifications_1.png" 
+                    alt="ISO 9001" 
+                    className="h-20 w-auto"
+                  />
                 </div>
               </div>
             </motion.div>
+            
+            {/* Espaço entre BP e COMPANY */}
+            <div className="col-span-1"></div>
             
             {/* Navigation Columns */}
             {navColumns.map((column, colIndex) => (
               <motion.div 
                 key={colIndex}
-                className="col-span-1"
+                className="col-span-2"
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
@@ -144,14 +140,14 @@ const Footer = () => {
             
             {/* Column 4: Headquarters */}
             <motion.div 
-              className="col-span-1"
+              className="col-span-3"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
               variants={fadeInUp}
             >
-              <h4 className="text-lg font-bold mb-4 uppercase tracking-wider text-white">Headquarters</h4>
+              <h4 className="text-lg font-bold mb-4 uppercase tracking-wider text-white">HEADQUARTERS</h4>
               <address className="not-italic text-sm text-gray-200 leading-relaxed">
                 <p className="mb-1">PACT - Parque do Alentejo de Ciência e Tecnologia</p>
                 <p className="mb-1">Rua Luís Adelino Fonseca, Lote 1A</p>
@@ -178,7 +174,7 @@ const Footer = () => {
         </div>
         
         {/* Bottom Bar */}
-        <div className="bg-primary-dark py-4 relative z-10">
+        <div className="bg-blue-900 py-4 relative z-10">
           <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
             <p>© {new Date().getFullYear()} BridgePoint - Engenharia de Sistemas Lda.</p>
             <div className="mt-2 md:mt-0">
