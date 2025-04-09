@@ -89,7 +89,7 @@ const Careers = () => {
             setJobTypes(types);
 
             setIsLoading(false);
-        }, 800);
+        }, 200);
 
         return () => clearTimeout(timer);
     }, []);
