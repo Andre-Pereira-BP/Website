@@ -10,7 +10,7 @@ const VideoSection = () => {
               muted 
               loop
             >
-              <source src="http://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/Siroco-Robot-v1.mp4" type="video/mp4" />
+              <source src="img/bp_siroco.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>

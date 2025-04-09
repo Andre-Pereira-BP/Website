@@ -1,22 +1,27 @@
 import { useState } from 'react';
 
 const CertificationsSection = () => {
+  
   const certifications = [
     {
-      image: "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/Home_Certifications_1.png",
+      image: "img/iso9001.png",
       alt: "ISO Certification"
     },
     {
-      image: "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/Alliance-Partner-NI.jpeg",
-      alt: "Alliance Partner NI"
+      image: "img/Alliance-Partner-NI.jpeg",
+      alt: "Alliance Partner NI Certification"
     },
     {
-      image: "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/Home_Certifications.png",
-      alt: "Quality Certification"
+      image: "img/LabView_cert.png",
+      alt: "LabView Certification"
     },
     {
-      image: "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/TR-Testmark_9000030036_EN_CMYK_with-QR-Code.jpg",
-      alt: "Test Mark Certification"
+      image: "img/topscoring5.png",
+      alt: "Top Scoring 5% 2022 Certification"
+    },
+    {
+      image: "img/pmelider24.png",
+      alt: "PME Lider 2024 Certification"
     }
   ];
 

@@ -4,16 +4,22 @@ const PartnersSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const partners = [
-    "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/logo_visteon.png",
-    "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/logo_hanon.png",
-    "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/logo_kemet-1-300x192.png",
-    "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/logo_jdeus-300x177.png",
-    "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/logo_BorgWarner-300x176.png",
-    "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/logo_Vishay-300x176.png",
-    "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/logo_siemens-300x176.png",
-    "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/logo_benteler-300x176.png",
-    "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/logo_embraer-300x176.png",
-    "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/logo_exercito-300x176.png"
+    "img/logo_benteler.png",
+    "img/logo_BorgWarner.png",
+    "img/logo_embraer.png",
+    "img/logo_exercito.png",
+    "img/logo_hanon.png",
+    "img/logo_incm.png",
+    "img/logo_jdeus.png",
+    "img/logo_kemet.png",
+    "img/logo_lnec.png",
+    "img/logo_lP.png",
+    "img/logo_lPQ.png",
+    "img/logo_lSQ.png",
+    "img/logo_siemens.png",
+    "img/logo_te.png",
+    "img/logo_Vishay.png",
+    "img/logo_visteon.png",
   ];
 
   // Função para paginar para frente ou para trás

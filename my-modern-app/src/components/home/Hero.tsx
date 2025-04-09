@@ -7,19 +7,19 @@ const Hero = () => {
     {
       title: "Automotive Industry",
       subtitle: "We Test for Your Success",
-      image: "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_305628495-scaled.jpeg",
+      image: "img/tech_car-scaled.jpeg",
       buttonText: "Learn More"
     },
     {
       title: "Quality Control",
       subtitle: "We Test for Your Success",
-      image: "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_402991030.jpg",
+      image: "img/tech_touch.jpg",
       buttonText: "Learn More"
     },
     {
       title: "High Voltage Test ⚡",
       subtitle: "We Test for Your Success",
-      image: "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_437936229.jpg",
+      image: "img/car_charging.jpg",
       buttonText: "Learn More"
     }
   ];

@@ -1002,10 +1002,12 @@ const Careers = () => {
                                         variants={fadeInUp}
                                     >
                                         <div className="flex items-center mb-4">
-                                            <div className="w-12 h-12 rounded-full bg-gray-300 mr-4"></div>
+                                            <div className="w-12 h-12 rounded-full bg-gray-300 mr-4">
+                                                <img src="img/luis.jpg" alt="Luís Raminhos" className="w-full h-full object-cover rounded-full" />
+                                            </div>
                                             <div>
-                                                <h4 className="font-bold">Ana Silva</h4>
-                                                <p className="text-sm text-gray-600">Software Engineer</p>
+                                                <h4 className="font-bold">Luís Raminhos</h4>
+                                                <p className="text-sm text-gray-600">Managing Director</p>
                                             </div>
                                         </div>
                                         <p className="text-gray-600 italic">
@@ -1025,10 +1027,12 @@ const Careers = () => {
                                         variants={fadeInUp}
                                     >
                                         <div className="flex items-center mb-4">
-                                            <div className="w-12 h-12 rounded-full bg-gray-300 mr-4"></div>
+                                            <div className="w-12 h-12 rounded-full bg-gray-300 mr-4">
+                                                <img src="img/jose.jpg" alt="José Rocha" className="w-full h-full object-cover rounded-full" />
+                                            </div>
                                             <div>
-                                                <h4 className="font-bold">Miguel Torres</h4>
-                                                <p className="text-sm text-gray-600">Test Systems Engineer</p>
+                                                <h4 className="font-bold">José Rocha</h4>
+                                                <p className="text-sm text-gray-600">Managing Director</p>
                                             </div>
                                         </div>
                                         <p className="text-gray-600 italic">
@@ -1048,9 +1052,11 @@ const Careers = () => {
                                         variants={fadeInUp}
                                     >
                                         <div className="flex items-center mb-4">
-                                            <div className="w-12 h-12 rounded-full bg-gray-300 mr-4"></div>
+                                            <div className="w-12 h-12 rounded-full bg-gray-300 mr-4">
+                                                <img src="img/ruben.jpg" alt="Ruben Orvalho" className="w-full h-full object-cover rounded-full" />
+                                            </div>
                                             <div>
-                                                <h4 className="font-bold">Sofia Martins</h4>
+                                                <h4 className="font-bold">Ruben Orvalho</h4>
                                                 <p className="text-sm text-gray-600">Project Manager</p>
                                             </div>
                                         </div>

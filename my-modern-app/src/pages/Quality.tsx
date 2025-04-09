@@ -53,7 +53,7 @@ const Quality = () => {
     {
       id: 'alliance-partner',
       name: 'NI Alliance Partner',
-      image: 'https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/Alliance-Partner-NI.jpeg',
+      image: 'img/Alliance-Partner-NI.jpeg',
       description: 'As a National Instruments Alliance Partner, BridgePoint has demonstrated exceptional expertise in developing test systems using NI technologies. This partnership ensures we remain at the forefront of test and measurement technology.',
       achievements: [
         'Exclusive access to advanced NI technologies',
@@ -447,7 +447,7 @@ const Quality = () => {
             >
               <div className="relative z-10 rounded-lg overflow-hidden shadow-xl">
                 <img 
-                  src="https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_322336749.jpg" 
+                  src="img/cientist.jpg" 
                   alt="Quality Assurance at BridgePoint" 
                   className="w-full h-auto"
                 />

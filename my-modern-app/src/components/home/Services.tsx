@@ -33,7 +33,7 @@ const ServiceCard = ({ image, title, icon, description, items }: {
       {
         title: "Automotive",
         icon: "⚙️",
-        image: "http://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_368680116-crop.jpg",
+        image: "img/car_interior-crop.jpg",
         description: "BridgePoint Test Systems",
         items: [
           "Infotainment",
@@ -46,7 +46,7 @@ const ServiceCard = ({ image, title, icon, description, items }: {
       {
         title: "Electric Vehicles",
         icon: "⚡",
-        image: "http://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_450863401-crop.jpg",
+        image: "img/ev_chargers-crop.jpg",
         description: "BridgePoint Test Systems",
         items: [
           "E-Motors",
@@ -59,7 +59,7 @@ const ServiceCard = ({ image, title, icon, description, items }: {
       {
         title: "Electronic Components",
         icon: "🔌",
-        image: "http://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_638891180-.jpg",
+        image: "img/chip.jpg",
         description: "BridgePoint Test Systems",
         items: [
           "Capacitors",

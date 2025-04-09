@@ -429,10 +429,13 @@ const Home = () => {
             <div className="aspect-w-16 aspect-h-9 bg-gray-100">
               <video 
                 className="w-full h-full object-cover" 
-                controls 
-                poster="https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_305628495-scaled.jpeg"
+                controls
+                autoPlay
+                muted
+                loop
+                poster="img/tech_car-scaled.jpeg"
               >
-                <source src="http://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/Siroco-Robot-v1.mp4" type="video/mp4" />
+                <source src="img/bp_siroco.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </div>
@@ -617,7 +620,7 @@ const Home = () => {
             >
               <div className="h-48 overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1559570278-eb8d71d06403?q=80&w=2046&auto=format&fit=crop" 
+                  src="img/chairs.png" 
                   alt="News" 
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />
@@ -649,7 +652,7 @@ const Home = () => {
             >
               <div className="h-48 overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop" 
+                  src="img/reunion.png" 
                   alt="News" 
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />
@@ -681,7 +684,7 @@ const Home = () => {
             >
               <div className="h-48 overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop" 
+                  src="img/worker.png" 
                   alt="News" 
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />

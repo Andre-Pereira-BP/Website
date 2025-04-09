@@ -69,7 +69,7 @@ const Footer = () => {
               variants={fadeInUp}
             >
               <img 
-                src="https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/02/logotipo_BridgePoint_branco-site-1.png" 
+                src="img/logo_bp_bw.png" 
                 alt="BridgePoint" 
                 className="h-14 mb-6"
               />
@@ -82,12 +82,12 @@ const Footer = () => {
                 <h4 className="text-sm font-bold mb-3 uppercase tracking-wider text-white">CERTIFICATIONS</h4>
                 <div className="flex space-x-4">
                   <img 
-                    src="https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/TR-Testmark_9000030036_EN_CMYK_with-QR-Code.jpg" 
-                    alt="Top Scoring" 
+                    src="img/pmelider24_white.png" 
+                    alt="PME LIDER 24" 
                     className="h-20 w-auto"
                   />
                   <img 
-                    src="https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/Home_Certifications_1.png" 
+                    src="img/iso9001.png" 
                     alt="ISO 9001" 
                     className="h-20 w-auto"
                   />
