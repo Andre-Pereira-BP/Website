@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import ModernLayout from '../components/layout/Layout';
 
 // Types for our news articles
@@ -22,6 +22,10 @@ const News = () => {
   const [activeFilter, setActiveFilter] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  
+  // Refs for scroll position management
+  const scrollPositionRef = useRef<number>(0);
+  const articleDetailRef = useRef<HTMLDivElement>(null);
 
   // Animation variants
   const fadeInUp = {
@@ -31,12 +35,12 @@ const News = () => {
 
   // Fetch news articles (simulate API call)
   useEffect(() => {
-    // Simulate loading delay
+    // Reduced loading time from 800ms to 300ms
     const timer = setTimeout(() => {
       setArticles(newsData);
       setFilteredArticles(newsData);
       setIsLoading(false);
-    }, 800);
+    }, 300);
 
     return () => clearTimeout(timer);
   }, []);
@@ -73,14 +77,15 @@ const News = () => {
     { value: 'projects', label: 'Projects' }
   ];
 
-  // Format date nicely
+  // Format date nicely in English
   const formatDate = (dateString: string) => {
+    // Force English locale with 'en-US'
     const options: Intl.DateTimeFormatOptions = { 
       year: 'numeric', 
       month: 'long', 
       day: 'numeric' 
     };
-    return new Date(dateString).toLocaleDateString(undefined, options);
+    return new Date(dateString).toLocaleDateString('en-US', options);
   };
 
   // Get category color
@@ -97,6 +102,26 @@ const News = () => {
       default:
         return 'bg-gray-500';
     }
+  };
+
+  // Handle opening article detail with scroll position management
+  const handleOpenArticle = (article: NewsArticle) => {
+    // Always store current scroll position before navigating to article detail
+    scrollPositionRef.current = window.pageYOffset || document.documentElement.scrollTop;
+    setSelectedArticle(article);
+    
+    // Scroll to the top of the article detail after it's rendered
+    window.scrollTo(0, 0);
+  };
+
+  // Handle closing article detail with scroll position restoration
+  const handleCloseArticle = () => {
+    setSelectedArticle(null);
+    
+    // Use requestAnimationFrame to ensure the news list is rendered before scrolling
+    requestAnimationFrame(() => {
+      window.scrollTo(0, scrollPositionRef.current);
+    });
   };
 
   // News Card Component
@@ -121,7 +146,7 @@ const News = () => {
           <h3 className="text-xl font-bold mb-3 font-montserrat">{article.title}</h3>
           <p className="text-gray-600 mb-4 flex-grow">{article.summary}</p>
           <button 
-            onClick={() => setSelectedArticle(article)}
+            onClick={() => handleOpenArticle(article)}
             className="mt-auto inline-flex items-center text-primary font-medium hover:text-primary-dark"
           >
             Read More
@@ -142,15 +167,15 @@ const News = () => {
     
     return (
       <motion.div 
-        className="bg-white rounded-lg shadow-lg overflow-hidden mb-12"
+        className="bg-white rounded-lg shadow-lg overflow-hidden mb-8"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.4 }} // Faster transition
         variants={fadeInUp}
       >
         <div className="grid grid-cols-1 md:grid-cols-2">
-          <div className="h-64 md:h-auto overflow-hidden relative">
+          <div className="h-48 md:h-60 overflow-hidden relative">
             <img 
               src={featured.image} 
               alt={featured.title} 
@@ -165,7 +190,7 @@ const News = () => {
             <h2 className="text-2xl md:text-3xl font-bold mb-4 font-montserrat">{featured.title}</h2>
             <p className="text-gray-600 mb-6">{featured.summary}</p>
             <button 
-              onClick={() => setSelectedArticle(featured)}
+              onClick={() => handleOpenArticle(featured)}
               className="inline-flex items-center text-primary font-medium hover:text-primary-dark self-start"
             >
               Read Full Article
@@ -183,12 +208,14 @@ const News = () => {
   const ArticleDetail = ({ article, onClose }: { article: NewsArticle, onClose: () => void }) => {
     return (
       <motion.div 
-        initial={{ opacity: 0, y: 50 }}
+        ref={articleDetailRef}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 50 }}
+        exit={{ opacity: 0, y: 20 }}
+        transition={{ duration: 0.3 }}
         className="bg-white rounded-lg shadow-lg overflow-hidden"
       >
-        <div className="relative h-72 md:h-96 overflow-hidden">
+        <div className="relative h-56 md:h-72 overflow-hidden">
           <img 
             src={article.image} 
             alt={article.title} 
@@ -252,134 +279,135 @@ const News = () => {
   return (
     <ModernLayout title="News & Updates">
       <div className="min-h-screen">
-        {selectedArticle ? (
-          // Article Detail View
-          <section className="py-10">
-            <div className="container mx-auto px-4">
-              <ArticleDetail article={selectedArticle} onClose={() => setSelectedArticle(null)} />
-            </div>
-          </section>
-        ) : (
-          // News Listing View
-          <>
-            {/* Featured Article */}
-            <section className="py-10">
+        <AnimatePresence mode="wait">
+          {selectedArticle ? (
+            // Article Detail View
+            <section className="py-10" key="article-detail">
               <div className="container mx-auto px-4">
-                <FeaturedNews />
+                <ArticleDetail article={selectedArticle} onClose={handleCloseArticle} />
               </div>
             </section>
-            
-            {/* Filters and Search */}
-            <section className="py-6 bg-gray-50">
-              <div className="container mx-auto px-4">
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
-                  {/* Category Filters */}
-                  <div className="flex flex-wrap gap-2 mb-4 md:mb-0">
-                    {filters.map(filter => (
-                      <button
-                        key={filter.value}
-                        onClick={() => setActiveFilter(filter.value)}
-                        className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                          activeFilter === filter.value
-                            ? 'bg-primary text-white'
-                            : 'bg-white text-gray-700 hover:bg-gray-100'
-                        }`}
-                      >
-                        {filter.label}
-                      </button>
-                    ))}
-                  </div>
-                  
-                  {/* Search */}
-                  <div className="w-full md:w-auto relative">
-                    <input
-                      type="text"
-                      placeholder="Search news..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full md:w-64 pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:border-primary focus:ring-1 focus:ring-primary"
-                    />
-                    <div className="absolute left-3 top-2.5 text-gray-400">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                      </svg>
+          ) : (
+            // News Listing View
+            <div key="news-listing">
+              {/* Featured Article */}
+              <section className="py-6">
+                <div className="container mx-auto px-4">
+                  <FeaturedNews />
+                </div>
+              </section>
+              
+              {/* Filters and Search */}
+              <section className="py-6 bg-gray-50">
+                <div className="container mx-auto px-4">
+                  <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
+                    {/* Category Filters */}
+                    <div className="flex flex-wrap gap-2 mb-4 md:mb-0">
+                      {filters.map(filter => (
+                        <button
+                          key={filter.value}
+                          onClick={() => setActiveFilter(filter.value)}
+                          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                            activeFilter === filter.value
+                              ? 'bg-primary text-white'
+                              : 'bg-white text-gray-700 hover:bg-gray-100'
+                          }`}
+                        >
+                          {filter.label}
+                        </button>
+                      ))}
+                    </div>
+                    
+                    {/* Search */}
+                    <div className="w-full md:w-auto relative">
+                      <input
+                        type="text"
+                        placeholder="Search news..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="w-full md:w-64 pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:border-primary focus:ring-1 focus:ring-primary"
+                      />
+                      <div className="absolute left-3 top-2.5 text-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </section>
-            
-            {/* News Grid */}
-            <section className="py-12 bg-gray-50">
-              <div className="container mx-auto px-4">
-                {isLoading ? (
-                  <LoadingSkeleton />
-                ) : filteredArticles.length > 0 ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {filteredArticles.map((article, index) => (
-                      <motion.div
-                        key={article.id}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: (index % 3) * 0.1 }}
-                        variants={fadeInUp}
-                      >
-                        <NewsCard article={article} />
-                      </motion.div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="text-center py-16">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-                    </svg>
-                    <h3 className="text-xl font-bold text-gray-600 mb-2">No News Found</h3>
-                    <p className="text-gray-500">Try adjusting your search or filter criteria</p>
-                  </div>
-                )}
-              </div>
-            </section>
-            
-            {/* Newsletter Signup */}
-            <section className="py-16 bg-primary text-white relative overflow-hidden">
-              <div className="absolute inset-0 opacity-10">
-                <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
-                  <defs>
-                    <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-                      <path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" strokeWidth="0.5"></path>
-                    </pattern>
-                  </defs>
-                  <rect width="100%" height="100%" fill="url(#grid)"></rect>
-                </svg>
-              </div>
+              </section>
               
-              <div className="container mx-auto px-4 relative z-10">
-                <div className="max-w-2xl mx-auto text-center">
-                  <h2 className="text-2xl md:text-3xl font-bold mb-4 font-montserrat text-white">Stay Up to Date</h2>
-                  <p className="text-white/90 mb-6">
-                    Subscribe to our newsletter to receive the latest news and updates from BridgePoint.
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
-                    <input
-                      type="email"
-                      placeholder="Your email address"
-                      className="flex-grow px-4 py-3 rounded-md text-gray-800 focus:outline-none"
-                    />
-                    <button className="bg-secondary hover:bg-secondary/90 text-white px-6 py-3 rounded-md font-medium transition-colors">
-                      Subscribe
-                    </button>
+              {/* News Grid */}
+              <section className="py-12 bg-gray-50">
+                <div className="container mx-auto px-4">
+                  {isLoading ? (
+                    <LoadingSkeleton />
+                  ) : filteredArticles.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                      {filteredArticles.map((article, index) => (
+                        <motion.div
+                          key={article.id}
+                          initial="hidden"
+                          whileInView="visible"
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.4, delay: (index % 3) * 0.05 }} // Faster animation with less delay
+                          variants={fadeInUp}
+                        >
+                          <NewsCard article={article} />
+                        </motion.div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-center py-16">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                      </svg>
+                      <h3 className="text-xl font-bold text-gray-600 mb-2">No News Found</h3>
+                      <p className="text-gray-500">Try adjusting your search or filter criteria</p>
+                    </div>
+                  )}
+                </div>
+              </section>
+              
+              {/* Newsletter Signup */}
+              <section className="py-16 bg-primary text-white relative overflow-hidden">
+                <div className="absolute inset-0 opacity-10">
+                  <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <defs>
+                      <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                        <path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" strokeWidth="0.5"></path>
+                      </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#grid)"></rect>
+                  </svg>
+                </div>
+                
+                <div className="container mx-auto px-4 relative z-10">
+                  <div className="max-w-2xl mx-auto text-center">
+                    <h2 className="text-2xl md:text-3xl font-bold mb-4 font-montserrat text-white">Stay Up to Date</h2>
+                    <p className="text-white/90 mb-6">
+                      Subscribe to our newsletter to receive the latest news and updates from BridgePoint.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+                      <input
+                        type="email"
+                        placeholder="Your email address"
+                        className="flex-grow px-4 py-3 rounded-md text-gray-800 focus:outline-none"
+                      />
+                      <button className="bg-secondary hover:bg-secondary/90 text-white px-6 py-3 rounded-md font-medium transition-colors">
+                        Subscribe
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </section>
-          </>
-        )}
+              </section>
+            </div>
+          )}
+        </AnimatePresence>
       </div>
     </ModernLayout>
   );
 };
-
 // Sample news data
 const newsData: NewsArticle[] = [
   {
@@ -389,7 +417,7 @@ const newsData: NewsArticle[] = [
     category: 'company',
     summary: 'BridgePoint has partnered with a leading European automotive manufacturer to develop next-generation testing solutions for electric vehicle components.',
     content: `BridgePoint Test Systems is proud to announce a strategic partnership with one of Europe's leading automotive manufacturers to develop cutting-edge testing solutions specifically designed for electric vehicle (EV) components.\n\nThe partnership will focus on creating innovative test systems for battery management, powertrain efficiency, and thermal control systems, addressing the unique challenges posed by electric vehicles.\n\n"This collaboration represents a significant milestone for BridgePoint," said José Rocha, Managing Director. "By combining our testing expertise with the automotive manufacturer's deep industry knowledge, we'll be able to create solutions that help accelerate the development and production of safer, more efficient electric vehicles."\n\nThe partnership will include joint research and development efforts, knowledge exchange, and the creation of specialized testing equipment for both R&D and production environments. The first prototypes are expected to be deployed by Q3 2024, with full-scale implementation planned for early 2025.\n\nThis announcement comes as BridgePoint continues to expand its footprint in the rapidly growing EV sector, reflecting the company's commitment to supporting the automotive industry's transition to sustainable transportation solutions.`,
-    image: 'https://images.unsplash.com/photo-1559570278-eb8d71d06403?q=80&w=2046&auto=format&fit=crop'
+    image: 'img/chairs.png'
   },
   {
     id: '2',
@@ -398,7 +426,7 @@ const newsData: NewsArticle[] = [
     category: 'company',
     summary: 'We are pleased to announce that BridgePoint has successfully completed the ISO 9001:2015 recertification process, demonstrating our ongoing commitment to quality management.',
     content: `BridgePoint Test Systems is proud to announce its successful recertification to ISO 9001:2015 standards, reaffirming our dedication to maintaining the highest quality management systems across all operations.\n\nThe recertification process involved a comprehensive audit of our quality management processes, including documentation, operational procedures, and continuous improvement mechanisms. The audit confirmed that BridgePoint not only maintains compliance with ISO standards but has strengthened its quality management framework since the previous certification.\n\n"Quality is at the core of everything we do at BridgePoint," commented Luís Raminhos, Managing Director. "This recertification reflects our team's ongoing commitment to excellence and our focus on delivering consistent, high-quality solutions to our clients."\n\nThe ISO 9001:2015 certification covers all aspects of BridgePoint's operations, including design, development, manufacturing, and customer support services for our test systems. This recertification ensures that our clients continue to receive solutions that meet rigorous international quality standards.\n\nAs part of our continuous improvement philosophy, BridgePoint has implemented several enhancements to our quality management system during the recertification process, including streamlined documentation processes, improved training protocols, and enhanced customer feedback mechanisms.`,
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop'
+    image: 'img/reunion.png'
   },
   {
     id: '3',
@@ -407,7 +435,7 @@ const newsData: NewsArticle[] = [
     category: 'technology',
     summary: 'BridgePoint expands its testing capabilities with new high-voltage test equipment for EV battery systems up to 1500V.',
     content: `BridgePoint Test Systems has significantly expanded its testing capabilities with the addition of advanced high-voltage test equipment designed specifically for electric vehicle (EV) battery systems operating at up to 1500V.\n\nThis state-of-the-art equipment enhances our ability to develop comprehensive testing solutions for the latest generation of electric vehicles, which are increasingly utilizing higher voltage systems to improve efficiency and performance.\n\nThe new capabilities include:\n\n- Precision high-voltage measurement systems with accuracy better than ±0.05%\n- Advanced safety isolation systems exceeding IEC 61010 standards\n- Controlled charge/discharge cycling at up to 500kW\n- Integrated thermal monitoring with millisecond response times\n- Configurable fault simulation for battery management system validation\n\n"As the automotive industry continues its transition to electric propulsion, testing requirements are evolving rapidly," said our Engineering Director. "Our investment in these high-voltage testing capabilities ensures that we can support manufacturers as they develop the next generation of EV technology."\n\nThe expanded testing capabilities are already being utilized in several client projects, supporting both development testing and end-of-line production verification for battery modules and power electronics components.`,
-    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop'
+    image: 'img/high_volt.png'
   },
   {
     id: '4',
@@ -416,7 +444,7 @@ const newsData: NewsArticle[] = [
     category: 'events',
     summary: 'Our team will be presenting new methodologies for automated test system validation at the upcoming European Testing Conference in Munich.',
     content: `BridgePoint Test Systems is pleased to announce that our engineering team will be presenting at the prestigious European Testing Conference (ETC) in Munich, Germany, scheduled for February 15-17, 2025.\n\nOur presentation, titled "Advanced Methodologies for Automated Validation of Complex Test Systems," will showcase BridgePoint's innovative approach to ensuring accuracy and reliability in automated test environments. The session will cover our proprietary validation frameworks and how they can be applied to high-complexity testing scenarios, particularly in the automotive and electronics industries.\n\nThe presentation will be delivered by our Lead Test Engineer and will include case studies from recent projects that demonstrate significant improvements in test system reliability and reduced validation time.\n\n"Participation in the European Testing Conference provides an excellent opportunity to share our expertise while also learning from other industry leaders," said our Technical Director. "We're looking forward to engaging with the testing community and discussing the evolving challenges in our field."\n\nIn addition to the presentation, BridgePoint will have representatives available at the conference to discuss specific testing challenges and potential solutions. Attendees interested in meeting with our team can schedule appointments in advance through our website or visit our booth at the conference.`,
-    image: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=2070&auto=format&fit=crop'
+    image: 'img/microphone.png'
   },
   {
     id: '5',
@@ -425,7 +453,7 @@ const newsData: NewsArticle[] = [
     category: 'projects',
     summary: 'Read about our recently completed project developing an automated testing system for automotive display units with machine vision quality verification.',
     content: `BridgePoint Test Systems has successfully delivered a comprehensive automated testing solution for a major automotive components manufacturer, focused on high-quality verification of infotainment and instrument cluster displays.\n\nThe project addressed the client's need for a highly reliable, high-throughput system capable of validating multiple display parameters while maintaining production line efficiency. The resulting system integrates machine vision technology with precise optical measurements to verify display quality against strict automotive standards.\n\nKey features of the developed solution include:\n\n- Multi-camera inspection system with calibrated color measurement\n- Automated detection of dead pixels, brightness inconsistencies, and color accuracy\n- Touch functionality verification using robotic actuators\n- Comprehensive electrical testing of all interfaces and connections\n- Custom software with intuitive operator interface and detailed reporting\n- Full traceability with database integration\n\nThe implemented system has achieved a cycle time of less than 35 seconds per unit while maintaining detection accuracy exceeding 99.7% for display defects. This represents a 40% improvement in throughput compared to the client's previous testing process, with significantly enhanced defect detection capabilities.\n\n"This project exemplifies our commitment to developing testing solutions that directly address our clients' specific challenges," noted our Project Manager. "By combining optical expertise with our automated testing capabilities, we've delivered a system that significantly improves both quality assurance and production efficiency."\n\nThe client has already commissioned additional systems for deployment across their global manufacturing facilities, building on the success of this initial implementation.`,
-    image: 'https://images.unsplash.com/photo-1611174797134-83576e0de4e0?q=80&w=1974&auto=format&fit=crop'
+    image: 'img/worker.png'
   },
   {
     id: '6',
@@ -434,7 +462,7 @@ const newsData: NewsArticle[] = [
     category: 'company',
     summary: 'We have expanded our North Office in Monção to accommodate growing team and increased project demands in the region.',
     content: `BridgePoint Test Systems is excited to announce the expansion of our North Office located in Monção, Viana do Castelo. This expansion comes in response to the significant growth in our operations and increased client demand in northern Portugal and neighboring regions.\n\nThe expanded facility includes additional engineering workspace, an enhanced prototyping lab, and dedicated client meeting areas. The office space has doubled in size, allowing for improved workflow and collaboration among our growing team.\n\n"This expansion represents an important milestone in our growth strategy," said José Rocha, Managing Director. "The enhanced facilities will enable us to better serve our clients in northern Portugal and Spain while providing our team with an improved working environment."\n\nThe North Office will continue to focus on specialized testing solutions for the automotive and electronics sectors, with the new facilities enabling more complex system development and testing capabilities. The expansion includes investment in additional test equipment and prototyping tools to support advanced project requirements.\n\nAs part of this growth, BridgePoint is actively recruiting additional engineering talent in the region, with several new positions opening in software development, systems integration, and project management roles.\n\nThe newly expanded office is fully operational as of October 1, 2023, with an official inauguration event planned for later this month.`,
-    image: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=2069&auto=format&fit=crop'
+    image: 'img/office.png'
   },
   {
     id: '7',
@@ -443,7 +471,7 @@ const newsData: NewsArticle[] = [
     category: 'technology',
     summary: 'BridgePoint announces the release of TestPoint 2.0, our enhanced software framework for test automation with improved data analysis capabilities.',
     content: `BridgePoint Test Systems is proud to announce the release of TestPoint 2.0, a significant update to our proprietary software framework for test automation that introduces enhanced data analysis capabilities and improved user interface features.\n\nTestPoint 2.0 builds on the proven foundation of our testing framework while adding powerful new functionalities designed to streamline test development, execution, and results analysis. The updated platform has been developed based on extensive feedback from both our engineering team and clients using previous versions.\n\nKey enhancements in the new release include:\n\n- Real-time data visualization with customizable dashboards\n- Advanced statistical analysis tools for test results evaluation\n- Improved test sequence editor with drag-and-drop functionality\n- Enhanced report generation with exportable formats for various stakeholders\n- Expanded API for integration with third-party systems and databases\n- Comprehensive test history tracking with version control\n\n"TestPoint 2.0 represents a major step forward in our software capabilities," said our Software Development Manager. "These enhancements will allow our clients to gain deeper insights from their test data while making the overall testing process more efficient."\n\nThe new software has already been deployed in several client projects with extremely positive feedback, particularly regarding the improved data visualization tools and the intuitive user interface.\n\nAll new test systems delivered by BridgePoint will include TestPoint 2.0, while existing clients have the option to upgrade their current installations through our support services team.`,
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop'
+    image: 'img/new_soft.png'
   },
   {
     id: '8',
@@ -452,7 +480,7 @@ const newsData: NewsArticle[] = [
     category: 'company',
     summary: 'We are pleased to announce our membership in the European Automotive Testing Alliance, collaborating with industry leaders to develop next-generation testing standards.',
     content: `BridgePoint Test Systems is proud to announce our membership in the prestigious European Automotive Testing Alliance (EATA), a consortium of leading testing technology providers, automotive manufacturers, and research institutions dedicated to advancing testing methodologies and standards across the European automotive industry.\n\nJoining this alliance aligns with our strategic focus on innovation and collaboration in the automotive testing sector. Through EATA, BridgePoint will participate in working groups focused on developing standardized approaches to emerging testing challenges, particularly those related to autonomous driving systems, connected vehicles, and electric powertrains.\n\n"Membership in EATA provides us with a valuable platform to collaborate with other industry leaders and contribute to shaping the future of automotive testing," said Luís Raminhos, Managing Director. "It also gives our clients confidence that our solutions are aligned with emerging industry standards and best practices."\n\nAs part of our involvement, BridgePoint will participate in the alliance's annual conference and technology showcase, as well as contribute to technical publications and standards development activities. This engagement will also provide opportunities for knowledge exchange and potential collaborative projects with other alliance members.`,
-    image: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?q=80&w=2073&auto=format&fit=crop'
+    image: 'img/buildings.png'
   }
 ];
 
