@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion} from 'framer-motion';//, AnimatePresence } from 'framer-motion';
 import ModernLayout from '../components/layout/Layout';
 
 // Types for job listings

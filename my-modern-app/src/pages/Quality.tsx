@@ -21,10 +21,10 @@ const Quality = () => {
     visible: { opacity: 1, y: 0 }
   };
   
-  const fadeIn = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 }
-  };
+  //const fadeIn = {
+  //  hidden: { opacity: 0 },
+  //  visible: { opacity: 1 }
+  //};
   
   // Toggle certification details
   const toggleCertification = (id: string) => {
