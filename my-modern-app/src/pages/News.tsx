@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ModernLayout from '../components/layout/Layout';
@@ -35,12 +36,12 @@ const News = () => {
 
   // Fetch news articles (simulate API call)
   useEffect(() => {
-    // Reduced loading time from 800ms to 300ms
+    // Reduced loading time from 800ms to 100ms
     const timer = setTimeout(() => {
       setArticles(newsData);
       setFilteredArticles(newsData);
       setIsLoading(false);
-    }, 300);
+    }, 100);
 
     return () => clearTimeout(timer);
   }, []);
@@ -166,13 +167,8 @@ const News = () => {
     const featured = articles[0]; // Use the first article as featured
     
     return (
-      <motion.div 
+      <div 
         className="bg-white rounded-lg shadow-lg overflow-hidden mb-8"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        transition={{ duration: 0.4 }} // Faster transition
-        variants={fadeInUp}
       >
         <div className="grid grid-cols-1 md:grid-cols-2">
           <div className="h-48 md:h-60 overflow-hidden relative">
@@ -200,7 +196,7 @@ const News = () => {
             </button>
           </div>
         </div>
-      </motion.div>
+      </div>
     );
   };
 
