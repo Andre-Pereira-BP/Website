@@ -112,11 +112,20 @@ const Contact = () => {
   const handleOfficeSelect = (officeId: string) => {
     setSelectedOffice(officeId);
     
-    // Scroll to map section after a short delay
+    // Scroll to map section with better positioning
     setTimeout(() => {
       const mapElement = document.getElementById('map-section');
       if (mapElement) {
-        mapElement.scrollIntoView({ behavior: 'smooth' });
+        // Get the position of the map element
+        const mapRect = mapElement.getBoundingClientRect();
+        // Calculate offset to keep some buttons visible (adjust the 220 value as needed)
+        const scrollPosition = window.scrollY + mapRect.top - 220;
+        
+        // Scroll to the calculated position
+        window.scrollTo({
+          top: scrollPosition,
+          behavior: 'smooth'
+        });
       }
     }, 100);
   };
