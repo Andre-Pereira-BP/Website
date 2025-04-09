@@ -1,14 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import ModernLayout from '../components/layout/Layout';
 import ContactMap from '../components/ui/ContactMap';
 
 const Contact = () => {
-  // Estado para o escritório selecionado
+  // State for selected office
   const [selectedOffice, setSelectedOffice] = useState<string>("South");
-  
-  // Referência para o componente do mapa
-  // const mapRef = useRef<any>(null);
   
   // Animation variants
   const fadeInUp = {
@@ -111,11 +108,11 @@ const Contact = () => {
     }
   ];
   
-  // Função para selecionar escritório
+  // Function to select office and scroll to map
   const handleOfficeSelect = (officeId: string) => {
     setSelectedOffice(officeId);
     
-    // Fazer scroll até o mapa
+    // Scroll to map section after a short delay
     setTimeout(() => {
       const mapElement = document.getElementById('map-section');
       if (mapElement) {
@@ -204,11 +201,12 @@ const Contact = () => {
             </p>
           </motion.div>
           
+          {/* Office Cards - clicking these updates the map */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             {offices.map((office, index) => (
               <motion.div
                 key={index}
-                className={`bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer transform transition-all duration-300 ${
+                className={`bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer transition-all duration-300 ${
                   selectedOffice === office.id ? 'ring-2 ring-primary scale-105' : 'hover:shadow-xl hover:-translate-y-1'
                 }`}
                 initial="hidden"
@@ -244,7 +242,7 @@ const Contact = () => {
             transition={{ duration: 0.7 }}
             variants={fadeInUp}
           >
-           <ContactMap selectedOffice={selectedOffice} />
+            <ContactMap selectedOffice={selectedOffice} />
           </motion.div>
         </div>
       </section>
@@ -259,7 +257,7 @@ const Contact = () => {
               </pattern>
             </defs>
             <rect width="100%" height="100%" fill="url(#grid)"></rect>
-          </svg>
+            </svg>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
