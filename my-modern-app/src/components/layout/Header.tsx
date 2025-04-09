@@ -45,14 +45,14 @@ const Header = () => {
       <div className="container mx-auto px-4 flex justify-between items-center">
         {/* Logo */}
         <Link to="/" className="flex items-center">
-          <motion.img 
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            src="http://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/Logo_Bridgepoint_Header.png" 
-            alt="BridgePoint" 
-            className="h-10"
-          />
+        <motion.img 
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          src="http://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/Logo_Bridgepoint_Header.png" 
+          alt="BridgePoint" 
+          className="h-14" // Alterado de h-10 para h-14
+        />
         </Link>
         
         {/* Desktop Navigation */}

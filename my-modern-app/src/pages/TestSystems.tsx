@@ -34,23 +34,23 @@ const TestSystems = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
         </svg>
       ),
-      image: "http://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_405741603.jpg",
+      image: "img/prod_dev.jpg",
       description: "Test systems for product development, measuring product parameters for performance, durability and innovation.",
       examples: [
         {
           title: "HVAC Testing System",
           description: "Advanced testing system for HVAC components with temperature, pressure, and flow measurements in controlled environments.",
-          image: "http://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_133580537.jpg"
+          image: "img/hvac.jpg"
         },
         {
           title: "Battery Test Bench",
           description: "High-precision test bench for electric vehicle battery development with voltage, current, and temperature monitoring.",
-          image: "http://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_450863401-crop.jpg"
+          image: "img/ev_chargers-crop.jpg"
         },
         {
           title: "Prototype Validation System",
           description: "Comprehensive validation system for early-stage prototypes with multiple sensor inputs and data analysis.",
-          image: "http://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_305628495-scaled.jpeg"
+          image: "img/tech_car-scaled.jpeg"
         }
       ]
     },
@@ -62,23 +62,23 @@ const TestSystems = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
         </svg>
       ),
-      image: "http://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_624383402.jpg",
+      image: "img/prod.jpg",
       description: "EOL testers and test benches. Integration of vision, data acquisition and instrumentation, DMM, RF test, protocol analyzers, RDS, Wi-Fi, Bluetooth, DoIP, Ethernet. Communication CAN, LIN, I2C. Programmable power supplies LV and HV test.",
       examples: [
         {
           title: "End-of-Line Tester",
           description: "Fully automated EOL tester for automotive electronics with comprehensive test coverage and high throughput.",
-          image: "http://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_624383402.jpg"
+          image: "img/prod.jpg"
         },
         {
           title: "Display Testing System",
           description: "Vision-based system for testing and calibrating automotive displays with automated evaluation of brightness, color, and pixel defects.",
-          image: "http://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_213435580.jpg"
+          image: "img/fabrica.jpg"
         },
         {
           title: "Robotic Assembly Tester",
           description: "Integrated robotic system for testing components during the assembly process with real-time feedback.",
-          image: "http://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_638891180-.jpg"
+          image: "img/chip.jpg"
         }
       ]
     },
@@ -90,23 +90,23 @@ const TestSystems = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
         </svg>
       ),
-      image: "http://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_322336749.jpg",
+      image: "img/cientist.jpg",
       description: "Test systems for product quality control, audit stations, test benches, Burn-In/Run-In and Vibration testers (NVH).",
       examples: [
         {
           title: "Burn-In Test System",
           description: "Temperature-controlled burn-in system for electronics with continuous monitoring and failure detection.",
-          image: "http://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_322336749.jpg"
+          image: "img/cientist.jpg"
         },
         {
           title: "NVH Analysis System",
           description: "Advanced vibration and acoustic testing system for automotive components with FFT analysis and reporting.",
-          image: "http://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_670713727.jpg"
+          image: "img/flow.jpg"
         },
         {
           title: "Quality Audit Station",
           description: "Comprehensive audit station for final quality verification with multiple inspection points and automated reporting.",
-          image: "http://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_402991030.jpg"
+          image: "img/tech_touch.jpg"
         }
       ]
     }

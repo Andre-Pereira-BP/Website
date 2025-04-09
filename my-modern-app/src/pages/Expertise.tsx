@@ -51,7 +51,7 @@ const Expertise = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
         </svg>
       ),
-      image: "http://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_607045343.jpg",
+      image: "img/software.jpg",
       description: "Software development for test systems, data acquisition and signal processing.",
       details: "Our software development expertise covers the entire software lifecycle, from requirements gathering to deployment and maintenance. We specialize in creating robust, scalable solutions for test automation, data acquisition, and signal processing applications.",
       keyPoints: [
@@ -66,14 +66,14 @@ const Expertise = () => {
       ],
       caseStudies: [
         {
-          title: "Automotive ECU Testing Platform",
+          title: "VTester - Automotive ECU Testing Platform",
           description: "Developed a comprehensive software platform for testing electronic control units in automotive applications, with automated test sequences and detailed reporting capabilities.",
-          image: "https://images.unsplash.com/photo-1545171709-49f14d8a8b55?q=80&w=2070&auto=format&fit=crop"
+          image: "img/software_modern.jpg"
         },
         {
           title: "Data Acquisition System for Environmental Monitoring",
           description: "Created a scalable data acquisition system for environmental parameter monitoring, with real-time data visualization and analytics.",
-          image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop"
+          image: "img/chipset.png"
         }
       ]
     },
@@ -85,7 +85,7 @@ const Expertise = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
         </svg>
       ),
-      image: "http://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_79645170.jpg",
+      image: "img/hardware_dev.jpg",
       description: "Customized hardware development, electronics and PCB design.",
       details: "Our hardware development team designs and implements customized electronic solutions for testing and measurement applications. We specialize in creating reliable, precision hardware interfaces that meet the specific needs of our clients' test environments.",
       keyPoints: [
@@ -103,12 +103,12 @@ const Expertise = () => {
         {
           title: "High Voltage Test Interface",
           description: "Designed and implemented a high voltage test interface for automotive battery systems, capable of safely handling up to 1000V DC with precision measurement capabilities.",
-          image: "https://images.unsplash.com/photo-1565140405258-b7aea9e48a21?q=80&w=2070&auto=format&fit=crop"
+          image: "img/high_volt.png"
         },
         {
           title: "Custom Multiplexer System",
           description: "Developed a custom 256-channel multiplexer system for automated testing of complex electronic assemblies, with minimal crosstalk and high signal integrity.",
-          image: "https://images.unsplash.com/photo-1563770775-4a163585bc0d?q=80&w=2070&auto=format&fit=crop"
+          image: "img/mux.png"
         }
       ]
     },
@@ -120,7 +120,7 @@ const Expertise = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       ),
-      image: "http://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_133580537.jpg",
+      image: "img/hvac.jpg",
       description: "Development of real-time control systems using LabVIEW real-time and FPGA technologies.",
       details: "BridgePoint specializes in developing high-performance real-time control systems that require deterministic operation and rapid response times. Our solutions leverage the power of LabVIEW Real-Time and FPGA technologies to deliver precise control for demanding applications.",
       keyPoints: [
@@ -138,12 +138,12 @@ const Expertise = () => {
         {
           title: "Vibration Test Control System",
           description: "Implemented a real-time control system for a multi-axis vibration test platform, with precise synchronization and complex waveform generation capabilities.",
-          image: "https://images.unsplash.com/photo-1599507410193-eb308dc5c9f2?q=80&w=2069&auto=format&fit=crop"
+          image: "img/vibration_control.jpg"
         },
         {
           title: "Power Electronics HIL Tester",
           description: "Developed a hardware-in-the-loop test system for power electronics controllers, featuring sub-microsecond response times and accurate power system simulation.",
-          image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop"
+          image: "img/hil_tester.png"
         }
       ]
     },
@@ -155,7 +155,7 @@ const Expertise = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
         </svg>
       ),
-      image: "http://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_624383402.jpg",
+      image: "img/prod.jpg",
       description: "Automation and robotics development for complete testers integration in assembly lines.",
       details: "Our robotics and automation expertise enables us to create integrated testing solutions that seamlessly fit into production environments. We design and implement robotic systems that enhance testing efficiency, reliability, and throughput in manufacturing settings.",
       keyPoints: [
@@ -173,12 +173,12 @@ const Expertise = () => {
         {
           title: "Automated Display Testing Cell",
           description: "Designed and implemented a robotic testing cell for automotive displays, combining precision handling with machine vision inspection in a production environment.",
-          image: "https://images.unsplash.com/photo-1581093458791-9f3c3abffe46?q=80&w=2070&auto=format&fit=crop"
+          image: "img/display-testing.png"
         },
         {
           title: "Collaborative Assembly Verification",
           description: "Developed a collaborative robot solution for final assembly verification in an electronics manufacturing facility, working alongside human operators.",
-          image: "https://images.unsplash.com/photo-1573496546038-82f9c39f6365?q=80&w=2069&auto=format&fit=crop"
+          image: "img/human_robot.png"
         }
       ]
     },
@@ -190,7 +190,7 @@ const Expertise = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
         </svg>
       ),
-      image: "http://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_670713727.jpg",
+      image: "img/flow.jpg",
       description: "Data acquisition systems and digital signal processing development.",
       details: "BridgePoint specializes in designing and implementing sophisticated data acquisition and signal processing systems. Our solutions capture, analyze, and interpret complex measurement data with high precision and reliability.",
       keyPoints: [
@@ -209,12 +209,12 @@ const Expertise = () => {
         {
           title: "Structural Health Monitoring System",
           description: "Implemented a distributed data acquisition system for long-term monitoring of structural integrity in critical infrastructure, with advanced signal processing for early fault detection.",
-          image: "https://images.unsplash.com/photo-1517420704952-d9f39e95b43e?q=80&w=2070&auto=format&fit=crop"
+          image: "img/dmms.png"
         },
         {
           title: "Acoustic Analysis Platform",
           description: "Developed a high-fidelity acoustic measurement and analysis system for automotive NVH testing, with real-time visualization and classification of noise sources.",
-          image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2034&auto=format&fit=crop"
+          image: "img/server.png"
         }
       ]
     },
@@ -227,7 +227,7 @@ const Expertise = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
         </svg>
       ),
-      image: "http://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_213435580.jpg",
+      image: "img/fabrica.jpg",
       description: "Automated Vision Systems for quality control.",
       details: "Our vision systems expertise enables us to create sophisticated inspection solutions that detect defects, verify assemblies, and ensure product quality. We combine advanced imaging technologies with machine learning to deliver reliable, accurate visual inspection systems.",
       keyPoints: [
@@ -246,12 +246,12 @@ const Expertise = () => {
         {
           title: "Automotive Display Quality Control",
           description: "Developed an automated inspection system for automotive displays, capable of detecting pixel defects, brightness variations, and color accuracy issues at production line speeds.",
-          image: "https://images.unsplash.com/photo-1611174797134-83576e0de4e0?q=80&w=1974&auto=format&fit=crop"
+          image: "img/displayq.png"
         },
         {
           title: "Surface Defect Detection System",
           description: "Implemented a machine learning-based vision system for detecting and classifying surface defects on painted automotive components with high accuracy.",
-          image: "https://images.unsplash.com/photo-1563770660439-4636190af475?q=80&w=2070&auto=format&fit=crop"
+          image: "img/surface_detection.png"
         }
       ]
     }
@@ -504,17 +504,17 @@ const Expertise = () => {
             variants={fadeInUp}
           >
             {/* Partner Logos - Replace with actual partner logos */}
-            <div className="w-32 h-16 bg-gray-100 flex items-center justify-center p-2 rounded">
-              <img src="https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/Alliance-Partner-NI.jpeg" alt="National Instruments" className="max-w-full max-h-full" />
+            <div className="w-64 h-32 bg-gray-100 flex items-center justify-center p-2 rounded">
+              <img src="img/logo_itec.jpg" alt="ITEC" className="max-w-full max-h-full" />
             </div>
-            <div className="w-32 h-16 bg-gray-100 flex items-center justify-center p-2 rounded">
-              <img src="https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/logo_Vishay-300x176.png" alt="Vishay" className="max-w-full max-h-full" />
+            <div className="w-64 h-32 bg-gray-100 flex items-center justify-center p-2 rounded">
+              <img src="img/logo_imesif.jpg" alt="Imesif" className="max-w-full max-h-full" />
             </div>
-            <div className="w-32 h-16 bg-gray-100 flex items-center justify-center p-2 rounded">
-              <img src="https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/logo_kemet-1-300x192.png" alt="Kemet" className="max-w-full max-h-full" />
+            <div className="w-64 h-32 bg-gray-100 flex items-center justify-center p-2 rounded">
+              <img src="img/logo_siroco.jpg" alt="Siroco" className="max-w-full max-h-full" />
             </div>
-            <div className="w-32 h-16 bg-gray-100 flex items-center justify-center p-2 rounded">
-              <img src="https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/logo_siemens-300x176.png" alt="Siemens" className="max-w-full max-h-full" />
+            <div className="w-64 h-32 bg-gray-100 flex items-center justify-center p-2 rounded">
+              <img src="img/logo_zeugma.jpg" alt="Zeugma" className="max-w-full max-h-full" />
             </div>
           </motion.div>
         </div>

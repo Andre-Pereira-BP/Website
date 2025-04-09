@@ -26,7 +26,7 @@ const Home = () => {
       title: "Testing Excellence for Automotive Industry",
       subtitle: "We Test for Your Success",
       description: "Advanced testing solutions for automotive components and systems",
-      image: "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_305628495-scaled.jpeg",
+      image: "img/tech_car.jpeg",
       buttonText: "Explore Solutions",
       buttonLink: "/test-systems"
     },
@@ -34,7 +34,7 @@ const Home = () => {
       title: "Quality Control Systems",
       subtitle: "We Test for Your Success",
       description: "Ensuring product quality through innovative testing approaches",
-      image: "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_402991030.jpg",
+      image: "img/tech_touch.jpg",
       buttonText: "Our Expertise",
       buttonLink: "/expertise"
     },
@@ -42,7 +42,7 @@ const Home = () => {
       title: "High Voltage Test Solutions ⚡",
       subtitle: "We Test for Your Success",
       description: "Advanced testing for electric vehicle components and power systems",
-      image: "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_437936229.jpg",
+      image: "img/car_charging.jpg",
       buttonText: "Discover More",
       buttonLink: "/expertise/data-acquisition"
     }
@@ -53,7 +53,7 @@ const Home = () => {
     {
       title: "Automotive",
       icon: "🚗",
-      image: "http://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_368680116-crop.jpg",
+      image: "img/car_interior-scaled.jpeg",
       description: "Comprehensive testing solutions for the automotive industry",
       items: [
         "Infotainment Systems",
@@ -67,7 +67,7 @@ const Home = () => {
     {
       title: "Electric Vehicles",
       icon: "⚡",
-      image: "http://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_450863401-crop.jpg",
+      image: "img/ev_chargers-crop.jpg",
       description: "Specialized testing for EV components and systems",
       items: [
         "E-Motors",
@@ -81,7 +81,7 @@ const Home = () => {
     {
       title: "Electronic Components",
       icon: "🔌",
-      image: "http://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/AdobeStock_638891180-.jpg",
+      image: "img/chip.jpg",
       description: "Precision testing for electronic devices and components",
       items: [
         "Capacitors",
@@ -96,33 +96,45 @@ const Home = () => {
 
   // Partners data
   const partners = [
-    "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/logo_visteon.png",
-    "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/logo_hanon.png",
-    "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/logo_kemet-1-300x192.png",
-    "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/logo_jdeus-300x177.png",
-    "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/logo_BorgWarner-300x176.png",
-    "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/logo_Vishay-300x176.png",
-    "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/logo_siemens-300x176.png",
-    "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/logo_benteler-300x176.png"
+    "img/logo_benteler.png",
+    "img/logo_BorgWarner.png",
+    "img/logo_embraer.png",
+    "img/logo_exercito.png",
+    "img/logo_hanon.png",
+    "img/logo_incm.png",
+    "img/logo_jdeus.png",
+    "img/logo_kemet.png",
+    "img/logo_lnec.png",
+    "img/logo_lP.png",
+    "img/logo_lPQ.png",
+    "img/logo_lSQ.png",
+    "img/logo_siemens.png",
+    "img/logo_te.png",
+    "img/logo_Vishay.png",
+    "img/logo_visteon.png",
   ];
 
   // Certifications data
   const certifications = [
     {
-      image: "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/Home_Certifications_1.png",
+      image: "img/iso9001.png",
       alt: "ISO Certification"
     },
     {
-      image: "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/Alliance-Partner-NI.jpeg",
-      alt: "Alliance Partner NI"
+      image: "img/Alliance-Partner-NI.jpeg",
+      alt: "Alliance Partner NI Certification"
     },
     {
-      image: "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/03/Home_Certifications.png",
-      alt: "Quality Certification"
+      image: "img/LabView_cert.png",
+      alt: "LabView Certification"
     },
     {
-      image: "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/TR-Testmark_9000030036_EN_CMYK_with-QR-Code.jpg",
-      alt: "Test Mark Certification"
+      image: "img/topscoring5.png",
+      alt: "Top Scoring 5% 2022 Certification"
+    },
+    {
+      image: "img/pmelider24.png",
+      alt: "PME Lider 2024 Certification"
     }
   ];
 
@@ -325,7 +337,7 @@ const Home = () => {
             >
               <div className="relative z-10 rounded-lg overflow-hidden shadow-xl">
                 <img 
-                  src="https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/3a146149-67f8-452d-8dde-8b2484494880.jpeg" 
+                  src="img/bp_team_bw.jpeg" 
                   alt="BridgePoint Team" 
                   className="w-full h-auto"
                 />

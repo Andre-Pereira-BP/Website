@@ -20,17 +20,17 @@ const About = () => {
     {
       name: "Engineering Team",
       role: "Development & Testing",
-      image: "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/3a146149-67f8-452d-8dde-8b2484494880.jpeg"
+      image: "img/bp_team_bw.jpeg"
     },
     {
       name: "Software Team",
       role: "Test Software Development",
-      image: "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/df0d87a1-cea7-41c2-8d60-ceaae0da79fa.jpeg"
+      image: "img/milton.jpeg"
     },
     {
       name: "Hardware Team",
       role: "Test Hardware Development",
-      image: "https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/9f4e95ac-8705-4d96-8712-b1ad73697cda.jpeg"
+      image: "img/santo.jpeg"
     }
   ];
   
@@ -139,7 +139,7 @@ const About = () => {
               className="relative"
             >
               <img 
-                src="https://www.bridgepoint.pt/wordpress/wp-content/uploads/2023/11/3a146149-67f8-452d-8dde-8b2484494880.jpeg" 
+                src="img/team_1024.png" 
                 alt="BridgePoint Team" 
                 className="rounded-lg shadow-xl w-full h-auto relative z-10"
               />
