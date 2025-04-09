@@ -162,7 +162,7 @@ const GoogleMapsContact: React.FC<GoogleMapsContactProps> = ({
       
       const mapOptions: google.maps.MapOptions = {
         center: { lat: selectedLocation.lat, lng: selectedLocation.lng },
-        zoom: 15,
+        zoom: 22,
         mapTypeControl: false,
         streetViewControl: true,
         fullscreenControl: true,
@@ -193,7 +193,7 @@ const GoogleMapsContact: React.FC<GoogleMapsContactProps> = ({
     
     // Pan to selected location
     googleMapRef.current.panTo({ lat: selectedLocation.lat, lng: selectedLocation.lng });
-    googleMapRef.current.setZoom(15);
+    googleMapRef.current.setZoom(22);
     
     // Add markers to map
     addMarkersToMap();
@@ -226,16 +226,22 @@ const GoogleMapsContact: React.FC<GoogleMapsContactProps> = ({
 
         // Create info window content
         const infoWindowContent = `
-          <div style="min-width: 200px; padding: 10px;">
-            <h3 style="margin: 0 0 8px; color: #013fa4; font-weight: 600;">${location.name}</h3>
-            <p style="margin: 0 0 8px; font-size: 14px;">${location.address.join('<br/>')}</p>
+        <div style="min-width: 200px; padding: 10px; position: relative; margin-top: -15px;">
+          <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 8px; height: 60px;">
+            <img src="/img/Logo_Bridgepoint_Header.png" alt="Bridgepoint Logo" style="max-width: 150px; max-height: 50px; object-fit: contain;">
+          </div>
+          <h3 style="margin: 0 0 8px; color: #013fa4; font-weight: 600; text-align: center; font-size: 18px;">${location.name}</h3>
+          <p style="margin: 0 0 8px; font-size: 14px; text-align: center;">${location.address.join('<br/>')}</p>
+          <div style="text-align: center; margin-top: 8px;">
             <a href="https://www.google.com/maps/dir/?api=1&destination=${location.lat},${location.lng}" 
                target="_blank" style="display: inline-block; background: #013fa4; color: white; 
                padding: 6px 12px; text-decoration: none; border-radius: 4px; font-size: 14px;">
                Get Directions
             </a>
           </div>
-        `;
+        </div>
+      `;
+      
 
         const infoWindow = new google.maps.InfoWindow({
           content: infoWindowContent
@@ -278,7 +284,7 @@ const GoogleMapsContact: React.FC<GoogleMapsContactProps> = ({
         google.maps.event.addListenerOnce(googleMapRef.current, 'idle', () => {
           const currentZoom = googleMapRef.current?.getZoom();
           if (googleMapRef.current && currentZoom !== undefined && currentZoom > 15) {
-            googleMapRef.current.setZoom(15);
+            googleMapRef.current.setZoom(22);
           }
         });
       }
