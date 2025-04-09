@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { motion} from 'framer-motion';//, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 import ModernLayout from '../components/layout/Layout';
 
 // Types for job listings
@@ -40,6 +40,9 @@ const Careers = () => {
     const [locations, setLocations] = useState<string[]>([]);
     const [jobTypes, setJobTypes] = useState<string[]>([]);
 
+    // Ref for scroll position management
+    const scrollPositionRef = useRef<number>(0);
+
     // Animation variants
     const fadeInUp = {
         hidden: { opacity: 0, y: 30 },
@@ -63,7 +66,7 @@ const Careers = () => {
 
     // Fetch job postings (simulate API call)
     useEffect(() => {
-        // Simulate loading delay
+        // Reduced loading delay
         const timer = setTimeout(() => {
             setJobs(jobListings);
             setFilteredJobs(jobListings);
@@ -127,14 +130,14 @@ const Careers = () => {
         setFilteredJobs(result);
     }, [activeLocation, activeDepartment, activeType, searchQuery, jobs]);
 
-    // Format date nicely
+    // Format date nicely in English
     const formatDate = (dateString: string) => {
         const options: Intl.DateTimeFormatOptions = {
             year: 'numeric',
             month: 'long',
             day: 'numeric'
         };
-        return new Date(dateString).toLocaleDateString(undefined, options);
+        return new Date(dateString).toLocaleDateString('en-US', options);
     };
 
     // Calculate days ago
@@ -225,20 +228,62 @@ const Careers = () => {
         }
     };
 
-    // Open application form for specific job
+    // Handle selecting a job with scroll position management
+    const handleSelectJob = (job: JobPosting) => {
+        // Store current scroll position
+        scrollPositionRef.current = window.pageYOffset || document.documentElement.scrollTop;
+
+        // Set the selected job and scroll to top
+        setSelectedJob(job);
+        window.scrollTo(0, 0);
+    };
+
+    // Handle closing job detail with scroll position restoration
+    const handleCloseJobDetail = () => {
+        setSelectedJob(null);
+
+        // Use requestAnimationFrame for smoother scroll restoration
+        requestAnimationFrame(() => {
+            window.scrollTo(0, scrollPositionRef.current);
+        });
+    };
+
+    // Open application form for specific job with scroll position management
     const openApplicationForm = (job: JobPosting) => {
+        // Store current scroll position
+        scrollPositionRef.current = window.pageYOffset || document.documentElement.scrollTop;
+
         setFormData(prev => ({ ...prev, jobId: job.id }));
         setIsOpenApplication(false);
         setSelectedJob(job);
         setShowApplicationForm(true);
+
+        // Scroll to top
+        window.scrollTo(0, 0);
+    };
+
+    // Close application form with scroll position restoration
+    const closeApplicationForm = () => {
+        setShowApplicationForm(false);
+
+        // Use requestAnimationFrame for smoother scroll restoration
+        requestAnimationFrame(() => {
+            window.scrollTo(0, scrollPositionRef.current);
+        });
     };
 
     // Open spontaneous application form
     const openSpontaneousForm = () => {
+        // Store current scroll position
+        scrollPositionRef.current = window.pageYOffset || document.documentElement.scrollTop;
+
         setFormData(prev => ({ ...prev, jobId: '' }));
         setIsOpenApplication(true);
         setSelectedJob(null);
         setShowApplicationForm(true);
+
+        // Scroll to top
+        window.scrollTo(0, 0);
     };
 
     // Job Card Component
@@ -251,9 +296,9 @@ const Careers = () => {
                 <div className="p-6 flex-grow flex flex-col">
                     <div className="flex items-start justify-between mb-4">
                         <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${job.type === 'full-time' ? 'bg-blue-100 text-blue-800' :
-                                job.type === 'part-time' ? 'bg-yellow-100 text-yellow-800' :
-                                    job.type === 'contract' ? 'bg-purple-100 text-purple-800' :
-                                        'bg-green-100 text-green-800'
+                            job.type === 'part-time' ? 'bg-yellow-100 text-yellow-800' :
+                                job.type === 'contract' ? 'bg-purple-100 text-purple-800' :
+                                    'bg-green-100 text-green-800'
                             }`}>
                             {job.type.replace('-', ' ')}
                         </span>
@@ -288,7 +333,7 @@ const Careers = () => {
 
                     <div className="mt-auto flex justify-between items-center">
                         <button
-                            onClick={() => setSelectedJob(job)}
+                            onClick={() => handleSelectJob(job)}
                             className="inline-flex items-center text-primary font-medium hover:text-primary-dark"
                         >
                             View Details
@@ -331,9 +376,9 @@ const Careers = () => {
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6">
                         <h1 className="text-2xl md:text-3xl font-bold font-montserrat mb-2 sm:mb-0">{job.title}</h1>
                         <span className={`self-start sm:self-center inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${job.type === 'full-time' ? 'bg-blue-100 text-blue-800' :
-                                job.type === 'part-time' ? 'bg-yellow-100 text-yellow-800' :
-                                    job.type === 'contract' ? 'bg-purple-100 text-purple-800' :
-                                        'bg-green-100 text-green-800'
+                            job.type === 'part-time' ? 'bg-yellow-100 text-yellow-800' :
+                                job.type === 'contract' ? 'bg-purple-100 text-purple-800' :
+                                    'bg-green-100 text-green-800'
                             }`}>
                             {job.type.replace('-', ' ')}
                         </span>
@@ -534,7 +579,6 @@ const Careers = () => {
                                     <p className="mt-2 text-sm text-red-600">{formErrors.email}</p>
                                 )}
                             </div>
-
                             {/* Phone */}
                             <div>
                                 <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
@@ -691,7 +735,7 @@ const Careers = () => {
                             <ApplicationForm
                                 job={selectedJob}
                                 isOpenApplication={isOpenApplication}
-                                onClose={() => setShowApplicationForm(false)}
+                                onClose={closeApplicationForm}
                             />
                         </div>
                     </section>
@@ -701,7 +745,7 @@ const Careers = () => {
                         <div className="container mx-auto px-4">
                             <JobDetail
                                 job={selectedJob}
-                                onClose={() => setSelectedJob(null)}
+                                onClose={handleCloseJobDetail}
                                 onApply={openApplicationForm}
                             />
                         </div>
