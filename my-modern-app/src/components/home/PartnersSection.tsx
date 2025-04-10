@@ -1,14 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 
 const PartnersSection = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [itemsPerSlide, setItemsPerSlide] = useState(4);
+  const sliderRef = useRef<HTMLDivElement>(null);
 
+  // Partners logos - update paths to match your project structure
   const partners = [
     "img/logo_benteler.png",
     "img/logo_BorgWarner.png",
     "img/logo_embraer.png",
     "img/logo_exercito.png",
-    "img/logo_hanon.png",
+    "img/logo_hanon.png", 
     "img/logo_incm.png",
     "img/logo_jdeus.png",
     "img/logo_kemet.png",
@@ -22,89 +27,150 @@ const PartnersSection = () => {
     "img/logo_visteon.png",
   ];
 
-  // Função para paginar para frente ou para trás
-  const navigate = (direction: 'prev' | 'next') => {
-    if (direction === 'prev') {
-      setActiveIndex((current) => (current === 0 ? partners.length - 1 : current - 1));
-    } else {
-      setActiveIndex((current) => (current === partners.length - 1 ? 0 : current + 1));
-    }
-  };
-
-  // Auto-rotação do carousel
+  // Handle responsive behavior
   useEffect(() => {
-    const interval = setInterval(() => {
-      navigate('next');
-    }, 3000);
-    return () => clearInterval(interval);
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setItemsPerSlide(1); // Mobile
+      } else if (window.innerWidth < 1024) {
+        setItemsPerSlide(2); // Tablet
+      } else {
+        setItemsPerSlide(4); // Desktop
+      }
+    };
+    
+    // Set initial value
+    handleResize();
+    
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Calcular quais logos mostrar baseado no índice ativo
-  // Em telas maiores, mostrar 5 logos; em telas menores, mostrar menos
-  const visiblePartners = () => {
-    const result = [];
-    const count = 5; // Número de logos visíveis de uma vez
+  // Calculate total number of slides
+  const totalSlides = Math.ceil(partners.length / itemsPerSlide);
+
+  // Auto-rotation for carousel
+  useEffect(() => {
+    if (isPaused) return;
     
-    for (let i = 0; i < count; i++) {
-      const index = (activeIndex + i) % partners.length;
-      result.push(partners[index]);
-    }
+    const interval = setInterval(() => {
+      setActiveSlide((current) => (current + 1) % totalSlides);
+    }, 4000);
     
-    return result;
+    return () => clearInterval(interval);
+  }, [isPaused, totalSlides, itemsPerSlide]);
+
+  // Navigation functions
+  const goToSlide = (index: number) => {
+    setActiveSlide(index);
+  };
+  
+  const nextSlide = () => {
+    setActiveSlide((current) => (current + 1) % totalSlides);
+  };
+  
+  const prevSlide = () => {
+    setActiveSlide((current) => (current === 0 ? totalSlides - 1 : current - 1));
+  };
+
+  // Create slides based on partners and itemsPerSlide
+  const slides = Array.from({ length: totalSlides }, (_, i) => {
+    const start = i * itemsPerSlide;
+    return partners.slice(start, start + itemsPerSlide);
+  });
+
+  // Animation variants for fade in
+  const fadeIn = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 }
   };
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section 
+      className="py-16 bg-gray-50"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-12 border-l-4 border-secondary pl-4">
-          Our Customers
-        </h2>
+        <motion.div 
+          className="text-center mb-12"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          variants={fadeIn}
+        >
+          <h2 className="text-3xl font-bold mb-4 font-montserrat">Our Customers</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Trusted by leading companies across industries
+          </p>
+        </motion.div>
         
-        <div className="relative">
-          {/* Navegação */}
-          <button 
-            onClick={() => navigate('prev')}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md z-10"
+        {/* Main carousel container */}
+        <div className="relative overflow-hidden">
+          <div 
+            ref={sliderRef}
+            className="flex transition-transform duration-700 ease-in-out"
+            style={{ transform: `translateX(-${activeSlide * 100}%)` }}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            {slides.map((slide, slideIndex) => (
+              <div 
+                key={slideIndex} 
+                className="min-w-full flex justify-center items-center gap-6"
+              >
+                {slide.map((logo, logoIndex) => (
+                  <motion.div 
+                    key={logoIndex} 
+                    className="flex-1 flex justify-center p-6 bg-white rounded-lg shadow-lg mx-2 h-36"
+                    whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <img 
+                      src={logo} 
+                      alt={`Partner ${slideIndex * itemsPerSlide + logoIndex + 1}`}
+                      className="max-w-full max-h-full object-contain"
+                    />
+                  </motion.div>
+                ))}
+              </div>
+            ))}
+          </div>
+          
+          {/* Navigation arrows */}
+          <button 
+            onClick={prevSlide}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white/90 text-primary w-10 h-10 rounded-full flex items-center justify-center shadow-lg z-10 hover:bg-white transition-colors"
+            aria-label="Previous slide"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
           
-          <div className="overflow-hidden px-12">
-            <div className="flex justify-center items-center space-x-8 py-4">
-              {visiblePartners().map((partner, index) => (
-                <div 
-                  key={index} 
-                  className="flex items-center justify-center bg-white p-4 rounded-lg shadow-sm w-32 h-24"
-                >
-                  <img 
-                    src={partner} 
-                    alt={`Partner ${activeIndex + index}`} 
-                    className="max-w-full max-h-full object-contain"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-          
           <button 
-            onClick={() => navigate('next')}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md z-10"
+            onClick={nextSlide}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white/90 text-primary w-10 h-10 rounded-full flex items-center justify-center shadow-lg z-10 hover:bg-white transition-colors"
+            aria-label="Next slide"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>
         </div>
         
-        {/* Indicadores */}
-        <div className="flex justify-center mt-6 space-x-2">
-          {partners.map((_, index) => (
+        {/* Indicators */}
+        <div className="flex justify-center mt-8 space-x-2">
+          {slides.map((_, index) => (
             <button
               key={index}
-              onClick={() => setActiveIndex(index)}
-              className={`w-2 h-2 rounded-full ${index === activeIndex ? 'bg-primary' : 'bg-gray-300'}`}
+              onClick={() => goToSlide(index)}
+              className={`w-3 h-3 rounded-full transition-all ${
+                index === activeSlide ? 'bg-primary scale-125' : 'bg-gray-300 hover:bg-gray-400'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
             />
           ))}
         </div>

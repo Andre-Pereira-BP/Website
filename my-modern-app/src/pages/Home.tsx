@@ -3,6 +3,163 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import ModernLayout from '../components/layout/Layout';
 
+// Componente PartnersCarousel embutido
+const PartnersCarousel = () => {
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [itemsPerSlide, setItemsPerSlide] = useState(4);
+  const sliderRef = useRef<HTMLDivElement>(null);
+
+  // Array de parceiros - usando os mesmos dados que o componente Home
+  const partners = [
+    "img/logo_benteler.png",
+    "img/logo_BorgWarner.png",
+    "img/logo_embraer.png",
+    "img/logo_exercito.png",
+    "img/logo_hanon.png", 
+    "img/logo_incm.png",
+    "img/logo_jdeus.png",
+    "img/logo_kemet.png",
+    "img/logo_lnec.png",
+    "img/logo_lP.png",
+    "img/logo_lPQ.png",
+    "img/logo_lSQ.png",
+    "img/logo_siemens.png",
+    "img/logo_te.png",
+    "img/logo_Vishay.png",
+    "img/logo_visteon.png",
+  ];
+
+  // Ajuste responsivo para quantidade de itens por slide
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setItemsPerSlide(1); // Mobile
+      } else if (window.innerWidth < 1024) {
+        setItemsPerSlide(2); // Tablet
+      } else {
+        setItemsPerSlide(4); // Desktop
+      }
+    };
+    
+    // Definir valor inicial
+    handleResize();
+    
+    // Adicionar event listener
+    window.addEventListener('resize', handleResize);
+    
+    // Limpeza
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Calcular número total de slides
+  const totalSlides = Math.ceil(partners.length / itemsPerSlide);
+
+  // Auto-rotação para carrossel
+  useEffect(() => {
+    if (isPaused) return;
+    
+    const interval = setInterval(() => {
+      setActiveSlide((current) => (current + 1) % totalSlides);
+    }, 4000);
+    
+    return () => clearInterval(interval);
+  }, [isPaused, totalSlides, itemsPerSlide]);
+
+  // Funções de navegação
+  const goToSlide = (index: number) => {
+    setActiveSlide(index);
+  };
+  
+  const nextSlide = () => {
+    setActiveSlide((current) => (current + 1) % totalSlides);
+  };
+  
+  const prevSlide = () => {
+    setActiveSlide((current) => (current === 0 ? totalSlides - 1 : current - 1));
+  };
+
+  // Criar slides baseados nos parceiros e itensPerSlide
+  const slides = Array.from({ length: totalSlides }, (_, i) => {
+    const start = i * itemsPerSlide;
+    return partners.slice(start, start + itemsPerSlide);
+  });
+
+  return (
+    <div 
+      className="relative w-full pb-12"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      {/* Container principal do carrossel */}
+      <div className="relative overflow-hidden">
+        <div 
+          ref={sliderRef}
+          className="flex transition-transform duration-700 ease-in-out"
+          style={{ transform: `translateX(-${activeSlide * 100}%)` }}
+        >
+          {slides.map((slide, slideIndex) => (
+            <div 
+              key={slideIndex} 
+              className="min-w-full flex justify-center items-center gap-6"
+            >
+              {slide.map((logo, logoIndex) => (
+                <motion.div 
+                  key={logoIndex} 
+                  className="flex-1 flex justify-center p-6 bg-white rounded-lg shadow-lg mx-2 h-36"
+                  whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <img 
+                    src={logo} 
+                    alt={`Partner ${slideIndex * itemsPerSlide + logoIndex + 1}`}
+                    className="max-w-full max-h-full object-contain"
+                  />
+                </motion.div>
+              ))}
+            </div>
+          ))}
+        </div>
+        
+        {/* Setas de navegação */}
+        <button 
+          onClick={prevSlide}
+          className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white/90 text-primary w-10 h-10 rounded-full flex items-center justify-center shadow-lg z-10 hover:bg-white transition-colors"
+          aria-label="Previous slide"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        
+        <button 
+          onClick={nextSlide}
+          className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white/90 text-primary w-10 h-10 rounded-full flex items-center justify-center shadow-lg z-10 hover:bg-white transition-colors"
+          aria-label="Next slide"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+      
+      {/* Indicadores */}
+      <div className="flex justify-center mt-8 space-x-2">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={`w-3 h-3 rounded-full transition-all ${
+              index === activeSlide ? 'bg-primary scale-125' : 'bg-gray-300 hover:bg-gray-400'
+            }`}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const Home = () => {
   // Hero slider state
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -94,7 +251,7 @@ const Home = () => {
     }
   ];
 
-  // Partners data
+  // Partners data - também é usado pelo componente PartnersCarousel
   const partners = [
     "img/logo_benteler.png",
     "img/logo_BorgWarner.png",
@@ -443,7 +600,7 @@ const Home = () => {
         </div>
       </section>
       
-      {/* Partners Section */}
+      {/* Partners Section - SUBSTITUÍDO PELO NOVO CAROUSEL */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <motion.div 
@@ -460,27 +617,8 @@ const Home = () => {
             </p>
           </motion.div>
           
-          <motion.div 
-            className="flex flex-wrap justify-center items-center gap-4 md:gap-10"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            variants={fadeIn}
-          >
-            {partners.map((logo, index) => (
-              <div 
-                key={index} 
-                className="w-32 h-20 bg-white flex items-center justify-center p-4 rounded-md shadow-sm"
-              >
-                <img 
-                  src={logo} 
-                  alt={`Partner ${index + 1}`} 
-                  className="max-w-full max-h-full object-contain"
-                />
-              </div>
-            ))}
-          </motion.div>
+          {/* NOVO CARROSSEL DE PARCEIROS */}
+          <PartnersCarousel />
         </div>
       </section>
       
@@ -576,8 +714,8 @@ const Home = () => {
         </div>
       </section>
       
-      {/* Latest News Section */}
-      <section className="py-16 bg-gray-50">
+     {/* Latest News Section */}
+     <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12">
             <motion.div
