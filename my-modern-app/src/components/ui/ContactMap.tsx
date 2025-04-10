@@ -6,7 +6,7 @@ interface ContactMapProps {
 }
 
 const ContactMap: React.FC<ContactMapProps> = ({ selectedOffice = "South" }) => {
-  const apiKey = "AIzaSyDnjSgKXYaTWu99-KVVC_zWmKOCE3Cn_RQ";
+  const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "";
   
   return (
     <div className="w-full">
