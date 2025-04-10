@@ -505,16 +505,16 @@ const Expertise = () => {
           >
             {/* Partner Logos - Replace with actual partner logos */}
             <div className="w-64 h-32 bg-gray-100 flex items-center justify-center p-2 rounded">
-              <img src="img/logo_itec.jpg" alt="ITEC" className="max-w-full max-h-full" />
+              <img src="img/logosPartners/itec.png" alt="ITEC" className="max-w-full max-h-full" />
             </div>
             <div className="w-64 h-32 bg-gray-100 flex items-center justify-center p-2 rounded">
-              <img src="img/logo_imesif.jpg" alt="Imesif" className="max-w-full max-h-full" />
+              <img src="img/logosPartners/imesif.png" alt="Imesif" className="max-w-full max-h-full" />
             </div>
             <div className="w-64 h-32 bg-gray-100 flex items-center justify-center p-2 rounded">
-              <img src="img/logo_siroco.jpg" alt="Siroco" className="max-w-full max-h-full" />
+              <img src="img/logosPartners/siroco.png" alt="Siroco" className="max-w-full max-h-full" />
             </div>
             <div className="w-64 h-32 bg-gray-100 flex items-center justify-center p-2 rounded">
-              <img src="img/logo_zeugma.jpg" alt="Zeugma" className="max-w-full max-h-full" />
+              <img src="img/logosPartners/zeugma.jpg" alt="Zeugma" className="max-w-full max-h-full" />
             </div>
           </motion.div>
         </div>
