@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import ModernLayout from '../components/layout/Layout';
 import ContactMap from '../components/ui/ContactMap';

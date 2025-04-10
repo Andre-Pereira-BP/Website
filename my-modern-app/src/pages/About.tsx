@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Layout from '../components/layout/Layout';
 import { Link } from 'react-router-dom';
