@@ -572,7 +572,7 @@ const Home = () => {
                 loop
                 poster="img/tech_car-scaled.jpeg"
               >
-                <source src="img/bp_siroco.mp4" type="video/mp4" />
+                <source src="img/videos/bp_siroco.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </div>

@@ -10,7 +10,7 @@ const VideoSection = () => {
               muted 
               loop
             >
-              <source src="img/bp_siroco.mp4" type="video/mp4" />
+              <source src="img/videos/bp_siroco.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>
