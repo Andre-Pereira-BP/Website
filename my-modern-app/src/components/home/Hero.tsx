@@ -7,19 +7,19 @@ const Hero = () => {
     {
       title: "Automotive Industry",
       subtitle: "We Test for Your Success",
-      image: "img/tech_car-scaled.jpeg",
+      image: "img/general/tech_car-scaled.jpeg",
       buttonText: "Learn More"
     },
     {
       title: "Quality Control",
       subtitle: "We Test for Your Success",
-      image: "img/tech_touch.jpg",
+      image: "img/general/tech_touch.jpg",
       buttonText: "Learn More"
     },
     {
       title: "High Voltage Test ⚡",
       subtitle: "We Test for Your Success",
-      image: "img/car_charging.jpg",
+      image: "img/general/car_charging.jpg",
       buttonText: "Learn More"
     }
   ];

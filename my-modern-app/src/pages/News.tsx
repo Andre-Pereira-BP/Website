@@ -408,12 +408,12 @@ const News = () => {
 const newsData: NewsArticle[] = [
   {
     id: '1',
-    title: 'BridgePoint Announces New Automotive Testing Partnership',
+    title: 'BridgePoint Announces New Automotive Testing Partnerrship',
     date: '2024-03-10',
     category: 'company',
     summary: 'BridgePoint has partnered with a leading European automotive manufacturer to develop next-generation testing solutions for electric vehicle components.',
     content: `BridgePoint Test Systems is proud to announce a strategic partnership with one of Europe's leading automotive manufacturers to develop cutting-edge testing solutions specifically designed for electric vehicle (EV) components.\n\nThe partnership will focus on creating innovative test systems for battery management, powertrain efficiency, and thermal control systems, addressing the unique challenges posed by electric vehicles.\n\n"This collaboration represents a significant milestone for BridgePoint," said José Rocha, Managing Director. "By combining our testing expertise with the automotive manufacturer's deep industry knowledge, we'll be able to create solutions that help accelerate the development and production of safer, more efficient electric vehicles."\n\nThe partnership will include joint research and development efforts, knowledge exchange, and the creation of specialized testing equipment for both R&D and production environments. The first prototypes are expected to be deployed by Q3 2024, with full-scale implementation planned for early 2025.\n\nThis announcement comes as BridgePoint continues to expand its footprint in the rapidly growing EV sector, reflecting the company's commitment to supporting the automotive industry's transition to sustainable transportation solutions.`,
-    image: 'img/chairs.png'
+    image: 'img/news/chairs.png'
   },
   {
     id: '2',
@@ -422,7 +422,7 @@ const newsData: NewsArticle[] = [
     category: 'company',
     summary: 'We are pleased to announce that BridgePoint has successfully completed the ISO 9001:2015 recertification process, demonstrating our ongoing commitment to quality management.',
     content: `BridgePoint Test Systems is proud to announce its successful recertification to ISO 9001:2015 standards, reaffirming our dedication to maintaining the highest quality management systems across all operations.\n\nThe recertification process involved a comprehensive audit of our quality management processes, including documentation, operational procedures, and continuous improvement mechanisms. The audit confirmed that BridgePoint not only maintains compliance with ISO standards but has strengthened its quality management framework since the previous certification.\n\n"Quality is at the core of everything we do at BridgePoint," commented Luís Raminhos, Managing Director. "This recertification reflects our team's ongoing commitment to excellence and our focus on delivering consistent, high-quality solutions to our clients."\n\nThe ISO 9001:2015 certification covers all aspects of BridgePoint's operations, including design, development, manufacturing, and customer support services for our test systems. This recertification ensures that our clients continue to receive solutions that meet rigorous international quality standards.\n\nAs part of our continuous improvement philosophy, BridgePoint has implemented several enhancements to our quality management system during the recertification process, including streamlined documentation processes, improved training protocols, and enhanced customer feedback mechanisms.`,
-    image: 'img/reunion.png'
+    image: 'img/news/reunion.png'
   },
   {
     id: '3',
@@ -431,7 +431,7 @@ const newsData: NewsArticle[] = [
     category: 'technology',
     summary: 'BridgePoint expands its testing capabilities with new high-voltage test equipment for EV battery systems up to 1500V.',
     content: `BridgePoint Test Systems has significantly expanded its testing capabilities with the addition of advanced high-voltage test equipment designed specifically for electric vehicle (EV) battery systems operating at up to 1500V.\n\nThis state-of-the-art equipment enhances our ability to develop comprehensive testing solutions for the latest generation of electric vehicles, which are increasingly utilizing higher voltage systems to improve efficiency and performance.\n\nThe new capabilities include:\n\n- Precision high-voltage measurement systems with accuracy better than ±0.05%\n- Advanced safety isolation systems exceeding IEC 61010 standards\n- Controlled charge/discharge cycling at up to 500kW\n- Integrated thermal monitoring with millisecond response times\n- Configurable fault simulation for battery management system validation\n\n"As the automotive industry continues its transition to electric propulsion, testing requirements are evolving rapidly," said our Engineering Director. "Our investment in these high-voltage testing capabilities ensures that we can support manufacturers as they develop the next generation of EV technology."\n\nThe expanded testing capabilities are already being utilized in several client projects, supporting both development testing and end-of-line production verification for battery modules and power electronics components.`,
-    image: 'img/high_volt.png'
+    image: 'img/expertise/high_volt.png'
   },
   {
     id: '4',
@@ -440,7 +440,7 @@ const newsData: NewsArticle[] = [
     category: 'events',
     summary: 'Our team will be presenting new methodologies for automated test system validation at the upcoming European Testing Conference in Munich.',
     content: `BridgePoint Test Systems is pleased to announce that our engineering team will be presenting at the prestigious European Testing Conference (ETC) in Munich, Germany, scheduled for February 15-17, 2025.\n\nOur presentation, titled "Advanced Methodologies for Automated Validation of Complex Test Systems," will showcase BridgePoint's innovative approach to ensuring accuracy and reliability in automated test environments. The session will cover our proprietary validation frameworks and how they can be applied to high-complexity testing scenarios, particularly in the automotive and electronics industries.\n\nThe presentation will be delivered by our Lead Test Engineer and will include case studies from recent projects that demonstrate significant improvements in test system reliability and reduced validation time.\n\n"Participation in the European Testing Conference provides an excellent opportunity to share our expertise while also learning from other industry leaders," said our Technical Director. "We're looking forward to engaging with the testing community and discussing the evolving challenges in our field."\n\nIn addition to the presentation, BridgePoint will have representatives available at the conference to discuss specific testing challenges and potential solutions. Attendees interested in meeting with our team can schedule appointments in advance through our website or visit our booth at the conference.`,
-    image: 'img/microphone.png'
+    image: 'img/news/microphone.png'
   },
   {
     id: '5',
@@ -449,7 +449,7 @@ const newsData: NewsArticle[] = [
     category: 'projects',
     summary: 'Read about our recently completed project developing an automated testing system for automotive display units with machine vision quality verification.',
     content: `BridgePoint Test Systems has successfully delivered a comprehensive automated testing solution for a major automotive components manufacturer, focused on high-quality verification of infotainment and instrument cluster displays.\n\nThe project addressed the client's need for a highly reliable, high-throughput system capable of validating multiple display parameters while maintaining production line efficiency. The resulting system integrates machine vision technology with precise optical measurements to verify display quality against strict automotive standards.\n\nKey features of the developed solution include:\n\n- Multi-camera inspection system with calibrated color measurement\n- Automated detection of dead pixels, brightness inconsistencies, and color accuracy\n- Touch functionality verification using robotic actuators\n- Comprehensive electrical testing of all interfaces and connections\n- Custom software with intuitive operator interface and detailed reporting\n- Full traceability with database integration\n\nThe implemented system has achieved a cycle time of less than 35 seconds per unit while maintaining detection accuracy exceeding 99.7% for display defects. This represents a 40% improvement in throughput compared to the client's previous testing process, with significantly enhanced defect detection capabilities.\n\n"This project exemplifies our commitment to developing testing solutions that directly address our clients' specific challenges," noted our Project Manager. "By combining optical expertise with our automated testing capabilities, we've delivered a system that significantly improves both quality assurance and production efficiency."\n\nThe client has already commissioned additional systems for deployment across their global manufacturing facilities, building on the success of this initial implementation.`,
-    image: 'img/worker.png'
+    image: 'img/news/worker.png'
   },
   {
     id: '6',
@@ -458,7 +458,7 @@ const newsData: NewsArticle[] = [
     category: 'company',
     summary: 'We have expanded our North Office in Monção to accommodate growing team and increased project demands in the region.',
     content: `BridgePoint Test Systems is excited to announce the expansion of our North Office located in Monção, Viana do Castelo. This expansion comes in response to the significant growth in our operations and increased client demand in northern Portugal and neighboring regions.\n\nThe expanded facility includes additional engineering workspace, an enhanced prototyping lab, and dedicated client meeting areas. The office space has doubled in size, allowing for improved workflow and collaboration among our growing team.\n\n"This expansion represents an important milestone in our growth strategy," said José Rocha, Managing Director. "The enhanced facilities will enable us to better serve our clients in northern Portugal and Spain while providing our team with an improved working environment."\n\nThe North Office will continue to focus on specialized testing solutions for the automotive and electronics sectors, with the new facilities enabling more complex system development and testing capabilities. The expansion includes investment in additional test equipment and prototyping tools to support advanced project requirements.\n\nAs part of this growth, BridgePoint is actively recruiting additional engineering talent in the region, with several new positions opening in software development, systems integration, and project management roles.\n\nThe newly expanded office is fully operational as of October 1, 2023, with an official inauguration event planned for later this month.`,
-    image: 'img/office.png'
+    image: 'img/news/office.png'
   },
   {
     id: '7',
@@ -467,7 +467,7 @@ const newsData: NewsArticle[] = [
     category: 'technology',
     summary: 'BridgePoint announces the release of TestPoint 2.0, our enhanced software framework for test automation with improved data analysis capabilities.',
     content: `BridgePoint Test Systems is proud to announce the release of TestPoint 2.0, a significant update to our proprietary software framework for test automation that introduces enhanced data analysis capabilities and improved user interface features.\n\nTestPoint 2.0 builds on the proven foundation of our testing framework while adding powerful new functionalities designed to streamline test development, execution, and results analysis. The updated platform has been developed based on extensive feedback from both our engineering team and clients using previous versions.\n\nKey enhancements in the new release include:\n\n- Real-time data visualization with customizable dashboards\n- Advanced statistical analysis tools for test results evaluation\n- Improved test sequence editor with drag-and-drop functionality\n- Enhanced report generation with exportable formats for various stakeholders\n- Expanded API for integration with third-party systems and databases\n- Comprehensive test history tracking with version control\n\n"TestPoint 2.0 represents a major step forward in our software capabilities," said our Software Development Manager. "These enhancements will allow our clients to gain deeper insights from their test data while making the overall testing process more efficient."\n\nThe new software has already been deployed in several client projects with extremely positive feedback, particularly regarding the improved data visualization tools and the intuitive user interface.\n\nAll new test systems delivered by BridgePoint will include TestPoint 2.0, while existing clients have the option to upgrade their current installations through our support services team.`,
-    image: 'img/new_soft.png'
+    image: 'img/news/new_soft.png'
   },
   {
     id: '8',
@@ -476,7 +476,7 @@ const newsData: NewsArticle[] = [
     category: 'company',
     summary: 'We are pleased to announce our membership in the European Automotive Testing Alliance, collaborating with industry leaders to develop next-generation testing standards.',
     content: `BridgePoint Test Systems is proud to announce our membership in the prestigious European Automotive Testing Alliance (EATA), a consortium of leading testing technology providers, automotive manufacturers, and research institutions dedicated to advancing testing methodologies and standards across the European automotive industry.\n\nJoining this alliance aligns with our strategic focus on innovation and collaboration in the automotive testing sector. Through EATA, BridgePoint will participate in working groups focused on developing standardized approaches to emerging testing challenges, particularly those related to autonomous driving systems, connected vehicles, and electric powertrains.\n\n"Membership in EATA provides us with a valuable platform to collaborate with other industry leaders and contribute to shaping the future of automotive testing," said Luís Raminhos, Managing Director. "It also gives our clients confidence that our solutions are aligned with emerging industry standards and best practices."\n\nAs part of our involvement, BridgePoint will participate in the alliance's annual conference and technology showcase, as well as contribute to technical publications and standards development activities. This engagement will also provide opportunities for knowledge exchange and potential collaborative projects with other alliance members.`,
-    image: 'img/buildings.png'
+    image: 'img/news/buildings.png'
   }
 ];
 

@@ -92,14 +92,14 @@ const Header = () => {
                 onClick={toggleLanguage} 
                 className={`w-8 h-8 flex items-center justify-center rounded-full overflow-hidden border-2 transition-all ${language === 'en' ? 'border-primary' : 'border-transparent opacity-60 hover:opacity-100'}`}
               >
-                <img src="img/gb.png" alt="English" className="w-full h-full object-cover" />
+                <img src="img/icons/gb.png" alt="English" className="w-full h-full object-cover" />
               </button>
               
               <button 
                 onClick={toggleLanguage} 
                 className={`w-8 h-8 flex items-center justify-center rounded-full overflow-hidden border-2 transition-all ${language === 'pt' ? 'border-primary' : 'border-transparent opacity-60 hover:opacity-100'}`}
               >
-                <img src="img/pt.png" alt="Portuguese" className="w-full h-full object-cover" />
+                <img src="img/icons/pt.png" alt="Portuguese" className="w-full h-full object-cover" />
               </button>
             </div>
           </nav>
@@ -113,14 +113,14 @@ const Header = () => {
               onClick={toggleLanguage} 
               className={`w-7 h-7 flex items-center justify-center rounded-full overflow-hidden border-2 transition-all ${language === 'en' ? 'border-primary' : 'border-transparent opacity-60'}`}
             >
-              <img src="img/gb.png" alt="English" className="w-full h-full object-cover" />
+              <img src="img/icons/gb.png" alt="English" className="w-full h-full object-cover" />
             </button>
             
             <button 
               onClick={toggleLanguage} 
               className={`w-7 h-7 flex items-center justify-center rounded-full overflow-hidden border-2 transition-all ${language === 'pt' ? 'border-primary' : 'border-transparent opacity-60'}`}
             >
-              <img src="img/pt.png" alt="Portuguese" className="w-full h-full object-cover" />
+              <img src="img/icons/pt.png" alt="Portuguese" className="w-full h-full object-cover" />
             </button>
           </div>
         

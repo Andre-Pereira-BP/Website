@@ -183,7 +183,7 @@ const Home = () => {
       title: "Testing Excellence for Automotive Industry",
       subtitle: "We Test for Your Success",
       description: "Advanced testing solutions for automotive components and systems",
-      image: "img/tech_car.jpeg",
+      image: "img/general/tech_car.jpeg",
       buttonText: "Explore Solutions",
       buttonLink: "/test-systems"
     },
@@ -191,7 +191,7 @@ const Home = () => {
       title: "Quality Control Systems",
       subtitle: "We Test for Your Success",
       description: "Ensuring product quality through innovative testing approaches",
-      image: "img/tech_touch.jpg",
+      image: "img/general/tech_touch.jpg",
       buttonText: "Our Expertise",
       buttonLink: "/expertise"
     },
@@ -199,7 +199,7 @@ const Home = () => {
       title: "High Voltage Test Solutions ⚡",
       subtitle: "We Test for Your Success",
       description: "Advanced testing for electric vehicle components and power systems",
-      image: "img/car_charging.jpg",
+      image: "img/general/car_charging.jpg",
       buttonText: "Discover More",
       buttonLink: "/expertise/data-acquisition"
     }
@@ -210,7 +210,7 @@ const Home = () => {
     {
       title: "Automotive",
       icon: "🚗",
-      image: "img/car_interior-scaled.jpeg",
+      image: "img/general/car_interior-scaled.jpeg",
       description: "Comprehensive testing solutions for the automotive industry",
       items: [
         "Infotainment Systems",
@@ -224,7 +224,7 @@ const Home = () => {
     {
       title: "Electric Vehicles",
       icon: "⚡",
-      image: "img/ev_chargers-crop.jpg",
+      image: "img/general/ev_chargers-crop.jpg",
       description: "Specialized testing for EV components and systems",
       items: [
         "E-Motors",
@@ -238,7 +238,7 @@ const Home = () => {
     {
       title: "Electronic Components",
       icon: "🔌",
-      image: "img/chip.jpg",
+      image: "img/general/chip.jpg",
       description: "Precision testing for electronic devices and components",
       items: [
         "Capacitors",
@@ -570,7 +570,7 @@ const Home = () => {
                 autoPlay
                 muted
                 loop
-                poster="img/tech_car-scaled.jpeg"
+                poster="img/general/tech_car-scaled.jpeg"
               >
                 <source src="img/videos/bp_siroco.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
@@ -738,7 +738,7 @@ const Home = () => {
             >
               <div className="h-48 overflow-hidden">
                 <img 
-                  src="img/chairs.png" 
+                  src="img/news/chairs.png" 
                   alt="News" 
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />
@@ -770,7 +770,7 @@ const Home = () => {
             >
               <div className="h-48 overflow-hidden">
                 <img 
-                  src="img/reunion.png" 
+                  src="img/news/reunion.png" 
                   alt="News" 
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />
@@ -802,7 +802,7 @@ const Home = () => {
             >
               <div className="h-48 overflow-hidden">
                 <img 
-                  src="img/worker.png" 
+                  src="img/news/worker.png" 
                   alt="News" 
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />

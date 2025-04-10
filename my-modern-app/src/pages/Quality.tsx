@@ -447,7 +447,7 @@ const Quality = () => {
             >
               <div className="relative z-10 rounded-lg overflow-hidden shadow-xl">
                 <img 
-                  src="img/cientist.jpg" 
+                  src="img/general/cientist.jpg" 
                   alt="Quality Assurance at BridgePoint" 
                   className="w-full h-auto"
                 />
