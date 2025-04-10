@@ -1047,7 +1047,7 @@ const Careers = () => {
                                     >
                                         <div className="flex items-center mb-4">
                                             <div className="w-12 h-12 rounded-full bg-gray-300 mr-4">
-                                                <img src="img/luis.jpg" alt="Luís Raminhos" className="w-full h-full object-cover rounded-full" />
+                                                <img src="img/team/luis.jpg" alt="Luís Raminhos" className="w-full h-full object-cover rounded-full" />
                                             </div>
                                             <div>
                                                 <h4 className="font-bold">Luís Raminhos</h4>
@@ -1072,7 +1072,7 @@ const Careers = () => {
                                     >
                                         <div className="flex items-center mb-4">
                                             <div className="w-12 h-12 rounded-full bg-gray-300 mr-4">
-                                                <img src="img/jose.jpg" alt="José Rocha" className="w-full h-full object-cover rounded-full" />
+                                                <img src="img/team/jose.jpg" alt="José Rocha" className="w-full h-full object-cover rounded-full" />
                                             </div>
                                             <div>
                                                 <h4 className="font-bold">José Rocha</h4>
@@ -1097,7 +1097,7 @@ const Careers = () => {
                                     >
                                         <div className="flex items-center mb-4">
                                             <div className="w-12 h-12 rounded-full bg-gray-300 mr-4">
-                                                <img src="img/ruben.jpg" alt="Ruben Orvalho" className="w-full h-full object-cover rounded-full" />
+                                                <img src="img/team/ruben.jpg" alt="Ruben Orvalho" className="w-full h-full object-cover rounded-full" />
                                             </div>
                                             <div>
                                                 <h4 className="font-bold">Ruben Orvalho</h4>

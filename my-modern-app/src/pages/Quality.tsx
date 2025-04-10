@@ -40,7 +40,7 @@ const Quality = () => {
     {
       id: 'iso9001',
       name: 'ISO 9001:2015',
-      image: 'img/iso9001.png',
+      image: 'img/certifications/iso9001.png',
       description: 'Our ISO 9001:2015 certification demonstrates our commitment to consistent quality management systems across all operations. This internationally recognized standard ensures that our test systems and solutions meet the highest quality benchmarks.',
       achievements: [
         'Successfully recertified in February 2024',
@@ -53,7 +53,7 @@ const Quality = () => {
     {
       id: 'alliance-partner',
       name: 'NI Alliance Partner',
-      image: 'img/Alliance-Partner-NI.jpeg',
+      image: 'img/certifications/Alliance-Partner-NI.jpeg',
       description: 'As a National Instruments Alliance Partner, BridgePoint has demonstrated exceptional expertise in developing test systems using NI technologies. This partnership ensures we remain at the forefront of test and measurement technology.',
       achievements: [
         'Exclusive access to advanced NI technologies',
@@ -66,7 +66,7 @@ const Quality = () => {
     {
       id: 'pme-lider',
       name: 'PME Líder 24',
-      image: 'img/pmelider24.png',
+      image: 'img/certifications/pmelider24.png',
       description: 'The PME Líder status recognizes BridgePoint as a leading small and medium enterprise in Portugal with excellent performance and growth profile. This distinction acknowledges our financial stability and business excellence.',
       achievements: [
         'Recognition of superior financial performance',
@@ -79,7 +79,7 @@ const Quality = () => {
     {
       id: 'top-sme-2022',
       name: '2022 Top 5% Portuguese SMEs',
-      image: 'img/topscoring5.png',
+      image: 'img/certifications/topscoring5.png',
       description: 'Our company ranks among the top 5% of Portuguese SMEs in 2022, demonstrating excellence in financial performance, innovation, and sustainable business practices. This achievement reflects our commitment to quality and growth in the Portuguese business landscape.',
       achievements: [
         'Recognized among elite Portuguese small and medium enterprises',

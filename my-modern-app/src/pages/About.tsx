@@ -20,17 +20,17 @@ const About = () => {
     {
       name: "Engineering Team",
       role: "Development & Testing",
-      image: "img/bp_team_bw.jpeg"
+      image: "img/team/bp_team_bw.jpeg"
     },
     {
       name: "Software Team",
       role: "Test Software Development",
-      image: "img/milton.jpeg"
+      image: "img/team/milton.jpeg"
     },
     {
       name: "Hardware Team",
       role: "Test Hardware Development",
-      image: "img/santo.jpeg"
+      image: "img/team/santo.jpeg"
     }
   ];
   
@@ -139,7 +139,7 @@ const About = () => {
               className="relative"
             >
               <img 
-                src="img/team_1024.png" 
+                src="img/team/team_1024.png" 
                 alt="BridgePoint Team" 
                 className="rounded-lg shadow-xl w-full h-auto relative z-10"
               />

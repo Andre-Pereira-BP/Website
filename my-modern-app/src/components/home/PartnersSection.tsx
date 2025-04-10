@@ -9,22 +9,22 @@ const PartnersSection = () => {
 
   // Partners logos - update paths to match your project structure
   const partners = [
-    "img/logo_benteler.png",
-    "img/logo_BorgWarner.png",
-    "img/logo_embraer.png",
-    "img/logo_exercito.png",
-    "img/logo_hanon.png", 
-    "img/logo_incm.png",
-    "img/logo_jdeus.png",
-    "img/logo_kemet.png",
-    "img/logo_lnec.png",
-    "img/logo_lP.png",
-    "img/logo_lPQ.png",
-    "img/logo_lSQ.png",
-    "img/logo_siemens.png",
-    "img/logo_te.png",
-    "img/logo_Vishay.png",
-    "img/logo_visteon.png",
+    "img/clientLogos/logo_benteler.png",
+    "img/clientLogos/logo_BorgWarner.png",
+    "img/clientLogos/logo_embraer.png",
+    "img/clientLogos/logo_exercito.png",
+    "img/clientLogos/logo_hanon.png", 
+    "img/clientLogos/logo_incm.png",
+    "img/clientLogos/logo_jdeus.png",
+    "img/clientLogos/logo_kemet.png",
+    "img/clientLogos/logo_lnec.png",
+    "img/clientLogos/logo_lP.png",
+    "img/clientLogos/logo_lPQ.png",
+    "img/clientLogos/logo_lSQ.png",
+    "img/clientLogos/logo_siemens.png",
+    "img/clientLogos/logo_te.png",
+    "img/clientLogos/logo_Vishay.png",
+    "img/clientLogos/logo_visteon.png",
   ];
 
   // Handle responsive behavior

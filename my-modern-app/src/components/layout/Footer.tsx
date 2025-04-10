@@ -258,12 +258,12 @@ const Footer: React.FC = () => {
                 <h4 className="text-sm font-bold mb-3 uppercase tracking-wider text-white">CERTIFICATIONS</h4>
                 <div className="flex space-x-4">
                   <img 
-                    src="img/pmelider24_white.png" 
+                    src="img/certifications/pmelider24_white.png" 
                     alt="PME LIDER 24" 
                     className="h-16 md:h-20 w-auto"
                   />
                   <img 
-                    src="img/iso9001.png" 
+                    src="img/certifications/iso9001.png" 
                     alt="ISO 9001" 
                     className="h-16 md:h-20 w-auto"
                   />

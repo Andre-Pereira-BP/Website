@@ -12,22 +12,22 @@ const PartnersCarousel = () => {
 
   // Array de parceiros - usando os mesmos dados que o componente Home
   const partners = [
-    "img/logo_benteler.png",
-    "img/logo_BorgWarner.png",
-    "img/logo_embraer.png",
-    "img/logo_exercito.png",
-    "img/logo_hanon.png", 
-    "img/logo_incm.png",
-    "img/logo_jdeus.png",
-    "img/logo_kemet.png",
-    "img/logo_lnec.png",
-    "img/logo_lP.png",
-    "img/logo_lPQ.png",
-    "img/logo_lSQ.png",
-    "img/logo_siemens.png",
-    "img/logo_te.png",
-    "img/logo_Vishay.png",
-    "img/logo_visteon.png",
+    "img/clientLogos/logo_benteler.png",
+    "img/clientLogos/logo_BorgWarner.png",
+    "img/clientLogos/logo_embraer.png",
+    "img/clientLogos/logo_exercito.png",
+    "img/clientLogos/logo_hanon.png", 
+    "img/clientLogos/logo_incm.png",
+    "img/clientLogos/logo_jdeus.png",
+    "img/clientLogos/logo_kemet.png",
+    "img/clientLogos/logo_lnec.png",
+    "img/clientLogos/logo_lP.png",
+    "img/clientLogos/logo_lPQ.png",
+    "img/clientLogos/logo_lSQ.png",
+    "img/clientLogos/logo_siemens.png",
+    "img/clientLogos/logo_te.png",
+    "img/clientLogos/logo_Vishay.png",
+    "img/clientLogos/logo_visteon.png",
   ];
 
   // Ajuste responsivo para quantidade de itens por slide
@@ -251,46 +251,26 @@ const Home = () => {
     }
   ];
 
-  // Partners data - também é usado pelo componente PartnersCarousel
-  const partners = [
-    "img/logo_benteler.png",
-    "img/logo_BorgWarner.png",
-    "img/logo_embraer.png",
-    "img/logo_exercito.png",
-    "img/logo_hanon.png",
-    "img/logo_incm.png",
-    "img/logo_jdeus.png",
-    "img/logo_kemet.png",
-    "img/logo_lnec.png",
-    "img/logo_lP.png",
-    "img/logo_lPQ.png",
-    "img/logo_lSQ.png",
-    "img/logo_siemens.png",
-    "img/logo_te.png",
-    "img/logo_Vishay.png",
-    "img/logo_visteon.png",
-  ];
-
   // Certifications data
   const certifications = [
     {
-      image: "img/iso9001.png",
+      image: "img/certifications/iso9001.png",
       alt: "ISO Certification"
     },
     {
-      image: "img/Alliance-Partner-NI.jpeg",
+      image: "img/certifications/Alliance-Partner-NI.jpeg",
       alt: "Alliance Partner NI Certification"
     },
     {
-      image: "img/LabView_cert.png",
+      image: "img/certifications/LabView_cert.png",
       alt: "LabView Certification"
     },
     {
-      image: "img/topscoring5.png",
+      image: "img/certifications/topscoring5.png",
       alt: "Top Scoring 5% 2022 Certification"
     },
     {
-      image: "img/pmelider24.png",
+      image: "img/certifications/pmelider24.png",
       alt: "PME Lider 2024 Certification"
     }
   ];
@@ -494,7 +474,7 @@ const Home = () => {
             >
               <div className="relative z-10 rounded-lg overflow-hidden shadow-xl">
                 <img 
-                  src="img/bp_team_bw.jpeg" 
+                  src="img/team/bp_team_bw.jpeg" 
                   alt="BridgePoint Team" 
                   className="w-full h-auto"
                 />

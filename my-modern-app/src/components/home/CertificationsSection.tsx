@@ -4,23 +4,23 @@ const CertificationsSection = () => {
   
   const certifications = [
     {
-      image: "img/iso9001.png",
+      image: "img/certifications/iso9001.png",
       alt: "ISO Certification"
     },
     {
-      image: "img/Alliance-Partner-NI.jpeg",
+      image: "img/certifications/Alliance-Partner-NI.jpeg",
       alt: "Alliance Partner NI Certification"
     },
     {
-      image: "img/LabView_cert.png",
+      image: "img/certifications/LabView_cert.png",
       alt: "LabView Certification"
     },
     {
-      image: "img/topscoring5.png",
+      image: "img/certifications/topscoring5.png",
       alt: "Top Scoring 5% 2022 Certification"
     },
     {
-      image: "img/pmelider24.png",
+      image: "img/certifications/pmelider24.png",
       alt: "PME Lider 2024 Certification"
     }
   ];
