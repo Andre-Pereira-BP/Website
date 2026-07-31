@@ -221,7 +221,7 @@ const Quality = () => {
             <p className="text-lg text-gray-600 mb-8">
               At BridgePoint, quality is not just a department—it's a mindset embedded in every aspect of our organization. 
               From design and development to delivery and support, we maintain rigorous standards to ensure our test systems 
-              meet the highest specifications for reliability, accuracy, and performance.
+              meet the highest specifications for reliability, accuracy, and performance - teste.
             </p>
           </motion.div>
         </div>
