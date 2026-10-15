@@ -278,3 +278,15 @@ create policy "admins delete CVs" on storage.objects
 --   select id, email from auth.users where email = 'nome@bridgepoint.pt'
 --   on conflict do nothing;
 -- -----------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------
+-- Table privileges. Newer Supabase projects no longer grant these automatically;
+-- without them every request fails with "permission denied for table". RLS above
+-- still decides which rows each role can see or change.
+-- -----------------------------------------------------------------------------
+grant usage on schema public to anon, authenticated;
+grant select on public.news, public.jobs to anon, authenticated;
+grant insert, update, delete on public.news, public.jobs to authenticated;
+grant insert on public.job_applications, public.contact_messages to anon, authenticated;
+grant select, update, delete on public.job_applications, public.contact_messages to authenticated;
+grant select on public.admin_users to authenticated;
