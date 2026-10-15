@@ -1,13 +1,73 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-PT">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="/logo_bp.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BridgePoint Test Systems</title>
+    <!--seo-->
+    <!-- Page-specific tags: replaced on every prerendered page (scripts/prerender.mjs) and kept
+         up to date while browsing by src/lib/seo.ts. These defaults only remain on the plain
+         shell served for "/", the admin area and articles published after the last build. -->
+    <title>BridgePoint Test Systems | We Test for Your Success</title>
+    <meta
+      name="description"
+      content="BridgePoint develops custom test and measurement systems for development, production and quality control in the automotive, EV and electronics industries. ISO 9001 certified, since 2011."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="BridgePoint Test Systems | We Test for Your Success" />
+    <meta
+      property="og:description"
+      content="Custom test and measurement systems for development, production and quality control. ISO 9001 certified, since 2011."
+    />
+    <meta property="og:image" content="https://www.bridgepoint.pt/img/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="pt_PT" />
+    <meta property="og:locale:alternate" content="en_GB" />
+    <meta name="twitter:title" content="BridgePoint Test Systems | We Test for Your Success" />
+    <meta name="twitter:image" content="https://www.bridgepoint.pt/img/og-image.jpg" />
+    <!--/seo-->
+
+    <meta name="theme-color" content="#013fa4" />
+    <link rel="icon" type="image/x-icon" href="/logo_bp.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:site_name" content="BridgePoint Test Systems" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Without JavaScript, show the prerendered content that would otherwise fade in -->
+    <noscript><style>[style*="opacity:0"] { opacity: 1 !important; transform: none !important; }</style></noscript>
+
+    <!-- Structured data for search engines -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "BridgePoint Test Systems",
+        "legalName": "BridgePoint - Engenharia de Sistemas, Lda.",
+        "url": "https://www.bridgepoint.pt/",
+        "logo": "https://www.bridgepoint.pt/img/Logo_Bridgepoint_Header.png",
+        "foundingDate": "2011",
+        "email": "geral@bridgepoint.pt",
+        "telephone": "+351 210 963 802",
+        "sameAs": ["https://pt.linkedin.com/company/bridgepoint-test-systems"],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "PACT – Parque do Alentejo de Ciência e Tecnologia, Rua Luís Adelino Fonseca, lote 1A",
+          "postalCode": "7005-345",
+          "addressLocality": "Évora",
+          "addressCountry": "PT"
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <div style="font-family: sans-serif; padding: 2rem; text-align: center">
+        <p>Algumas funcionalidades deste website necessitam de JavaScript. / Some features of this website require JavaScript.</p>
+        <p><a href="/pt/">Português</a> · <a href="/en/">English</a> — geral@bridgepoint.pt — +351 210 963 802</p>
+      </div>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

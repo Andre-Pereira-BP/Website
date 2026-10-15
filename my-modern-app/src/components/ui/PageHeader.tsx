@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Link } from 'react-router-dom';
+import Link from '../../i18n/Link';
 
 interface PageHeaderProps {
   title: string;

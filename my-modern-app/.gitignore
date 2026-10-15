@@ -23,12 +23,11 @@ dist-ssr
 *.sln
 *.sw?
 
-# Ambiente
+# Ambiente (chaves e segredos) — nunca enviar para o git
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*
+!.env.example
+*.env
 
 # Cobertura de testes
 coverage

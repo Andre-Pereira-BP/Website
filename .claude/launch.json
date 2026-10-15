@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "website-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "my-modern-app", "run", "dev", "--", "--port", "5173", "--strictPort"],
+      "port": 5173
+    },
+    {
+      "name": "website-dev-alt",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "my-modern-app", "run", "dev", "--", "--port", "5174", "--strictPort"],
+      "port": 5174
+    },
+    {
+      "name": "website-preview",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "my-modern-app", "run", "preview", "--", "--port", "4174", "--strictPort"],
+      "port": 4174
+    }
+  ]
+}

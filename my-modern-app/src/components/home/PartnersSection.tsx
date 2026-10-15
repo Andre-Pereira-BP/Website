@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 const PartnersSection = () => {
   const [activeSlide, setActiveSlide] = useState(0);
@@ -95,7 +95,7 @@ const PartnersSection = () => {
       onMouseLeave={() => setIsPaused(false)}
     >
       <div className="container mx-auto px-4">
-        <motion.div 
+        <m.div 
           className="text-center mb-12"
           initial="hidden"
           whileInView="visible"
@@ -107,7 +107,7 @@ const PartnersSection = () => {
           <p className="text-gray-600 max-w-2xl mx-auto">
             Trusted by leading companies across industries
           </p>
-        </motion.div>
+        </m.div>
         
         {/* Main carousel container */}
         <div className="relative overflow-hidden">
@@ -122,7 +122,7 @@ const PartnersSection = () => {
                 className="min-w-full flex justify-center items-center gap-6"
               >
                 {slide.map((logo, logoIndex) => (
-                  <motion.div 
+                  <m.div 
                     key={logoIndex} 
                     className="flex-1 flex justify-center p-6 bg-white rounded-lg shadow-lg mx-2 h-36"
                     whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
@@ -133,7 +133,7 @@ const PartnersSection = () => {
                       alt={`Partner ${slideIndex * itemsPerSlide + logoIndex + 1}`}
                       className="max-w-full max-h-full object-contain"
                     />
-                  </motion.div>
+                  </m.div>
                 ))}
               </div>
             ))}

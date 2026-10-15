@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+# The admin area is protected by login; this only keeps it out of search results.
+Disallow: /admin
+
+Sitemap: https://www.bridgepoint.pt/sitemap.xml
