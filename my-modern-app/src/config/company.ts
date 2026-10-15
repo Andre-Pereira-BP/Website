@@ -6,8 +6,7 @@ export const SITE_URL = (import.meta.env.VITE_SITE_URL as string | undefined)?.r
 export const COMPANY = {
   brand: 'BridgePoint',
   legalName: 'BridgePoint - Engenharia de Sistemas, Lda.',
-  // TODO: preencher com o NIPC real antes do lançamento (aparece no rodapé e nas páginas legais).
-  nipc: '',
+  nipc: '509727476',
   foundedYear: 2011,
   phone: '+351 210 963 802',
   generalEmail: 'geral@bridgepoint.pt',
