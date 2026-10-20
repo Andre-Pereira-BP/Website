@@ -14,6 +14,7 @@ import Applications from './pages/Applications';
 import Messages from './pages/Messages';
 import SetupNotice from './pages/SetupNotice';
 import { isSupabaseConfigured } from '../lib/supabase';
+import { suspendTheme } from '../lib/theme';
 
 const FullScreenSpinner = () => (
   <div className="min-h-screen flex items-center justify-center bg-gray-50 text-primary">
@@ -85,6 +86,8 @@ const AdminApp = () => {
     }
     robots.content = 'noindex, nofollow';
     document.documentElement.lang = 'pt-PT';
+    // The back office is always light, whatever theme the visitor chose on the public site
+    return suspendTheme();
   }, []);
 
   if (!isSupabaseConfigured) return <SetupNotice />;

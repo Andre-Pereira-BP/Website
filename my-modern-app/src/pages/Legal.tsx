@@ -62,7 +62,7 @@ const Legal = ({ doc }: { doc: LegalDocId }) => {
     <Layout title={content.title} subtitle={`${labels.updated}: ${formatDate(LAST_UPDATED, lang)}`}>
       <section className="py-12 md:py-16">
         <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-4 gap-10">
-          <article className="lg:col-span-3 prose prose-lg max-w-none prose-headings:font-montserrat prose-h2:text-2xl prose-a:text-primary">
+          <article className="lg:col-span-3 prose prose-lg dark:prose-invert max-w-none prose-headings:font-montserrat prose-h2:text-2xl prose-a:text-primary">
             <p className="lead">{content.intro}</p>
             {content.sections.map((section) => (
               <section key={section.heading}>

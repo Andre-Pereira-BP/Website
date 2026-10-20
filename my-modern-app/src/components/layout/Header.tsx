@@ -6,6 +6,31 @@ import { LANGUAGES, useLanguage, useT } from '../../i18n/LanguageContext';
 import Link from '../../i18n/Link';
 import { htmlLang, rememberLang, stripLang, switchLangPath } from '../../i18n/locale';
 import { useHydrated } from '../../lib/ssr';
+import { toggleTheme, useIsDark } from '../../lib/theme';
+
+/** Sun/moon switch. Both icons are rendered; CSS shows the right one, so it never flashes. */
+const ThemeToggle = () => {
+  const t = useT(commonDict);
+  const dark = useIsDark();
+  const label = dark ? t.header.themeToLight : t.header.themeToDark;
+  return (
+    <button
+      type="button"
+      onClick={toggleTheme}
+      aria-label={label}
+      title={label}
+      className="group relative flex h-9 w-9 flex-shrink-0 items-center justify-center overflow-hidden rounded-full bg-gray-100 text-gray-600 transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+    >
+      <svg className="absolute h-5 w-5 transition-all duration-500 rotate-0 scale-100 opacity-100 dark:-rotate-90 dark:scale-0 dark:opacity-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+      </svg>
+      <svg className="absolute h-5 w-5 transition-all duration-500 rotate-90 scale-0 opacity-0 dark:rotate-0 dark:scale-100 dark:opacity-100 text-amber-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <circle cx="12" cy="12" r="4" strokeWidth={2} />
+        <path strokeLinecap="round" strokeWidth={2} d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41" />
+      </svg>
+    </button>
+  );
+};
 
 /** Links to the same page in each language (crawlable, keeps query string and #hash). */
 const LanguageSwitcher = ({ size = 'md' }: { size?: 'md' | 'lg' }) => {
@@ -128,12 +153,16 @@ const Header = () => {
               );
             })}
           </nav>
-          <LanguageSwitcher />
+          <div className="flex items-center gap-2">
+            <LanguageSwitcher />
+            <ThemeToggle />
+          </div>
         </div>
 
         {/* Mobile controls */}
-        <div className="xl:hidden flex items-center gap-3">
+        <div className="xl:hidden flex items-center gap-2 sm:gap-3">
           <LanguageSwitcher />
+          <ThemeToggle />
           <button
             type="button"
             onClick={() => setMobileMenuOpen((open) => !open)}

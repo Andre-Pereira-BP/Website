@@ -15,6 +15,8 @@ const en = {
     closeMenu: 'Close menu',
     language: 'Language',
     homeLink: 'BridgePoint – home page',
+    themeToDark: 'Switch to dark mode',
+    themeToLight: 'Switch to light mode',
   },
   footer: {
     about:
@@ -111,6 +113,8 @@ const pt: CommonDict = {
     closeMenu: 'Fechar menu',
     language: 'Idioma',
     homeLink: 'BridgePoint – página inicial',
+    themeToDark: 'Mudar para modo escuro',
+    themeToLight: 'Mudar para modo claro',
   },
   footer: {
     about:

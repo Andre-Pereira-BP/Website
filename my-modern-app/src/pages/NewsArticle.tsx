@@ -112,7 +112,7 @@ const NewsArticlePage = () => {
 
           <RichText
             content={content}
-            className="prose prose-lg max-w-none prose-headings:font-montserrat prose-a:text-primary prose-li:marker:text-secondary"
+            className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-montserrat prose-a:text-primary prose-li:marker:text-secondary"
           />
 
           {data.source_url && (

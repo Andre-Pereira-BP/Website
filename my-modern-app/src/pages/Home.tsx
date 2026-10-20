@@ -68,7 +68,7 @@ const CustomersMarquee = () => {
           <li
             key={`${customer.name}-${i}`}
             aria-hidden={i >= CUSTOMERS.length ? 'true' : undefined}
-            className="flex h-28 w-52 flex-shrink-0 items-center justify-center rounded-xl bg-white p-6 shadow-md ring-1 ring-gray-100"
+            className="bp-keep-light flex h-28 w-52 flex-shrink-0 items-center justify-center rounded-xl bg-white p-6 shadow-md ring-1 ring-gray-100"
           >
             <img
               src={customer.logo}
@@ -231,7 +231,7 @@ const Home = () => {
                   onClick={() => goTo(index)}
                   aria-label={`${t.hero.goTo} ${index + 1}`}
                   aria-current={index === currentSlide}
-                  className={`h-2.5 rounded-full transition-all ${index === currentSlide ? 'w-10 bg-white' : 'w-2.5 bg-white/50 hover:bg-white/80'}`}
+                  className={`h-2.5 rounded-full transition-all ${index === currentSlide ? 'w-10 bg-white bp-keep-light' : 'w-2.5 bg-white/50 hover:bg-white/80'}`}
                 />
               ))}
               <button
@@ -415,7 +415,7 @@ const Home = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             {CERTIFICATIONS.map((cert) => (
-              <li key={cert.alt} className="w-32 h-32 md:w-36 md:h-36 bg-white flex items-center justify-center p-4 rounded-xl shadow-md ring-1 ring-gray-100 transition-transform hover:-translate-y-1">
+              <li key={cert.alt} className="bp-keep-light w-32 h-32 md:w-36 md:h-36 bg-white flex items-center justify-center p-4 rounded-xl shadow-md ring-1 ring-gray-100 transition-transform hover:-translate-y-1">
                 <img src={cert.image} alt={cert.alt} loading="lazy" className="max-w-full max-h-full object-contain" />
               </li>
             ))}

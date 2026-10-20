@@ -210,3 +210,89 @@
 .leaflet-popup-content-wrapper {
   border-radius: 14px !important;
 }
+
+/* =============================================================================
+   Dark theme (html.dark, toggled in the header — see src/lib/theme.ts).
+   Instead of adding dark: variants to every component, the handful of neutral colour
+   utilities the public site uses are remapped here. Brand blue/green, photos and the
+   white-on-blue bands keep their colours. Logo cards marked .bp-keep-light stay white.
+   ============================================================================= */
+html.dark {
+  color-scheme: dark;
+  --bp-bg: #0b1220;
+  --bp-surface: #111a2e;
+  --bp-surface-2: #17223a;
+  --bp-surface-3: #1e2a45;
+  --bp-line: rgb(255 255 255 / 0.08);
+  --bp-line-strong: rgb(255 255 255 / 0.16);
+}
+
+html.dark body { background-color: var(--bp-bg); color: #cbd5e1; }
+html.dark :is(h1, h2, h3, h4, h5, h6) { color: #f1f5f9; }
+
+/* Surfaces */
+html.dark .bg-white:not(.bp-keep-light) { background-color: var(--bp-surface); }
+html.dark .bg-white\/90 { background-color: rgb(17 26 46 / 0.9); }
+html.dark .bg-white\/80 { background-color: rgb(17 26 46 / 0.8); }
+html.dark .bg-gray-50 { background-color: var(--bp-bg); }
+html.dark .bg-gray-100 { background-color: var(--bp-surface-2); }
+html.dark .bg-gray-200 { background-color: var(--bp-surface-3); }
+html.dark .bg-gray-300 { background-color: #334155; }
+html.dark .bg-gray-800 { background-color: #e2e8f0; }
+html.dark .hover\:bg-gray-50:hover,
+html.dark .hover\:bg-gray-100:hover { background-color: var(--bp-surface-2); }
+html.dark .hover\:bg-gray-200:hover { background-color: var(--bp-surface-3); }
+html.dark .hover\:bg-white:hover:not(.bp-keep-light) { background-color: var(--bp-surface-2); }
+html.dark .bp-keep-light { background-color: #fff; }
+
+/* Text */
+html.dark .text-gray-900 { color: #f1f5f9; }
+html.dark .text-gray-800 { color: #e2e8f0; }
+html.dark .text-gray-700 { color: #cbd5e1; }
+html.dark .text-gray-600 { color: #a3b1c6; }
+html.dark .text-gray-500 { color: #8a98ad; }
+html.dark .text-gray-400 { color: #64748b; }
+html.dark .hover\:text-gray-800:hover { color: #f1f5f9; }
+html.dark .text-primary { color: #6aa8ff; }
+html.dark .text-primary-dark,
+html.dark .hover\:text-primary-dark:hover { color: #93c5fd; }
+html.dark .hover\:text-primary:hover { color: #6aa8ff; }
+html.dark .bg-primary .text-primary,
+html.dark .text-white { color: #fff; }
+
+/* Lines */
+html.dark .border-gray-100,
+html.dark .border-gray-200 { border-color: var(--bp-line); }
+html.dark .border-gray-300 { border-color: var(--bp-line-strong); }
+html.dark .ring-gray-100,
+html.dark .ring-gray-200 { --tw-ring-color: var(--bp-line); }
+html.dark .ring-gray-300,
+html.dark .hover\:ring-gray-200:hover { --tw-ring-color: var(--bp-line-strong); }
+html.dark .divide-gray-100 > :not([hidden]) ~ :not([hidden]) { border-color: var(--bp-line); }
+
+/* Section gradients (light grey -> white) */
+html.dark .from-gray-50 { --tw-gradient-from: var(--bp-bg) var(--tw-gradient-from-position); --tw-gradient-to: rgb(11 18 32 / 0) var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+html.dark .from-white { --tw-gradient-from: var(--bp-bg) var(--tw-gradient-from-position); --tw-gradient-to: rgb(11 18 32 / 0) var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+html.dark .to-white,
+html.dark .to-gray-50 { --tw-gradient-to: var(--bp-bg) var(--tw-gradient-to-position); }
+
+/* Forms */
+html.dark :is(input:not([type='checkbox']):not([type='radio']):not([type='file']), select, textarea) {
+  background-color: var(--bp-bg);
+  border-color: var(--bp-line-strong);
+  color: #e2e8f0;
+}
+html.dark :is(input, textarea)::placeholder { color: #64748b; }
+html.dark input[type='checkbox'] { background-color: var(--bp-bg); border-color: var(--bp-line-strong); }
+
+/* Map: inverted greyscale tiles for a matching night map */
+html.dark .bp-map .leaflet-tile-pane { filter: grayscale(1) invert(1) brightness(0.85) contrast(0.9); }
+html.dark .bp-map .leaflet-control-attribution { background-color: rgb(17 26 46 / 0.8); color: #8a98ad; }
+
+/* Smooth colour change when the visitor toggles the theme (not on page load) */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease, fill 0.35s ease !important;
+}

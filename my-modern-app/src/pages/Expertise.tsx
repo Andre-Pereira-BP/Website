@@ -207,7 +207,7 @@ const Expertise = () => {
           <SectionHeading title={t.partners.title} subtitle={t.partners.subtitle} />
           <ul className="flex flex-wrap justify-center items-center gap-6 md:gap-10">
             {PARTNERS.map((partner) => (
-              <li key={partner.name} className="w-56 h-28 bg-white ring-1 ring-gray-200 shadow-sm flex items-center justify-center p-4 rounded-xl transition hover:shadow-md">
+              <li key={partner.name} className="bp-keep-light w-56 h-28 bg-white ring-1 ring-gray-200 shadow-sm flex items-center justify-center p-4 rounded-xl transition hover:shadow-md">
                 <img src={partner.logo} alt={partner.name} loading="lazy" className="max-w-full max-h-full object-contain" />
               </li>
             ))}

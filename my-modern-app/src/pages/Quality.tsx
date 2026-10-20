@@ -142,7 +142,7 @@ const Quality = () => {
                     aria-expanded={open}
                     aria-controls={panelId}
                   >
-                    <div className="w-28 h-28 bg-white flex items-center justify-center p-3 rounded-xl ring-1 ring-gray-100 flex-shrink-0">
+                    <div className="bp-keep-light w-28 h-28 bg-white flex items-center justify-center p-3 rounded-xl ring-1 ring-gray-100 flex-shrink-0">
                       <img src={CERT_IMAGES[index]} alt="" loading="lazy" className="max-w-full max-h-full object-contain" />
                     </div>
                     <div className="flex-grow">
