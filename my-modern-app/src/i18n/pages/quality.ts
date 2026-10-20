@@ -53,6 +53,17 @@ const en = {
       },
     ],
   },
+  documents: {
+    title: 'Quality Documents',
+    subtitle: 'Our quality management documents, available for clients and suppliers',
+    download: 'Download',
+    onlyIn: 'Portuguese only',
+    items: [
+      { title: 'Quality Policy', description: "BridgePoint's commitment to quality, customer satisfaction and continuous improvement." },
+      { title: 'Quality Manual', description: 'How our ISO 9001:2015 quality management system is organised across the company.' },
+      { title: 'Supplier Evaluation Criteria', description: 'The criteria we use to select, evaluate and monitor our suppliers.' },
+    ],
+  },
   journey: {
     title: 'Our Quality Journey',
     subtitle: 'Key milestones in our commitment to excellence',
@@ -134,6 +145,17 @@ const pt: QualityDict = {
         description: 'Em 2022, a empresa integrou o grupo das 5% melhores PME portuguesas, demonstrando excelência no desempenho financeiro, na inovação e em práticas de negócio sustentáveis.',
         achievements: ['Reconhecida entre a elite das PME portuguesas', 'Indicadores de desempenho financeiro superiores', 'Sustentabilidade e resiliência do negócio', 'Contributo para a economia local e criação de emprego', 'Reconhecimento da inovação e capacidade de adaptação ao mercado'],
       },
+    ],
+  },
+  documents: {
+    title: 'Documentos da Qualidade',
+    subtitle: 'Os documentos do nosso sistema de gestão da qualidade, disponíveis para clientes e fornecedores',
+    download: 'Descarregar',
+    onlyIn: 'apenas em inglês',
+    items: [
+      { title: 'Política da Qualidade', description: 'O compromisso da BridgePoint com a qualidade, a satisfação do cliente e a melhoria contínua.' },
+      { title: 'Manual da Qualidade', description: 'Como está organizado o nosso sistema de gestão da qualidade ISO 9001:2015.' },
+      { title: 'Critérios de Avaliação de Fornecedores', description: 'Os critérios que usamos para selecionar, avaliar e acompanhar os nossos fornecedores.' },
     ],
   },
   journey: {

@@ -5,7 +5,7 @@ import CtaBanner from '../components/ui/CtaBanner';
 import SectionHeading from '../components/ui/SectionHeading';
 import Timeline from '../components/ui/Timeline';
 import { commonDict } from '../i18n/common';
-import { useT } from '../i18n/LanguageContext';
+import { useLanguage, useT } from '../i18n/LanguageContext';
 import { qualityDict } from '../i18n/pages/quality';
 import { useSeo } from '../lib/seo';
 
@@ -35,6 +35,29 @@ const PILLAR_ICONS = [
   'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
 ];
 
+// Quality documents (PDF files in public/docs/quality). To update one, replace the file with the
+// same name; to add a language version, add an entry to `files`.
+const QUALITY_DOCS = [
+  {
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+    files: [
+      { lang: 'pt', href: '/docs/quality/politica-da-qualidade-pt.pdf', size: '83 KB' },
+      { lang: 'en', href: '/docs/quality/quality-policy-en.pdf', size: '179 KB' },
+    ],
+  },
+  {
+    icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253',
+    files: [{ lang: 'pt', href: '/docs/quality/manual-da-qualidade-pt.pdf', size: '891 KB' }],
+  },
+  {
+    icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4',
+    files: [
+      { lang: 'pt', href: '/docs/quality/criterios-avaliacao-fornecedores-pt.pdf', size: '149 KB' },
+      { lang: 'en', href: '/docs/quality/supplier-evaluation-criteria-en.pdf', size: '132 KB' },
+    ],
+  },
+] as const;
+
 const Icon = ({ d, className = 'h-6 w-6' }: { d: string; className?: string }) => (
   <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={d} />
@@ -43,6 +66,7 @@ const Icon = ({ d, className = 'h-6 w-6' }: { d: string; className?: string }) =
 
 const Quality = () => {
   const t = useT(qualityDict);
+  const { lang } = useLanguage();
   const tc = useT(commonDict);
   const [expanded, setExpanded] = useState<number | null>(null);
   useSeo({ title: t.title, description: t.seoDescription });
@@ -191,8 +215,59 @@ const Quality = () => {
         </div>
       </section>
 
+      {/* Quality documents */}
+      <section id="documents" className="py-20 bg-white scroll-mt-24">
+        <div className="container mx-auto px-4">
+          <SectionHeading title={t.documents.title} subtitle={t.documents.subtitle} />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {t.documents.items.map((doc, index) => {
+              // One file per document, in the site's language (falls back to the other language)
+              const docFiles = QUALITY_DOCS[index].files as readonly { lang: string; href: string; size: string }[];
+              const file = docFiles.find((f) => f.lang === lang) ?? docFiles[0];
+              const fallback = file.lang !== lang;
+              return (
+                <m.article
+                  key={doc.title}
+                  className="flex flex-col rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-100 transition-all hover:-translate-y-1 hover:shadow-xl"
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.1 * index }}
+                  variants={fadeInUp}
+                >
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <Icon d={QUALITY_DOCS[index].icon} />
+                  </div>
+                  <h3 className="text-xl font-bold font-montserrat">{doc.title}</h3>
+                  <p className="mt-2 mb-6 flex-grow text-gray-600">{doc.description}</p>
+                  <a
+                    href={file.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center justify-between gap-3 rounded-xl bg-gray-50 px-4 py-3 ring-1 ring-gray-100 transition-colors hover:bg-primary hover:ring-primary"
+                  >
+                    <span className="flex items-center gap-3">
+                      <span className="rounded-md bg-red-600 px-1.5 py-0.5 text-[10px] font-bold text-white">PDF</span>
+                      <span className="font-semibold text-gray-800 group-hover:text-white">{t.documents.download}</span>
+                      <span className="text-xs text-gray-500 group-hover:text-white/80">
+                        {file.size}
+                        {fallback && ` · ${t.documents.onlyIn}`}
+                      </span>
+                    </span>
+                    <svg className="h-5 w-5 text-primary group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    <span className="sr-only">: {doc.title} (PDF)</span>
+                  </a>
+                </m.article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* Journey */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <SectionHeading title={t.journey.title} subtitle={t.journey.subtitle} />
           <Timeline items={t.journey.items} />
@@ -200,7 +275,7 @@ const Quality = () => {
       </section>
 
       {/* Approach */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
             <m.div className="relative" initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }} variants={fadeInUp}>
