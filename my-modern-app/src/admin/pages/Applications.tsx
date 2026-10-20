@@ -85,7 +85,7 @@ const ApplicationDetail = ({ application, onChanged, onDelete }: { application: 
       <div className="flex flex-wrap gap-2">
         <Button onClick={downloadCv} loading={downloading}>⬇ Descarregar CV</Button>
         <a href={`mailto:${application.email}?subject=${encodeURIComponent(`BridgePoint – ${application.job_title || 'Candidatura'}`)}`} className="inline-flex items-center rounded-lg px-4 py-2.5 text-sm font-semibold text-gray-700 ring-1 ring-gray-300 hover:bg-gray-50">
-          ✉ Responder por email
+          Responder por email
         </a>
       </div>
 

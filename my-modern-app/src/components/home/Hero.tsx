@@ -17,7 +17,7 @@ const Hero = () => {
       buttonText: "Learn More"
     },
     {
-      title: "High Voltage Test ⚡",
+      title: "High Voltage Test",
       subtitle: "We Test for Your Success",
       image: "img/general/car_charging.jpg",
       buttonText: "Learn More"

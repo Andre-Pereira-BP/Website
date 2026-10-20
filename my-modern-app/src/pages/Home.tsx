@@ -24,9 +24,9 @@ const HERO_SLIDES = [
 ];
 
 const SERVICE_META = [
-  { icon: '🚗', image: '/img/general/car_interior-scaled.webp', link: '/test-systems' },
-  { icon: '⚡', image: '/img/general/ev_chargers-crop.webp', link: '/expertise' },
-  { icon: '🔌', image: '/img/general/chip.webp', link: '/expertise' },
+  { icon: 'M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM19 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM3 16.5V12l2-5h11l3 5h2v4.5M3 12h18', image: '/img/general/car_interior-scaled.webp', link: '/test-systems' },
+  { icon: 'M13 10V3L4 14h7v7l9-11h-7z', image: '/img/general/ev_chargers-crop.webp', link: '/expertise' },
+  { icon: 'M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z', image: '/img/general/chip.webp', link: '/expertise' },
 ];
 
 const CUSTOMERS = [
@@ -352,7 +352,9 @@ const Home = () => {
                   </div>
                   <div className="p-6 flex flex-col flex-grow">
                     <h3 className="text-xl font-bold mb-3 flex items-center font-montserrat">
-                      <span className="mr-2 text-2xl" aria-hidden="true">{meta.icon}</span>
+                      <span className="mr-3 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary" aria-hidden="true">
+                        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d={meta.icon} /></svg>
+                      </span>
                       {service.title}
                     </h3>
                     <p className="mb-4 text-gray-600">{service.description}</p>

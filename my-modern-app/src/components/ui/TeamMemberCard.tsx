@@ -29,8 +29,8 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({
           <p className="text-white/90 text-sm mb-4 font-ptsans">{position}</p>
           
           <div className="space-y-2 text-white/90 text-sm font-ptsans">
-            <p><span className="inline-block w-6">📱</span> {phone}</p>
-            <p><span className="inline-block w-6">✉️</span> {email}</p>
+            <p>{phone}</p>
+            <p>{email}</p>
           </div>
         </div>
       </div>

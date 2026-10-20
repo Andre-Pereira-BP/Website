@@ -21,7 +21,12 @@ const VALUE_ICONS = [
 ];
 
 const TEAM_IMAGES = ['/img/team/bp_team_bw.webp', '/img/team/milton_team.webp', '/img/team/santo_team.webp'];
-const MISSION_ICONS = ['⚙️', '🚀', '✅'];
+// Line icons: gear (engineering), arrow up-right (new challenges), check badge (success)
+const MISSION_ICONS = [
+  'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065zM15 12a3 3 0 11-6 0 3 3 0 016 0z',
+  'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
+  'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+];
 
 const About = () => {
   const t = useT(aboutDict);
@@ -71,7 +76,9 @@ const About = () => {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 variants={fadeInUp}
               >
-                <span className="text-4xl" aria-hidden="true">{MISSION_ICONS[i]}</span>
+                <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary" aria-hidden="true">
+                  <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d={MISSION_ICONS[i]} /></svg>
+                </span>
                 <p className="mt-4 text-xl font-bold font-montserrat text-gray-900">{item}</p>
               </m.div>
             ))}

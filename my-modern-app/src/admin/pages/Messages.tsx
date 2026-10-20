@@ -120,7 +120,7 @@ const Messages = () => {
                     href={`mailto:${selected.email}?subject=${encodeURIComponent('Re: o seu contacto com a BridgePoint')}${deptEmail(selected.department) ? `&cc=${deptEmail(selected.department)}` : ''}`}
                     className="inline-flex items-center rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-white hover:bg-primary-light"
                   >
-                    ✉ Responder
+                    Responder
                   </a>
                   {selected.status !== 'archived' ? (
                     <Button variant="secondary" onClick={() => setStatus(selected, 'archived', 'Mensagem arquivada.')}>Arquivar</Button>

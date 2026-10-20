@@ -32,7 +32,7 @@ const ServiceCard = ({ image, title, icon, description, items }: {
     const services = [
       {
         title: "Automotive",
-        icon: "⚙️",
+        icon: "",
         image: "img/general/car_interior-crop.jpg",
         description: "BridgePoint Test Systems",
         items: [
@@ -45,7 +45,7 @@ const ServiceCard = ({ image, title, icon, description, items }: {
       },
       {
         title: "Electric Vehicles",
-        icon: "⚡",
+        icon: "",
         image: "img/general/ev_chargers-crop.jpg",
         description: "BridgePoint Test Systems",
         items: [
@@ -58,7 +58,7 @@ const ServiceCard = ({ image, title, icon, description, items }: {
       },
       {
         title: "Electronic Components",
-        icon: "🔌",
+        icon: "",
         image: "img/general/chip.jpg",
         description: "BridgePoint Test Systems",
         items: [
