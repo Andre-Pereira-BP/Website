@@ -108,17 +108,22 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white shadow-lg py-2' : 'bg-white/90 backdrop-blur-sm py-4'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled || mobileMenuOpen ? 'shadow-lg py-2' : 'py-4'}`}
     >
+      {/* Background on its own layer: a backdrop-filter on <header> would trap the fixed mobile menu inside it */}
+      <div
+        aria-hidden="true"
+        className={`absolute inset-0 -z-10 transition-colors duration-300 ${
+          scrolled || mobileMenuOpen ? 'bg-white' : 'bg-white/90 backdrop-blur-sm'
+        }`}
+      />
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-2 focus:z-[60] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-white"
       >
         {t.header.skipToContent}
       </a>
-      <div className="container mx-auto px-4 flex justify-between items-center">
+      <div className="relative z-50 container mx-auto px-4 flex justify-between items-center">
         <Link to="/" className="flex items-center" aria-label={t.header.homeLink}>
           <m.img
             initial={{ opacity: 0, y: -10 }}
