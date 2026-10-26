@@ -1,3 +1,5 @@
+import { defineDict } from '../dict';
+
 const en = {
   title: 'Test Systems',
   subtitle: 'Custom test systems for every stage of your product lifecycle.',
@@ -90,4 +92,4 @@ const pt: TestSystemsDict = {
   },
 };
 
-export const testSystemsDict = { en, pt };
+export const testSystemsDict = defineDict('testSystems', { en, pt });

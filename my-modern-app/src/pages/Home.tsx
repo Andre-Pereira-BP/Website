@@ -11,53 +11,56 @@ import { homeDict } from '../i18n/pages/home';
 import { listPublishedNews } from '../lib/content';
 import { useAsync } from '../lib/useAsync';
 import { useSeo } from '../lib/seo';
+import { useMedia } from '../lib/siteContent';
+import type { MediaKey } from '../config/media';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0 },
 };
 
-const HERO_SLIDES = [
-  { image: '/img/general/tech_car.webp', link: '/test-systems' },
-  { image: '/img/general/tech_touch.webp', link: '/expertise' },
-  { image: '/img/general/car_charging.webp', link: '/expertise#data-acquisition' },
+const HERO_SLIDES: { image: MediaKey; link: string }[] = [
+  { image: 'home.hero.1', link: '/test-systems' },
+  { image: 'home.hero.2', link: '/expertise' },
+  { image: 'home.hero.3', link: '/expertise#data-acquisition' },
 ];
 
-const SERVICE_META = [
-  { icon: 'M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM19 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM3 16.5V12l2-5h11l3 5h2v4.5M3 12h18', image: '/img/general/car_interior-scaled.webp', link: '/test-systems' },
-  { icon: 'M13 10V3L4 14h7v7l9-11h-7z', image: '/img/general/ev_chargers-crop.webp', link: '/expertise' },
-  { icon: 'M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z', image: '/img/general/chip.webp', link: '/expertise' },
+const SERVICE_META: { icon: string; image: MediaKey; link: string }[] = [
+  { icon: 'M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM19 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM3 16.5V12l2-5h11l3 5h2v4.5M3 12h18', image: 'home.services.1', link: '/test-systems' },
+  { icon: 'M13 10V3L4 14h7v7l9-11h-7z', image: 'home.services.2', link: '/expertise' },
+  { icon: 'M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z', image: 'home.services.3', link: '/expertise' },
 ];
 
-const CUSTOMERS = [
-  { name: 'Benteler', logo: '/img/clientLogos/logo_benteler.png' },
-  { name: 'BorgWarner', logo: '/img/clientLogos/logo_BorgWarner.png' },
-  { name: 'Embraer', logo: '/img/clientLogos/logo_embraer.png' },
-  { name: 'Exército Português', logo: '/img/clientLogos/logo_exercito.png' },
-  { name: 'Hanon Systems', logo: '/img/clientLogos/logo_hanon.png' },
-  { name: 'INCM', logo: '/img/clientLogos/logo_incm.png' },
-  { name: 'JDEUS', logo: '/img/clientLogos/logo_jdeus.png' },
-  { name: 'KEMET', logo: '/img/clientLogos/logo_kemet.png' },
-  { name: 'LNEC', logo: '/img/clientLogos/logo_lnec.png' },
-  { name: 'Infraestruturas de Portugal', logo: '/img/clientLogos/logo_lP.png' },
-  { name: 'IPQ', logo: '/img/clientLogos/logo_lPQ.png' },
-  { name: 'ISQ', logo: '/img/clientLogos/logo_lSQ.png' },
-  { name: 'Siemens', logo: '/img/clientLogos/logo_siemens.png' },
-  { name: 'TE Connectivity', logo: '/img/clientLogos/logo_te.png' },
-  { name: 'Vishay', logo: '/img/clientLogos/logo_Vishay.png' },
-  { name: 'Visteon', logo: '/img/clientLogos/logo_visteon.png' },
+const CUSTOMERS: { name: string; logo: MediaKey }[] = [
+  { name: 'Benteler', logo: 'home.customers.benteler' },
+  { name: 'BorgWarner', logo: 'home.customers.borgwarner' },
+  { name: 'Embraer', logo: 'home.customers.embraer' },
+  { name: 'Exército Português', logo: 'home.customers.exercito' },
+  { name: 'Hanon Systems', logo: 'home.customers.hanon' },
+  { name: 'INCM', logo: 'home.customers.incm' },
+  { name: 'JDEUS', logo: 'home.customers.jdeus' },
+  { name: 'KEMET', logo: 'home.customers.kemet' },
+  { name: 'LNEC', logo: 'home.customers.lnec' },
+  { name: 'Infraestruturas de Portugal', logo: 'home.customers.ip' },
+  { name: 'IPQ', logo: 'home.customers.ipq' },
+  { name: 'ISQ', logo: 'home.customers.isq' },
+  { name: 'Siemens', logo: 'home.customers.siemens' },
+  { name: 'TE Connectivity', logo: 'home.customers.te' },
+  { name: 'Vishay', logo: 'home.customers.vishay' },
+  { name: 'Visteon', logo: 'home.customers.visteon' },
 ];
 
-const CERTIFICATIONS = [
-  { image: '/img/certifications/iso9001.png', alt: 'ISO 9001' },
-  { image: '/img/certifications/Alliance-Partner-NI.jpeg', alt: 'NI Alliance Partner' },
-  { image: '/img/certifications/LabView_cert.png', alt: 'Certified LabVIEW' },
-  { image: '/img/certifications/topscoring5.png', alt: 'Top 5% 2022' },
-  { image: '/img/certifications/pmelider24.png', alt: 'PME Líder 2024' },
+const CERTIFICATIONS: { image: MediaKey; alt: string }[] = [
+  { image: 'home.certs.iso9001', alt: 'ISO 9001' },
+  { image: 'home.certs.ni', alt: 'NI Alliance Partner' },
+  { image: 'home.certs.labview', alt: 'Certified LabVIEW' },
+  { image: 'home.certs.top5', alt: 'Top 5% 2022' },
+  { image: 'home.certs.pmelider', alt: 'PME Líder 2024' },
 ];
 
 /** Continuous, pausable logo strip (duplicated list for a seamless loop). */
 const CustomersMarquee = () => {
+  const media = useMedia();
   const items = [...CUSTOMERS, ...CUSTOMERS];
   return (
     <div className="bp-marquee group relative overflow-hidden py-4" aria-label="Customers">
@@ -71,7 +74,7 @@ const CustomersMarquee = () => {
             className="bp-keep-light flex h-28 w-52 flex-shrink-0 items-center justify-center rounded-xl bg-white p-6 shadow-md ring-1 ring-gray-100"
           >
             <img
-              src={customer.logo}
+              src={media(customer.logo)}
               alt={i >= CUSTOMERS.length ? '' : customer.name}
               loading="lazy"
               className="max-h-full max-w-full object-contain grayscale opacity-80 transition duration-300 hover:grayscale-0 hover:opacity-100"
@@ -131,6 +134,7 @@ const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [paused, setPaused] = useState(false);
   const news = useAsync(() => listPublishedNews(3), [], 'news:latest:3');
+  const media = useMedia();
 
   useSeo({ description: t.seo.description });
 
@@ -157,7 +161,7 @@ const Home = () => {
             transition={{ duration: 1 }}
           >
             <img
-              src={HERO_SLIDES[currentSlide].image}
+              src={media(HERO_SLIDES[currentSlide].image)}
               alt=""
               className="absolute inset-0 h-full w-full object-cover"
               fetchPriority={currentSlide === 0 ? 'high' : 'auto'}
@@ -322,7 +326,7 @@ const Home = () => {
               className="relative"
             >
               <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl">
-                <img src="/img/team/bp_team_bw.webp" alt={t.about.imageAlt} loading="lazy" className="w-full h-auto" />
+                <img src={media('home.about')} alt={t.about.imageAlt} loading="lazy" className="w-full h-auto" />
               </div>
               <div className="hidden md:block absolute top-1/2 -right-6 -bottom-6 left-1/2 bg-primary/10 rounded-2xl -z-10" aria-hidden="true"></div>
             </m.div>
@@ -348,7 +352,7 @@ const Home = () => {
                   variants={fadeInUp}
                 >
                   <div className="h-48 overflow-hidden">
-                    <img src={meta.image} alt="" loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <img src={media(meta.image)} alt="" loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                   </div>
                   <div className="p-6 flex flex-col flex-grow">
                     <h3 className="text-xl font-bold mb-3 flex items-center font-montserrat">
@@ -418,7 +422,7 @@ const Home = () => {
           >
             {CERTIFICATIONS.map((cert) => (
               <li key={cert.alt} className="bp-keep-light w-32 h-32 md:w-36 md:h-36 bg-white flex items-center justify-center p-4 rounded-xl shadow-md ring-1 ring-gray-100 transition-transform hover:-translate-y-1">
-                <img src={cert.image} alt={cert.alt} loading="lazy" className="max-w-full max-h-full object-contain" />
+                <img src={media(cert.image)} alt={cert.alt} loading="lazy" className="max-w-full max-h-full object-contain" />
               </li>
             ))}
           </m.ul>

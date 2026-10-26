@@ -1,3 +1,5 @@
+import { defineDict } from '../dict';
+
 const en = {
   seo: {
     description:
@@ -180,4 +182,4 @@ const pt: HomeDict = {
   },
 };
 
-export const homeDict = { en, pt };
+export const homeDict = defineDict('home', { en, pt });

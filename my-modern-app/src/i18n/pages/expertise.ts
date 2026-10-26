@@ -1,3 +1,5 @@
+import { defineDict } from '../dict';
+
 const en = {
   title: 'Our Expertise',
   subtitle: 'Multidisciplinary engineering for complex test and measurement challenges.',
@@ -264,4 +266,4 @@ const pt: ExpertiseDict = {
   ],
 };
 
-export const expertiseDict = { en, pt };
+export const expertiseDict = defineDict('expertise', { en, pt });

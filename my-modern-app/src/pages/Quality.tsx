@@ -8,18 +8,16 @@ import { commonDict } from '../i18n/common';
 import { useLanguage, useT } from '../i18n/LanguageContext';
 import { qualityDict } from '../i18n/pages/quality';
 import { useSeo } from '../lib/seo';
+import { useMedia, useMediaFile } from '../lib/siteContent';
+import { formatBytes, MediaKey } from '../config/media';
+import type { Lang } from '../i18n/locale';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0 },
 };
 
-const CERT_IMAGES = [
-  '/img/certifications/iso9001.png',
-  '/img/certifications/Alliance-Partner-NI.jpeg',
-  '/img/certifications/pmelider24.png',
-  '/img/certifications/topscoring5.png',
-];
+const CERT_IMAGES: MediaKey[] = ['quality.certs.iso9001', 'quality.certs.ni', 'quality.certs.pmelider', 'quality.certs.top5'];
 
 const METRIC_ICONS = [
   'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z',
@@ -35,28 +33,22 @@ const PILLAR_ICONS = [
   'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
 ];
 
-// Quality documents (PDF files in public/docs/quality). To update one, replace the file with the
-// same name; to add a language version, add an entry to `files`.
-const QUALITY_DOCS = [
+// Quality documents: one file per language, replaceable in the admin area ("Imagens e ficheiros").
+// The originals are in public/docs/quality.
+const QUALITY_DOCS: { icon: string; files: Record<Lang, MediaKey> }[] = [
   {
     icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
-    files: [
-      { lang: 'pt', href: '/docs/quality/politica-da-qualidade-pt.pdf', size: '83 KB' },
-      { lang: 'en', href: '/docs/quality/quality-policy-en.pdf', size: '179 KB' },
-    ],
+    files: { pt: 'quality.docs.policy.pt', en: 'quality.docs.policy.en' },
   },
   {
     icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253',
-    files: [{ lang: 'pt', href: '/docs/quality/manual-da-qualidade-pt.pdf', size: '891 KB' }],
+    files: { pt: 'quality.docs.manual.pt', en: 'quality.docs.manual.en' },
   },
   {
     icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4',
-    files: [
-      { lang: 'pt', href: '/docs/quality/criterios-avaliacao-fornecedores-pt.pdf', size: '149 KB' },
-      { lang: 'en', href: '/docs/quality/supplier-evaluation-criteria-en.pdf', size: '132 KB' },
-    ],
+    files: { pt: 'quality.docs.suppliers.pt', en: 'quality.docs.suppliers.en' },
   },
-] as const;
+];
 
 const Icon = ({ d, className = 'h-6 w-6' }: { d: string; className?: string }) => (
   <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -68,6 +60,8 @@ const Quality = () => {
   const t = useT(qualityDict);
   const { lang } = useLanguage();
   const tc = useT(commonDict);
+  const media = useMedia();
+  const mediaFile = useMediaFile();
   const [expanded, setExpanded] = useState<number | null>(null);
   useSeo({ title: t.title, description: t.seoDescription });
 
@@ -167,7 +161,7 @@ const Quality = () => {
                     aria-controls={panelId}
                   >
                     <div className="bp-keep-light w-28 h-28 bg-white flex items-center justify-center p-3 rounded-xl ring-1 ring-gray-100 flex-shrink-0">
-                      <img src={CERT_IMAGES[index]} alt="" loading="lazy" className="max-w-full max-h-full object-contain" />
+                      <img src={media(CERT_IMAGES[index])} alt="" loading="lazy" className="max-w-full max-h-full object-contain" />
                     </div>
                     <div className="flex-grow">
                       <div className="flex items-center justify-between gap-4">
@@ -222,9 +216,11 @@ const Quality = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {t.documents.items.map((doc, index) => {
               // One file per document, in the site's language (falls back to the other language)
-              const docFiles = QUALITY_DOCS[index].files as readonly { lang: string; href: string; size: string }[];
-              const file = docFiles.find((f) => f.lang === lang) ?? docFiles[0];
-              const fallback = file.lang !== lang;
+              const { files } = QUALITY_DOCS[index];
+              const own = mediaFile(files[lang]);
+              const file = own ?? mediaFile(files[lang === 'pt' ? 'en' : 'pt']);
+              const fallback = !own;
+              if (!file) return null;
               return (
                 <m.article
                   key={doc.title}
@@ -241,7 +237,7 @@ const Quality = () => {
                   <h3 className="text-xl font-bold font-montserrat">{doc.title}</h3>
                   <p className="mt-2 mb-6 flex-grow text-gray-600">{doc.description}</p>
                   <a
-                    href={file.href}
+                    href={file.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group flex items-center justify-between gap-3 rounded-xl bg-gray-50 px-4 py-3 ring-1 ring-gray-100 transition-colors hover:bg-primary hover:ring-primary"
@@ -250,8 +246,7 @@ const Quality = () => {
                       <span className="rounded-md bg-red-600 px-1.5 py-0.5 text-[10px] font-bold text-white">PDF</span>
                       <span className="font-semibold text-gray-800 group-hover:text-white">{t.documents.download}</span>
                       <span className="text-xs text-gray-500 group-hover:text-white/80">
-                        {file.size}
-                        {fallback && ` · ${t.documents.onlyIn}`}
+                        {[file.bytes ? formatBytes(file.bytes) : '', fallback ? t.documents.onlyIn : ''].filter(Boolean).join(' · ')}
                       </span>
                     </span>
                     <svg className="h-5 w-5 text-primary group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -280,7 +275,7 @@ const Quality = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
             <m.div className="relative" initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }} variants={fadeInUp}>
               <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl">
-                <img src="/img/general/cientist.webp" alt={t.approach.imageAlt} loading="lazy" className="w-full h-auto" />
+                <img src={media('quality.approach')} alt={t.approach.imageAlt} loading="lazy" className="w-full h-auto" />
               </div>
               <div className="hidden md:block absolute top-1/2 -right-6 -bottom-6 left-1/2 bg-primary/10 rounded-2xl -z-10" aria-hidden="true"></div>
             </m.div>

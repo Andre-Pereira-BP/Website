@@ -1,3 +1,5 @@
+import { defineDict } from '../dict';
+
 const en = {
   title: 'About Us',
   subtitle: 'A systems engineering company passionate about test and measurement since 2011.',
@@ -106,4 +108,4 @@ const pt: AboutDict = {
   },
 };
 
-export const aboutDict = { en, pt };
+export const aboutDict = defineDict('about', { en, pt });

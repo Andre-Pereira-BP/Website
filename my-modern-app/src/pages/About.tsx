@@ -7,6 +7,8 @@ import { COMPANY } from '../config/company';
 import { useT } from '../i18n/LanguageContext';
 import { aboutDict } from '../i18n/pages/about';
 import { useSeo } from '../lib/seo';
+import { useMedia } from '../lib/siteContent';
+import type { MediaKey } from '../config/media';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -20,7 +22,7 @@ const VALUE_ICONS = [
   'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
 ];
 
-const TEAM_IMAGES = ['/img/team/bp_team_bw.webp', '/img/team/milton_team.webp', '/img/team/santo_team.webp'];
+const TEAM_IMAGES: MediaKey[] = ['about.team.1', 'about.team.2', 'about.team.3'];
 // Line icons: gear (engineering), arrow up-right (new challenges), check badge (success)
 const MISSION_ICONS = [
   'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065zM15 12a3 3 0 11-6 0 3 3 0 016 0z',
@@ -30,6 +32,7 @@ const MISSION_ICONS = [
 
 const About = () => {
   const t = useT(aboutDict);
+  const media = useMedia();
   useSeo({ title: t.title, description: t.seoDescription });
 
   return (
@@ -54,7 +57,7 @@ const About = () => {
               variants={fadeInUp}
               className="relative"
             >
-              <img src="/img/team/team_1024.webp" alt={t.intro.imageAlt} loading="lazy" className="rounded-2xl shadow-2xl w-full h-auto relative z-10" />
+              <img src={media('about.intro')} alt={t.intro.imageAlt} loading="lazy" className="rounded-2xl shadow-2xl w-full h-auto relative z-10" />
               <div className="hidden md:block absolute -bottom-6 -right-6 w-full h-full bg-primary/10 rounded-2xl -z-10" aria-hidden="true"></div>
             </m.div>
           </div>
@@ -129,7 +132,7 @@ const About = () => {
                 variants={fadeInUp}
               >
                 <div className="h-64 overflow-hidden">
-                  <img src={TEAM_IMAGES[index]} alt={member.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <img src={media(TEAM_IMAGES[index])} alt={member.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold font-montserrat">{member.name}</h3>

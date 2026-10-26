@@ -1,5 +1,7 @@
 import { createContext, ReactNode, useContext, useEffect, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
+import { applyTextOverrides, useSiteContent } from '../lib/siteContent';
+import { dictId } from './dict';
 import { detectPreferredLang, htmlLang, Lang, langFromPath } from './locale';
 
 export type { Lang } from './locale';
@@ -39,10 +41,16 @@ export const useLanguage = () => {
   return ctx;
 };
 
-/** Picks the dictionary for the active language. `pt` must mirror the shape of `en`. */
+/**
+ * Picks the dictionary for the active language. `pt` must mirror the shape of `en`.
+ * Texts edited in the admin area are applied on top (dictionaries registered with defineDict).
+ */
 export const useT = <T,>(dict: { en: T; pt: T }): T => {
   const { lang } = useLanguage();
-  return dict[lang];
+  const { texts } = useSiteContent();
+  const id = dictId(dict);
+  const overrides = id ? texts[id]?.[lang] : undefined;
+  return useMemo(() => applyTextOverrides(dict[lang], overrides), [dict, lang, overrides]);
 };
 
 /** Locale string for Intl formatting. */

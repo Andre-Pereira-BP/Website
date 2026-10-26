@@ -26,7 +26,21 @@ export function getSupabase(): Promise<SupabaseClient> {
   return clientPromise;
 }
 
+/**
+ * Public read through the REST API with a plain fetch: used on every page, so it avoids
+ * downloading the client library just to read a table.
+ */
+export async function restSelect<T>(table: string, select: string): Promise<T[]> {
+  if (!isSupabaseConfigured) throw new Error('Supabase não está configurado.');
+  const res = await fetch(`${url}/rest/v1/${table}?select=${encodeURIComponent(select)}`, {
+    headers: { apikey: anonKey!, Authorization: `Bearer ${anonKey}` },
+  });
+  if (!res.ok) throw new Error(`${table}: HTTP ${res.status} ${await res.text().catch(() => '')}`.trim());
+  return (await res.json()) as T[];
+}
+
 export const BUCKETS = {
   newsImages: 'news-images',
   applications: 'job-applications',
+  siteFiles: 'site-files',
 } as const;

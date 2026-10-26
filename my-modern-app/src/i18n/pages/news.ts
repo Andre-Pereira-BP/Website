@@ -1,3 +1,4 @@
+import { defineDict } from '../dict';
 import type { NewsCategory } from '../../lib/types';
 
 const en = {
@@ -68,4 +69,4 @@ const pt: NewsDict = {
   followText: 'Siga a BridgePoint no LinkedIn para acompanhar as últimas notícias, projetos e oportunidades de emprego.',
 };
 
-export const newsDict = { en, pt };
+export const newsDict = defineDict('news', { en, pt });

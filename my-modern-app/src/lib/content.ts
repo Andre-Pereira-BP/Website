@@ -8,6 +8,8 @@ import type {
   NewsArticle,
 } from './types';
 import type { Lang } from '../i18n/LanguageContext';
+import { MEDIA_SLOTS, MediaKey, MediaSlot } from '../config/media';
+import type { TextOverrides } from './siteContent';
 
 // Bundled content is only downloaded when Supabase is not configured
 const loadFallback = () => import('../data/fallbackContent');
@@ -294,11 +296,11 @@ export async function adminDashboardCounts(): Promise<DashboardCounts> {
 
 const MAX_IMAGE_WIDTH = 1600;
 
-/** Resizes to at most 1600px wide and re-encodes as WebP in the browser before uploading. */
-async function compressImage(file: File): Promise<Blob> {
+/** Resizes to at most `maxWidth` px wide and re-encodes as WebP in the browser before uploading. */
+async function compressImage(file: File, maxWidth = MAX_IMAGE_WIDTH): Promise<Blob> {
   if (file.type === 'image/gif') return file;
   const bitmap = await createImageBitmap(file);
-  const scale = Math.min(1, MAX_IMAGE_WIDTH / bitmap.width);
+  const scale = Math.min(1, maxWidth / bitmap.width);
   const canvas = document.createElement('canvas');
   canvas.width = Math.round(bitmap.width * scale);
   canvas.height = Math.round(bitmap.height * scale);
@@ -333,3 +335,96 @@ export async function removeOwnedNewsImage(url: string | null | undefined) {
 }
 
 export { isSupabaseConfigured };
+
+// ---------------------------------------------------------------------------
+// Website texts, images and documents (see src/lib/siteContent.tsx)
+// ---------------------------------------------------------------------------
+
+export interface SiteContentRow {
+  id: string;
+  content: TextOverrides;
+  updated_at: string;
+}
+
+export async function adminListSiteContent(): Promise<SiteContentRow[]> {
+  const { data, error } = await (await getSupabase()).from('site_content').select('id, content, updated_at');
+  if (error) throw error;
+  return data as SiteContentRow[];
+}
+
+export async function adminGetSiteContent(id: string): Promise<SiteContentRow | null> {
+  const { data, error } = await (await getSupabase()).from('site_content').select('id, content, updated_at').eq('id', id).maybeSingle();
+  if (error) throw error;
+  return data as SiteContentRow | null;
+}
+
+/** Saves the edited texts of one page; with no edits left the row is removed. */
+export async function adminSaveSiteContent(id: string, content: TextOverrides) {
+  const client = await getSupabase();
+  const empty = Object.values(content).every((texts) => !texts || Object.keys(texts).length === 0);
+  const { error } = empty
+    ? await client.from('site_content').delete().eq('id', id)
+    : await client.from('site_content').upsert({ id, content }, { onConflict: 'id' });
+  if (error) throw error;
+}
+
+export interface SiteMediaRow {
+  key: string;
+  url: string;
+  path: string | null;
+  name: string | null;
+  bytes: number | null;
+  updated_at: string;
+}
+
+export async function adminListMedia(): Promise<SiteMediaRow[]> {
+  const { data, error } = await (await getSupabase()).from('site_media').select('*');
+  if (error) throw error;
+  return data as SiteMediaRow[];
+}
+
+export const MEDIA_IMAGE_MAX_BYTES = 15 * 1024 * 1024;
+export const MEDIA_DOCUMENT_MAX_BYTES = 20 * 1024 * 1024;
+
+/** Uploads a new file for a slot, publishes it and deletes the file it replaces. */
+export async function adminReplaceMedia(key: MediaKey, file: File, previous: SiteMediaRow | undefined): Promise<SiteMediaRow> {
+  const slot: MediaSlot = MEDIA_SLOTS[key];
+  const client = await getSupabase();
+  let body: Blob = file;
+  let path: string;
+  if (slot.kind === 'image') {
+    body = await compressImage(file, slot.maxWidth);
+    const ext = body.type === 'image/webp' ? 'webp' : file.name.split('.').pop()?.toLowerCase() || 'jpg';
+    path = `images/${key}/${crypto.randomUUID()}.${ext}`;
+  } else {
+    // Keep the original file name: it is the name visitors get when they download it
+    path = `documents/${crypto.randomUUID()}/${safeFileName(file.name)}`;
+  }
+  const upload = await client.storage.from(BUCKETS.siteFiles).upload(path, body, {
+    contentType: body.type || file.type || undefined,
+    cacheControl: '31536000',
+    upsert: false,
+  });
+  if (upload.error) throw upload.error;
+
+  const url = client.storage.from(BUCKETS.siteFiles).getPublicUrl(path).data.publicUrl;
+  const { data, error } = await client
+    .from('site_media')
+    .upsert({ key, url, path, name: file.name.slice(0, 200), bytes: body.size }, { onConflict: 'key' })
+    .select()
+    .single();
+  if (error) {
+    await client.storage.from(BUCKETS.siteFiles).remove([path]);
+    throw error;
+  }
+  if (previous?.path) await client.storage.from(BUCKETS.siteFiles).remove([previous.path]);
+  return data as SiteMediaRow;
+}
+
+/** Goes back to the original file of the slot. */
+export async function adminResetMedia(row: SiteMediaRow) {
+  const client = await getSupabase();
+  const { error } = await client.from('site_media').delete().eq('key', row.key);
+  if (error) throw error;
+  if (row.path) await client.storage.from(BUCKETS.siteFiles).remove([row.path]);
+}

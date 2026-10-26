@@ -2,6 +2,7 @@ import Link from '../../i18n/Link';
 import { m } from 'framer-motion';
 import { COMPANY, OFFICES } from '../../config/company';
 import { commonDict } from '../../i18n/common';
+import { useMedia } from '../../lib/siteContent';
 import { useT } from '../../i18n/LanguageContext';
 import { hasOptionalCookies, openCookieSettings } from '../../lib/consent';
 import GridPattern from '../ui/GridPattern';
@@ -13,6 +14,7 @@ const fadeInUp = {
 
 const Footer = () => {
   const t = useT(commonDict);
+  const media = useMedia();
   const hq = OFFICES[0];
 
   const navColumns = [
@@ -63,8 +65,8 @@ const Footer = () => {
             <p className="text-sm text-gray-200 mb-6 leading-relaxed max-w-sm">{t.footer.about}</p>
             <h2 className="text-sm font-bold mb-3 uppercase tracking-wider text-white">{t.footer.certifications}</h2>
             <div className="flex items-center gap-4">
-              <img src="/img/certifications/pmelider24_white.png" alt="PME Líder 2024" className="h-16 md:h-20 w-auto" loading="lazy" />
-              <img src="/img/certifications/iso9001.png" alt="ISO 9001" className="h-16 md:h-20 w-auto" loading="lazy" />
+              <img src={media('footer.certs.pmelider')} alt="PME Líder 2024" className="h-16 md:h-20 w-auto" loading="lazy" />
+              <img src={media('footer.certs.iso9001')} alt="ISO 9001" className="h-16 md:h-20 w-auto" loading="lazy" />
             </div>
           </m.div>
 

@@ -272,6 +272,70 @@ create policy "admins delete CVs" on storage.objects
   using (bucket_id = 'job-applications' and public.is_admin());
 
 -- -----------------------------------------------------------------------------
+-- Editable website content (admin → "Textos do site" / "Imagens e ficheiros")
+--   site_content  one row per page dictionary (id = 'home', 'about', ...). `content` holds only
+--                 the texts that differ from the originals in the code: { "pt": {...}, "en": {...} }.
+--                 The site merges them field by field, so the page structure never changes.
+--   site_media    replaced images / documents, one row per slot key (see src/config/media.ts).
+--   site-files    public bucket with the uploaded files (images and PDFs, max 20 MB).
+-- -----------------------------------------------------------------------------
+create table if not exists public.site_content (
+  id         text primary key check (id ~ '^[a-zA-Z][a-zA-Z0-9_-]*$' and char_length(id) <= 60),
+  content    jsonb not null default '{}'::jsonb check (jsonb_typeof(content) = 'object'),
+  updated_at timestamptz not null default now()
+);
+
+drop trigger if exists site_content_updated_at on public.site_content;
+create trigger site_content_updated_at before update on public.site_content
+  for each row execute function public.set_updated_at();
+
+alter table public.site_content enable row level security;
+
+drop policy if exists "read site content" on public.site_content;
+create policy "read site content" on public.site_content
+  for select to anon, authenticated using (true);
+
+drop policy if exists "admins manage site content" on public.site_content;
+create policy "admins manage site content" on public.site_content
+  for all to authenticated using (public.is_admin()) with check (public.is_admin());
+
+create table if not exists public.site_media (
+  key        text primary key check (key ~ '^[a-zA-Z0-9._-]+$' and char_length(key) <= 100),
+  url        text not null check (url ~ '^https://' and char_length(url) <= 1000),
+  path       text check (char_length(path) <= 300),
+  name       text check (char_length(name) <= 200),
+  bytes      bigint check (bytes >= 0),
+  updated_at timestamptz not null default now()
+);
+
+drop trigger if exists site_media_updated_at on public.site_media;
+create trigger site_media_updated_at before update on public.site_media
+  for each row execute function public.set_updated_at();
+
+alter table public.site_media enable row level security;
+
+drop policy if exists "read site media" on public.site_media;
+create policy "read site media" on public.site_media
+  for select to anon, authenticated using (true);
+
+drop policy if exists "admins manage site media" on public.site_media;
+create policy "admins manage site media" on public.site_media
+  for all to authenticated using (public.is_admin()) with check (public.is_admin());
+
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('site-files', 'site-files', true, 20971520, array['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'application/pdf'])
+on conflict (id) do update
+  set public = excluded.public,
+      file_size_limit = excluded.file_size_limit,
+      allowed_mime_types = excluded.allowed_mime_types;
+
+drop policy if exists "admins manage site files" on storage.objects;
+create policy "admins manage site files" on storage.objects
+  for all to authenticated
+  using (bucket_id = 'site-files' and public.is_admin())
+  with check (bucket_id = 'site-files' and public.is_admin());
+
+-- -----------------------------------------------------------------------------
 -- After creating the manager's user in Authentication → Users, grant admin rights:
 --
 --   insert into public.admin_users (user_id, email)
@@ -290,3 +354,5 @@ grant insert, update, delete on public.news, public.jobs to authenticated;
 grant insert on public.job_applications, public.contact_messages to anon, authenticated;
 grant select, update, delete on public.job_applications, public.contact_messages to authenticated;
 grant select on public.admin_users to authenticated;
+grant select on public.site_content, public.site_media to anon, authenticated;
+grant insert, update, delete on public.site_content, public.site_media to authenticated;

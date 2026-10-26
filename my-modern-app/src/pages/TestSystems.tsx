@@ -8,25 +8,27 @@ import { commonDict } from '../i18n/common';
 import { useT } from '../i18n/LanguageContext';
 import { testSystemsDict } from '../i18n/pages/testSystems';
 import { useSeo } from '../lib/seo';
+import { useMedia } from '../lib/siteContent';
+import type { MediaKey } from '../config/media';
 
-const SYSTEM_META = [
+const SYSTEM_META: { id: string; image: MediaKey; icon: string; examples: MediaKey[] }[] = [
   {
     id: 'development',
-    image: '/img/general/prod_dev.webp',
+    image: 'testSystems.development',
     icon: 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z',
-    examples: ['/img/general/hvac.webp', '/img/general/ev_chargers-crop.webp', '/img/general/tech_car-scaled.webp'],
+    examples: ['testSystems.development.example.1', 'testSystems.development.example.2', 'testSystems.development.example.3'],
   },
   {
     id: 'production',
-    image: '/img/general/prod.webp',
+    image: 'testSystems.production',
     icon: 'M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z',
-    examples: ['/img/general/prod.webp', '/img/general/fabrica.webp', '/img/general/chip.webp'],
+    examples: ['testSystems.production.example.1', 'testSystems.production.example.2', 'testSystems.production.example.3'],
   },
   {
     id: 'quality',
-    image: '/img/general/cientist.webp',
+    image: 'testSystems.quality',
     icon: 'M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z',
-    examples: ['/img/general/cientist.webp', '/img/general/flow.webp', '/img/general/tech_touch.webp'],
+    examples: ['testSystems.quality.example.1', 'testSystems.quality.example.2', 'testSystems.quality.example.3'],
   },
 ];
 
@@ -39,6 +41,7 @@ const Icon = ({ d }: { d: string }) => (
 const TestSystems = () => {
   const t = useT(testSystemsDict);
   const tc = useT(commonDict);
+  const media = useMedia();
   const [selected, setSelected] = useState<number | null>(null);
   const close = useCallback(() => setSelected(null), []);
   useSeo({ title: t.title, description: t.seoDescription });
@@ -75,7 +78,7 @@ const TestSystems = () => {
                   className="group bg-white rounded-2xl shadow-lg hover:shadow-xl ring-1 ring-gray-100 overflow-hidden h-full flex flex-col transition-all hover:-translate-y-1"
                 >
                   <div className="h-56 overflow-hidden relative">
-                    <img src={meta.image} alt="" loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <img src={media(meta.image)} alt="" loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
                       <div className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-primary text-white">
                         <Icon d={meta.icon} />
@@ -106,7 +109,7 @@ const TestSystems = () => {
         {selected !== null && (
           <DetailModal
             title={t.systems[selected].title}
-            image={SYSTEM_META[selected].image}
+            image={media(SYSTEM_META[selected].image)}
             icon={<Icon d={SYSTEM_META[selected].icon} />}
             onClose={close}
           >
@@ -116,7 +119,7 @@ const TestSystems = () => {
               {t.systems[selected].examples.map((example, i) => (
                 <div key={example.title} className="bg-gray-50 rounded-xl overflow-hidden shadow-md">
                   <div className="h-40 overflow-hidden">
-                    <img src={SYSTEM_META[selected].examples[i]} alt="" loading="lazy" className="w-full h-full object-cover" />
+                    <img src={media(SYSTEM_META[selected].examples[i])} alt="" loading="lazy" className="w-full h-full object-cover" />
                   </div>
                   <div className="p-4">
                     <h4 className="font-bold text-lg mb-2">{example.title}</h4>

@@ -3,6 +3,7 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { LanguageProvider } from './i18n/LanguageContext';
 import { detectPreferredLang, isLang, LANG_CODES, localizePath } from './i18n/locale';
 import CookieConsent from './components/ui/CookieConsent';
+import { SiteContentProvider } from './lib/siteContent';
 import Home from './pages/Home';
 
 // Every page except the home page is loaded on demand to keep the first load small.
@@ -58,18 +59,20 @@ const pageRoutes = (
 function App() {
   return (
     <LanguageProvider>
-      <Suspense fallback={<PageFallback />}>
-        <Routes>
-          <Route path="/admin/*" element={<AdminApp />} />
-          {LANG_CODES.map((lang) => (
-            <Route key={lang} path={`/${lang}`}>
-              {pageRoutes}
-            </Route>
-          ))}
-          <Route path="*" element={<LanguageRedirect />} />
-        </Routes>
-      </Suspense>
-      <CookieConsent />
+      <SiteContentProvider>
+        <Suspense fallback={<PageFallback />}>
+          <Routes>
+            <Route path="/admin/*" element={<AdminApp />} />
+            {LANG_CODES.map((lang) => (
+              <Route key={lang} path={`/${lang}`}>
+                {pageRoutes}
+              </Route>
+            ))}
+            <Route path="*" element={<LanguageRedirect />} />
+          </Routes>
+        </Suspense>
+        <CookieConsent />
+      </SiteContentProvider>
     </LanguageProvider>
   );
 }

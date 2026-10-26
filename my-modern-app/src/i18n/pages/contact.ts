@@ -1,3 +1,5 @@
+import { defineDict } from '../dict';
+
 const en = {
   title: 'Contact Us',
   subtitle: "Talk to our team — we'll get back to you as soon as possible.",
@@ -92,4 +94,4 @@ const pt: ContactDict = {
   },
 };
 
-export const contactDict = { en, pt };
+export const contactDict = defineDict('contact', { en, pt });

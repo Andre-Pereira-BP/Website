@@ -1,3 +1,5 @@
+import { defineDict } from './dict';
+
 const en = {
   nav: {
     home: 'Home',
@@ -192,4 +194,4 @@ const pt: CommonDict = {
   },
 };
 
-export const commonDict = { en, pt };
+export const commonDict = defineDict('common', { en, pt });

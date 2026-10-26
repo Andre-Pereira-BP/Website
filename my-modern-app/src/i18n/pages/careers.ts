@@ -1,3 +1,4 @@
+import { defineDict } from '../dict';
 import type { JobType } from '../../lib/types';
 
 const en = {
@@ -226,4 +227,4 @@ const pt: CareersDict = {
   },
 };
 
-export const careersDict = { en, pt };
+export const careersDict = defineDict('careers', { en, pt });

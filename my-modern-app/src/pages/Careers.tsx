@@ -15,6 +15,8 @@ import { listPublishedJobs } from '../lib/content';
 import { JobPosting, JobType, localized } from '../lib/types';
 import { useAsync } from '../lib/useAsync';
 import { useSeo } from '../lib/seo';
+import { useMedia } from '../lib/siteContent';
+import type { MediaKey } from '../config/media';
 import { useHydrated } from '../lib/ssr';
 
 const TYPE_STYLES: Record<JobType, string> = {
@@ -31,7 +33,7 @@ const WHY_ICONS = [
   'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h.5A2.5 2.5 0 0020 5.5v-1.65M12 14.5V10m0 4.5v4.5m-1.5-8l3-3-3-3',
 ];
 
-const TESTIMONIAL_IMAGES = ['/img/team/luis.webp', '/img/team/jose.webp', '/img/team/ruben.webp'];
+const TESTIMONIAL_IMAGES: MediaKey[] = ['careers.testimonials.1', 'careers.testimonials.2', 'careers.testimonials.3'];
 
 const daysAgo = (iso: string, t: CareersDict) => {
   const diff = Math.floor((Date.now() - new Date(`${iso}T12:00:00`).getTime()) / 86_400_000);
@@ -173,6 +175,7 @@ const JobDetail = ({ job, lang, onClose, onApply }: { job: JobPosting; lang: Lan
 const Careers = () => {
   const t = useT(careersDict);
   const tc = useT(commonDict);
+  const media = useMedia();
   const { lang } = useLanguage();
   const [params, setParams] = useSearchParams();
   const { data: jobs, loading, error, reload } = useAsync(() => listPublishedJobs(), [], 'jobs');
@@ -260,7 +263,7 @@ const Careers = () => {
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary to-primary-dark text-white">
         <GridPattern />
-        <img src="/img/team/bp_team_bw.webp" alt="" className="absolute inset-0 h-full w-full object-cover opacity-15 mix-blend-luminosity" />
+        <img src={media('careers.banner')} alt="" className="absolute inset-0 h-full w-full object-cover opacity-15 mix-blend-luminosity" />
         <div className="container mx-auto px-4 py-20 md:py-28 relative z-10">
           <div className="max-w-3xl">
             <m.p className="text-sm font-semibold uppercase tracking-[0.25em] text-secondary mb-4 font-montserrat" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
@@ -414,7 +417,7 @@ const Careers = () => {
                 </svg>
                 <blockquote className="text-gray-700 italic flex-grow">“{item.quote}”</blockquote>
                 <figcaption className="mt-6 flex items-center">
-                  <img src={TESTIMONIAL_IMAGES[index]} alt="" loading="lazy" className="w-12 h-12 rounded-full object-cover mr-4 bg-gray-200" />
+                  <img src={media(TESTIMONIAL_IMAGES[index])} alt="" loading="lazy" className="w-12 h-12 rounded-full object-cover mr-4 bg-gray-200" />
                   <div>
                     <p className="font-bold text-gray-900">{item.name}</p>
                     <p className="text-sm text-gray-600">{item.role}</p>

@@ -10,57 +10,59 @@ import { commonDict } from '../i18n/common';
 import { useT } from '../i18n/LanguageContext';
 import { expertiseDict } from '../i18n/pages/expertise';
 import { useSeo } from '../lib/seo';
+import { useMedia } from '../lib/siteContent';
+import type { MediaKey } from '../config/media';
 
-const AREA_META = [
+const AREA_META: { id: string; image: MediaKey; icon: string; technologies: string[]; caseImages: MediaKey[] }[] = [
   {
     id: 'software-development',
-    image: '/img/expertise/software.webp',
+    image: 'expertise.software',
     icon: 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4',
     technologies: ['LabVIEW', 'TestStand', 'Python', 'C#', '.NET', 'SQL', 'REST APIs', 'MQTT', 'OPC UA'],
-    caseImages: ['/img/expertise/software_modern.webp', '/img/expertise/chipset.webp'],
+    caseImages: ['expertise.software.case.1', 'expertise.software.case.2'],
   },
   {
     id: 'hardware-development',
-    image: '/img/expertise/hardware_dev.webp',
+    image: 'expertise.hardware',
     icon: 'M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z',
     technologies: ['Altium Designer', 'PSpice', 'EAGLE', 'High Voltage Systems', 'Mixed Signal Design', 'EMC/EMI'],
-    caseImages: ['/img/expertise/high_volt.webp', '/img/expertise/mux.webp'],
+    caseImages: ['expertise.hardware.case.1', 'expertise.hardware.case.2'],
   },
   {
     id: 'real-time-control',
-    image: '/img/general/hvac.webp',
+    image: 'expertise.realtime',
     icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z',
     technologies: ['LabVIEW Real-Time', 'LabVIEW FPGA', 'CompactRIO', 'PXI', 'EtherCAT', 'NI Linux Real-Time'],
-    caseImages: ['/img/expertise/vibration_control.webp', '/img/expertise/hil_tester.webp'],
+    caseImages: ['expertise.realtime.case.1', 'expertise.realtime.case.2'],
   },
   {
     id: 'robotics-automation',
-    image: '/img/general/prod.webp',
+    image: 'expertise.robotics',
     icon: 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
     technologies: ['ABB Robotics', 'KUKA', 'Universal Robots', 'Machine Vision', 'PLC', 'Safety PLCs', 'Industrial IoT'],
-    caseImages: ['/img/expertise/display-testing.webp', '/img/expertise/human_robot.webp'],
+    caseImages: ['expertise.robotics.case.1', 'expertise.robotics.case.2'],
   },
   {
     id: 'data-acquisition',
-    image: '/img/general/flow.webp',
+    image: 'expertise.daq',
     icon: 'M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z',
     technologies: ['NI DAQ', 'HBM', 'DSP', 'FFT', 'Wavelets', 'Time-Series Analysis', 'MATLAB'],
-    caseImages: ['/img/expertise/dmms.webp', '/img/expertise/server.webp'],
+    caseImages: ['expertise.daq.case.1', 'expertise.daq.case.2'],
   },
   {
     id: 'vision-systems',
-    image: '/img/general/fabrica.webp',
+    image: 'expertise.vision',
     icon: 'M15 12a3 3 0 11-6 0 3 3 0 016 0zM2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z',
     technologies: ['Machine Vision', 'Deep Learning', 'COGNEX', 'NI Vision', 'OpenCV', 'Image Processing', 'Structured Light'],
-    caseImages: ['/img/expertise/displayq.webp', '/img/expertise/surface_detection.webp'],
+    caseImages: ['expertise.vision.case.1', 'expertise.vision.case.2'],
   },
 ];
 
-const PARTNERS = [
-  { name: 'ITEC', logo: '/img/logosPartners/itec.png' },
-  { name: 'IMESIF', logo: '/img/logosPartners/imesif.png' },
-  { name: 'Siroco', logo: '/img/logosPartners/siroco.png' },
-  { name: 'Zeugma', logo: '/img/logosPartners/zeugma.jpg' },
+const PARTNERS: { name: string; logo: MediaKey }[] = [
+  { name: 'ITEC', logo: 'expertise.partners.itec' },
+  { name: 'IMESIF', logo: 'expertise.partners.imesif' },
+  { name: 'Siroco', logo: 'expertise.partners.siroco' },
+  { name: 'Zeugma', logo: 'expertise.partners.zeugma' },
 ];
 
 const Icon = ({ d }: { d: string }) => (
@@ -78,6 +80,7 @@ const CheckIcon = () => (
 const Expertise = () => {
   const t = useT(expertiseDict);
   const tc = useT(commonDict);
+  const media = useMedia();
   const { hash } = useLocation();
   const navigate = useNavigate();
   const [active, setActive] = useState<number | null>(null);
@@ -127,7 +130,7 @@ const Expertise = () => {
                 className="group relative bg-white rounded-2xl shadow-lg hover:shadow-xl ring-1 ring-gray-100 overflow-hidden transition-all hover:-translate-y-1"
               >
                 <div className="relative h-56 overflow-hidden">
-                  <img src={AREA_META[index].image} alt="" loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <img src={media(AREA_META[index].image)} alt="" loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent flex items-end">
                     <div className="p-6 flex items-center">
                       <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-primary text-white rounded-full mr-3">
@@ -157,7 +160,7 @@ const Expertise = () => {
 
       <AnimatePresence>
         {area && meta && (
-          <DetailModal title={area.title} image={meta.image} icon={<Icon d={meta.icon} />} onClose={close}>
+          <DetailModal title={area.title} image={media(meta.image)} icon={<Icon d={meta.icon} />} onClose={close}>
             <p className="text-lg text-gray-700">{area.details}</p>
 
             <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -189,7 +192,7 @@ const Expertise = () => {
               {area.caseStudies.map((study, i) => (
                 <div key={study.title} className="bg-gray-50 rounded-xl overflow-hidden shadow-md">
                   <div className="h-48 overflow-hidden bg-white">
-                    <img src={meta.caseImages[i]} alt="" loading="lazy" className="w-full h-full object-cover" />
+                    <img src={media(meta.caseImages[i])} alt="" loading="lazy" className="w-full h-full object-cover" />
                   </div>
                   <div className="p-4">
                     <h4 className="font-bold text-lg mb-2">{study.title}</h4>
@@ -208,7 +211,7 @@ const Expertise = () => {
           <ul className="flex flex-wrap justify-center items-center gap-6 md:gap-10">
             {PARTNERS.map((partner) => (
               <li key={partner.name} className="bp-keep-light w-56 h-28 bg-white ring-1 ring-gray-200 shadow-sm flex items-center justify-center p-4 rounded-xl transition hover:shadow-md">
-                <img src={partner.logo} alt={partner.name} loading="lazy" className="max-w-full max-h-full object-contain" />
+                <img src={media(partner.logo)} alt={partner.name} loading="lazy" className="max-w-full max-h-full object-contain" />
               </li>
             ))}
           </ul>

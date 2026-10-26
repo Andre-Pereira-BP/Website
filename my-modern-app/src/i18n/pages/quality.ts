@@ -1,3 +1,5 @@
+import { defineDict } from '../dict';
+
 const en = {
   title: 'Quality',
   subtitle: 'Quality is not a department — it is a mindset embedded in everything we do.',
@@ -184,4 +186,4 @@ const pt: QualityDict = {
   },
 };
 
-export const qualityDict = { en, pt };
+export const qualityDict = defineDict('quality', { en, pt });

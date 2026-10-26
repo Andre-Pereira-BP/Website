@@ -12,6 +12,9 @@ import JobsList from './pages/JobsList';
 import JobEditor from './pages/JobEditor';
 import Applications from './pages/Applications';
 import Messages from './pages/Messages';
+import TextsList from './pages/TextsList';
+import TextEditor from './pages/TextEditor';
+import MediaManager from './pages/MediaManager';
 import SetupNotice from './pages/SetupNotice';
 import { isSupabaseConfigured } from '../lib/supabase';
 import { suspendTheme } from '../lib/theme';
@@ -68,6 +71,9 @@ const Protected = () => {
         <Route path="jobs/:id" element={<JobEditor />} />
         <Route path="applications" element={<Applications />} />
         <Route path="messages" element={<Messages />} />
+        <Route path="content" element={<TextsList />} />
+        <Route path="content/:pageId" element={<TextEditor />} />
+        <Route path="media" element={<MediaManager />} />
         <Route path="*" element={<Navigate to="/admin" replace />} />
       </Routes>
     </AdminLayout>
