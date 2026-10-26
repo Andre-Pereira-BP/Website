@@ -66,6 +66,9 @@ const AdminLayout = ({ children }: { children: ReactNode }) => {
         </a>
         <div className="rounded-lg bg-white/5 px-3 py-3">
           <p className="truncate text-xs text-white/60" title={email ?? ''}>{email}</p>
+          <Link to="/admin/reset-password" className="mt-1 block text-sm font-semibold text-white/80 hover:text-white hover:underline">
+            Alterar palavra-passe
+          </Link>
           <button type="button" onClick={signOut} className="mt-1 text-sm font-semibold text-white hover:underline">
             Terminar sessão
           </button>

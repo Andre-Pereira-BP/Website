@@ -256,10 +256,30 @@ create policy "admins manage news images" on storage.objects
   using (bucket_id = 'news-images' and public.is_admin())
   with check (bucket_id = 'news-images' and public.is_admin());
 
+-- Anti-spam: CVs only with the path the website uses (YYYY-MM/<uuid>-<name>), and at most 20
+-- uploads every 10 minutes for the whole site (see "Anti-spam limits" below).
+create or replace function public.cv_uploads_allowed()
+returns boolean
+language sql
+stable
+security definer
+set search_path = public, storage
+as $$
+  select count(*) < 20 from storage.objects
+  where bucket_id = 'job-applications' and created_at > now() - interval '10 minutes';
+$$;
+
+revoke all on function public.cv_uploads_allowed() from public;
+grant execute on function public.cv_uploads_allowed() to anon, authenticated;
+
 drop policy if exists "anyone can upload a CV" on storage.objects;
 create policy "anyone can upload a CV" on storage.objects
   for insert to anon, authenticated
-  with check (bucket_id = 'job-applications');
+  with check (
+    bucket_id = 'job-applications'
+    and name ~ '^[0-9]{4}-[0-9]{2}/[0-9a-f-]{36}-[A-Za-z0-9._-]{1,80}$'
+    and public.cv_uploads_allowed()
+  );
 
 drop policy if exists "admins read CVs" on storage.objects;
 create policy "admins read CVs" on storage.objects
@@ -334,6 +354,52 @@ create policy "admins manage site files" on storage.objects
   for all to authenticated
   using (bucket_id = 'site-files' and public.is_admin())
   with check (bucket_id = 'site-files' and public.is_admin());
+
+-- -----------------------------------------------------------------------------
+-- Anti-spam limits for the public forms. The website already has a hidden honeypot field and
+-- a minimum fill time; these limits also stop bots that call the API directly.
+--   contact messages: 3 per email per hour, 20 per 10 minutes for the whole site
+--   job applications: 3 per email per day,  20 per 10 minutes for the whole site
+-- -----------------------------------------------------------------------------
+create or replace function public.limit_contact_messages()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  if (select count(*) from public.contact_messages
+      where lower(email) = lower(new.email) and created_at > now() - interval '1 hour') >= 3
+     or (select count(*) from public.contact_messages where created_at > now() - interval '10 minutes') >= 20 then
+    raise exception 'Too many messages, please try again later.' using errcode = 'P0001';
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists contact_messages_rate_limit on public.contact_messages;
+create trigger contact_messages_rate_limit before insert on public.contact_messages
+  for each row execute function public.limit_contact_messages();
+
+create or replace function public.limit_job_applications()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  if (select count(*) from public.job_applications
+      where lower(email) = lower(new.email) and created_at > now() - interval '1 day') >= 3
+     or (select count(*) from public.job_applications where created_at > now() - interval '10 minutes') >= 20 then
+    raise exception 'Too many applications, please try again later.' using errcode = 'P0001';
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists job_applications_rate_limit on public.job_applications;
+create trigger job_applications_rate_limit before insert on public.job_applications
+  for each row execute function public.limit_job_applications();
 
 -- -----------------------------------------------------------------------------
 -- After creating the manager's user in Authentication → Users, grant admin rights:

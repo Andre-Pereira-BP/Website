@@ -1,10 +1,12 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { Link, Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 import { Button, Field, TextInput } from '../ui';
 import AuthShell from '../AuthShell';
+import { useCaptcha } from '../useCaptcha';
 
-
+// After a reset email is sent, the button waits this long before another one can be requested
+const RESET_COOLDOWN_SECONDS = 60;
 
 const Login = () => {
   const { status, signIn, sendPasswordReset } = useAuth();
@@ -15,6 +17,14 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [info, setInfo] = useState('');
+  const [cooldown, setCooldown] = useState(0);
+  const captcha = useCaptcha();
+
+  useEffect(() => {
+    if (cooldown <= 0) return;
+    const timer = setTimeout(() => setCooldown((s) => s - 1), 1000);
+    return () => clearTimeout(timer);
+  }, [cooldown]);
 
   if (status === 'admin' || status === 'not-admin') {
     const from = (location.state as { from?: string } | null)?.from;
@@ -25,19 +35,30 @@ const Login = () => {
     e.preventDefault();
     setError('');
     setInfo('');
+    if (!captcha.ready) return setError('Confirme a verificação anti-robô.');
     setLoading(true);
     try {
       if (mode === 'login') {
-        await signIn(email.trim(), password);
+        await signIn(email.trim(), password, captcha.token);
       } else {
-        await sendPasswordReset(email.trim());
+        await sendPasswordReset(email.trim(), captcha.token);
+        setCooldown(RESET_COOLDOWN_SECONDS);
         setInfo('Se o email estiver registado, receberá uma ligação para definir uma nova palavra-passe.');
       }
     } catch (err) {
       const message = (err as Error).message || '';
-      setError(/invalid login credentials/i.test(message) ? 'Email ou palavra-passe incorretos.' : /rate limit/i.test(message) ? 'Demasiadas tentativas. Aguarde alguns minutos.' : message);
+      setError(
+        /invalid login credentials/i.test(message)
+          ? 'Email ou palavra-passe incorretos.'
+          : /rate limit|too many/i.test(message)
+            ? 'Demasiadas tentativas. Aguarde alguns minutos.'
+            : /captcha/i.test(message)
+              ? 'A verificação anti-robô falhou. Tente novamente.'
+              : message
+      );
     } finally {
       setLoading(false);
+      captcha.reset();
     }
   };
 
@@ -63,10 +84,11 @@ const Login = () => {
             <TextInput id="admin-password" type="password" autoComplete="current-password" required value={password} onChange={(e) => setPassword(e.target.value)} />
           </Field>
         )}
+        {captcha.element}
         {error && <p role="alert" className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700 ring-1 ring-red-200">{error}</p>}
         {info && <p role="status" className="rounded-lg bg-emerald-50 px-3 py-2 text-sm text-emerald-800 ring-1 ring-emerald-200">{info}</p>}
-        <Button type="submit" loading={loading} className="w-full">
-          {mode === 'login' ? 'Entrar' : 'Enviar ligação'}
+        <Button type="submit" loading={loading} disabled={!captcha.ready || (mode === 'forgot' && cooldown > 0)} className="w-full">
+          {mode === 'login' ? 'Entrar' : cooldown > 0 ? `Pode pedir outra ligação em ${cooldown}s` : 'Enviar ligação'}
         </Button>
         {mode === 'forgot' && (
           <button type="button" onClick={() => setMode('login')} className="w-full text-sm font-semibold text-gray-600 hover:text-gray-900">

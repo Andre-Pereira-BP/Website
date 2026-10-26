@@ -11,9 +11,9 @@ interface AuthContextValue {
   recoveryMode: boolean;
   userId: string | null;
   checkError: string | null;
-  signIn: (email: string, password: string) => Promise<void>;
+  signIn: (email: string, password: string, captchaToken?: string) => Promise<void>;
   signOut: () => Promise<void>;
-  sendPasswordReset: (email: string) => Promise<void>;
+  sendPasswordReset: (email: string, captchaToken?: string) => Promise<void>;
   updatePassword: (password: string) => Promise<void>;
 }
 
@@ -78,16 +78,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       recoveryMode,
       userId: session?.user.id ?? null,
       checkError,
-      signIn: async (email, password) => {
-        const { error } = await (await getSupabase()).auth.signInWithPassword({ email, password });
+      signIn: async (email, password, captchaToken) => {
+        const { error } = await (await getSupabase()).auth.signInWithPassword({ email, password, options: { captchaToken } });
         if (error) throw error;
       },
       signOut: async () => {
         await (await getSupabase()).auth.signOut();
       },
-      sendPasswordReset: async (email) => {
+      sendPasswordReset: async (email, captchaToken) => {
         const { error } = await (await getSupabase()).auth.resetPasswordForEmail(email, {
           redirectTo: `${window.location.origin}/admin/reset-password`,
+          captchaToken,
         });
         if (error) throw error;
       },
